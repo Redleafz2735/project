@@ -42,6 +42,8 @@
     </div>
 </footer>
 
+
+
 <!-- !start #footer -->
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -68,5 +70,13 @@
 
 <!-- Custom Javascript -->
 <script src="index.js"></script>
+
+<!-- Search Javascript -->
+<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script>
+        $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+</script>
 </body>
 </html>

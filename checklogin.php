@@ -25,7 +25,7 @@
             if ($num > 0) {
                 $_SESSION['user_id'] = $num['user_id'];
                 $_SESSION['fullname'] = $num['fullname'];
-                echo "<script>window.location.href='login.php'</script>";
+                echo "<script>window.location.href='index.php'</script>";
             } else {
                 echo "<script>alert('Something went wrong! Please try again.');</script>";
                 echo "<script>window.location.href='login.php'</script>";

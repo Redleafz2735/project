@@ -1,6 +1,16 @@
+<?php 
+
+    ob_start();
+    session_start();
+    if ($_SESSION['user_id'] == "") {
+        $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ!';
+        header("location: login.php");
+    } else {
+?>
+
+
+
 <?php
-session_start();
-ob_start();
 // include header.php file
 include ('header.php');
 ?>
@@ -23,5 +33,11 @@ include ('header.php');
 // include footer.php file
 include ('footer.php');
 ?>
+
+
+<?php 
+}
+?>
+
 
 
