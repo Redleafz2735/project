@@ -47,13 +47,9 @@
                     </tr>
                     <tr class="font-rale font-size-14">
                         <td>Deal Price:</td>
-                        <td class="font-size-20 text-danger">$<span><?php echo $item['item_price'] ?? 0; ?></span><small class="text-dark font-size-12">&nbsp;&nbsp;Inclusive of all taxes</small></td>
-                    </tr>
-                    <tr class="font-rale font-size-14">
-                        <td>You Save:</td>
-                        <td><span class="font-size-16 text-danger">$152.00</span></td>
-                    </tr>
-                </table>
+                        <td class="font-size-20 text-danger"><span><?php echo $item['item_price'] ?? 0; ?> ฿</span><small class="text-dark font-size-12">&nbsp;&nbsp;Inclusive of all taxes</small></td>
+                    </tr> 
+                </table> 
                 <!---    !product price       -->
 
                 <!--    #policy -->

@@ -54,7 +54,7 @@ include ('header.php');
             <button type="submit" name="submit" id="submit" class="btn btn-primary">สมัครสมาชิก</button>
         </form>
         <hr>
-        <p>เป็นสมาชิกแล้วใช่ไหม คลิ๊กที่นี่เพื่อ <a href="signin.php">เข้าสู่ระบบ</a></p>
+        <p>เป็นสมาชิกแล้วใช่ไหม คลิ๊กที่นี่เพื่อ <a href="login.php">เข้าสู่ระบบ</a></p>
     </div>
 
 <?php

@@ -23,7 +23,7 @@
                 <!-- cart item -->
                 <div class="row border-top py-3 mt-3">
                     <div class="col-sm-2">
-                        <img src="<?php echo $item['item_image'] ?? "./assets/products/1.png" ?>" style="height: 120px;" alt="cart1" class="img-fluid">
+                        <img src="<?php echo $item['item_image'] ?? "../admin/assets/products/" ?>" style="height: 120px;" alt="cart1" class="img-fluid">
                     </div>
                     <div class="col-sm-8">
                         <h5 class="font-baloo font-size-20"><?php echo $item['item_name'] ?? "Unknown"; ?></h5>
@@ -48,7 +48,7 @@
 
                     <div class="col-sm-2 text-right">
                         <div class="font-size-20 text-danger font-baloo">
-                            $<span class="product_price" data-id="<?php echo $item['item_id'] ?? '0'; ?>"><?php echo $item['item_price'] ?? 0; ?></span>
+                            <span class="product_price" data-id="<?php echo $item['item_id'] ?? '0'; ?>"><?php echo $item['item_price'] ?? 0; ?> ฿</span>
                         </div>
                     </div>
                 </div>

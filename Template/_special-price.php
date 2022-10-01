@@ -37,7 +37,7 @@ $in_cart = $Cart->getCartId($product->getData('cart'));
                         <div class="text-center">
                             <h6><?php echo $item['item_name'] ?? "Unknown"; ?></h6>
                             <div class="price py-2">
-                                <span>$<?php echo $item['item_price'] ?? 0 ?></span>
+                                <span><?php echo $item['item_price'] ?? 0 ?> ฿</span>
                             </div>
                             <form method="post">
                                 <input type="hidden" name="item_id" value="<?php echo $item['item_id'] ?? '1'; ?>">

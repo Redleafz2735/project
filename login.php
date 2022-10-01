@@ -37,7 +37,7 @@ include ('header.php');
             <button type="submit" name="login" class="btn btn-primary">เข้าสู่ระบบ</button>
         </form>
         <hr>
-        <p>ยังไม่เป็นสมาชิกใช่ไหม คลิ๊กที่นี่เพื่อ <a href="index.php">สมัครสมาชิก</a></p>
+        <p>ยังไม่เป็นสมาชิกใช่ไหม คลิ๊กที่นี่เพื่อ <a href="register.php">สมัครสมาชิก</a></p>
         <br>
         <br>
         <br>

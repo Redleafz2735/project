@@ -18,6 +18,9 @@ require ('database/Test.php');
 // User class
 require ('database/User.php');
 
+// Insertproduct class
+require ('database/ProductInsert.php');
+
 
 
 // DBController object
@@ -40,3 +43,8 @@ $innerjoin = new Testproduct($db);
 
 //Userprofile
 $updateuser = new User($db);
+
+//adminzone
+$productinsert = new ProductInsert($db);
+
+$updateproduct= new Testproduct($db);

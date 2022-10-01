@@ -61,7 +61,17 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script>
+        let imgInput = document.getElementById('imgInput');
+        let previewImg = document.getElementById('previewImg');
 
+        imgInput.onchange = evt => {
+            const [file] = imgInput.files;
+                if (file) {
+                    previewImg.src = URL.createObjectURL(file)
+            }
+        }
+</script>
 <!-- Owl Carousel Js file -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha256-pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=" crossorigin="anonymous"></script>
 
@@ -74,9 +84,14 @@
 <!-- Search Javascript -->
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script>
-        $(document).ready( function () {
-        $('#myTable').DataTable();
+        $(document).ready(function() {
+        var table = $('#myTable').DataTable( {
+        rowReorder: {
+            selector: 'td:nth-child(2)'
+        },
+        responsive: true
     } );
+} );
 </script>
 </body>
 </html>

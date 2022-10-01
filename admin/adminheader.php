@@ -20,7 +20,8 @@
 
     <!-- Search CSS file -->
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-
+    <link rel="stylesheet" href="//cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js">
+    
     <?php
     // require functions.php file
     require ('../functions.php');

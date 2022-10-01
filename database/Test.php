@@ -29,4 +29,27 @@ class Testproduct
         WHERE product.item_brand");
         return $result;
     }
+
+    public function updateproduct($item_brand, $item_name, $item_price, $item_image, $item_register, $item_id) {
+        if ($item_image == 1){
+            $result = mysqli_query($this->db->con, "UPDATE product SET 
+            item_brand = '$item_brand',
+            item_name = '$item_name',
+            item_price = '$item_price',
+            item_register = '$item_register'
+            WHERE item_id = '$item_id'
+        ");
+        return $result;
+        } else {
+            $result = mysqli_query($this->db->con, "UPDATE product SET 
+            item_brand = '$item_brand',
+            item_name = '$item_name',
+            item_price = '$item_price',
+            item_image = '$item_image',
+            item_register = '$item_register'
+            WHERE item_id = '$item_id'
+        ");
+        return $result;
+        }
+    }
 }
