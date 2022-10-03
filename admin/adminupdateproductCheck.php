@@ -33,7 +33,7 @@ if (isset($_POST['update'])) {
 
                 $sql = $updateproduct->updateproduct($item_brand, $item_name, $item_price, $item_image, $i1->format('Y-m-d h:i:sa'), $item_id); 
                 if ($sql) {
-                    $_SESSION['success'] = "updated สินค้าสำเร็จ successfully";
+                    $_SESSION['success'] = "อัพเดทสินค้าสำเร็จ";
                     header("location: adminproduct.php"); 
                 } else {
                     $_SESSION['error'] = "Data has not been inserted successfully";
@@ -44,7 +44,7 @@ if (isset($_POST['update'])) {
     } else {
         $sql = $updateproduct->updateproduct($item_brand, $item_name, $item_price, $check, $i1->format('Y-m-d h:i:sa'), $item_id);
         if ($sql) {
-            $_SESSION['success'] = "updated สินค้าสำเร็จ successfully";
+            $_SESSION['success'] = "อัพเดทสินค้าสำเร็จ";
             header("location: adminproduct.php"); 
         } 
     } 
@@ -52,13 +52,3 @@ if (isset($_POST['update'])) {
 }
 ?>
 
-<?php
-/* $sql = $updateproduct->updateproduct($item_brand, $item_name, $item_price, $item_image, $i1->format('Y-m-d h:i:sa'), $item_id);
-
-if ($sql) {
-    $_SESSION['success'] = "updated สินค้าสำเร็จ successfully";
-    header("location: adminproduct.php"); 
-}*/
-
-
-?>

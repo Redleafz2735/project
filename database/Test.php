@@ -1,6 +1,6 @@
 <?php
 
-// php cart class
+// php Admin Product
 class Testproduct
 {
     public $db = null;
@@ -51,5 +51,10 @@ class Testproduct
         ");
         return $result;
         }
+    }
+
+    public function deleteproduct($item_id) {
+        $deleterecord = mysqli_query($this->db->con, "DELETE FROM product WHERE item_id = '$item_id'");
+        return $deleterecord;
     }
 }

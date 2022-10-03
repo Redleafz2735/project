@@ -25,10 +25,10 @@ if (isset($_POST['submit'])) {
                     $item_image = $truePath;
                     $sql = $productinsert->Insertproduct($item_brand, $item_name, $item_price, $item_image, $i1->format('Y-m-d h:i:sa'));
                     if ($sql) {
-                        $_SESSION['success'] = "เพิ่มสินค้าสำเร็จ successfully";
+                        $_SESSION['success'] = "เพิ่มสินค้าสำเร็จ";
                         header("location: adminproduct.php");
                     } else {
-                        $_SESSION['error'] = "Data has not been inserted successfully";
+                        $_SESSION['error'] = "มีบางอย่างผิดพลาด";
                         header("location: adminproduct.php");
                     }
                 } 

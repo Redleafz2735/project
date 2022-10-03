@@ -46,5 +46,5 @@ $updateuser = new User($db);
 
 //adminzone
 $productinsert = new ProductInsert($db);
-
 $updateproduct= new Testproduct($db);
+$deletedata = new Testproduct($db);

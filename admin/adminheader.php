@@ -47,13 +47,16 @@
                     <a class="nav-link" href="#">การสั่งทำ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="adminproduct.php">Products</a>
+                    <a class="nav-link" href="#">ประเภทสินค้า</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Orders</a>
+                    <a class="nav-link" href="adminproduct.php">สินค้า</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">User</a>
+                    <a class="nav-link" href="#">คำสั่งซื้อ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="adminuser.php">ลูกค้า</a>
                 </li>
             </ul>
             <?php if(isset($_SESSION['admin_id'])) { ?> 
@@ -67,21 +70,8 @@
                         <a class="dropdown-item" href="logout.php">Logout</a>
                     </div>
                 </div>
-                &nbsp;
-                &nbsp;
-                <form action="#" class="font-size-14 font-rale">
-                    <a href="cart.php" class="py-2 rounded-pill color-primary-bg">
-                        <span class="font-size-16 px-2 text-white"><i class="fas fa-shopping-cart"></i></span>
-                        <span class="px-3 py-2 rounded-pill text-dark bg-light"><?php echo count($product->getData('cart')); ?></span>
-                    </a>
-                </form>
             <?php }else{ ?>       
-                <form action="#" class="font-size-14 font-rale">
-                    <a href="cart.php" class="py-2 rounded-pill color-primary-bg">
-                        <span class="font-size-16 px-2 text-white"><i class="fas fa-shopping-cart"></i></span>
-                        <span class="px-3 py-2 rounded-pill text-dark bg-light">0</span>
-                    </a>
-                </form>
+                
             <?php 
             }
             ?>

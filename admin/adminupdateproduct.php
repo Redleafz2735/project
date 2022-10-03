@@ -4,10 +4,19 @@ session_start();
 // include header.php file
 include ('adminheader.php');
 ?>
+<style>
+body  {
+    background-image: url("./yousef-espanioly-c9Bh_Wf3aUw-unsplash.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+}
+</style>
 <br>
 <br>
 <div class="container mt-5">
-    <h1>Edit Data</h1>
+    <h1><strong>แก้ไขสินค้า</strong></h1>
     <hr>
     <?php 
 
@@ -33,7 +42,7 @@ include ('adminheader.php');
         <div class="mb-3">
             <label for="item_image" class="col-form-label">item image:</label>
             <input type="file" class="form-control" id="imgInput" name="item_image">
-            <img width="350px" src="./<?php echo $row['item_image']; ?>" id="previewImg" alt="">
+            <img width="350px" src=".<?php echo $row['item_image']; ?>" id="previewImg" alt="">
         </div>
         <hr>
     <?php } ?>
