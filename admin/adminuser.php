@@ -46,11 +46,9 @@ body  {
                                 <table id="myTable" class="table table-bordered table-striped"> 
                                     <thead>
                                         <th>ID</th>
-                                        <th>itemname</th>
-                                        <th>itembran</th>
-                                        <th>itemprice</th>
-                                        <th>itemimage</th>
-                                        <th>itemregister</th>
+                                        <th>Fullname</th>
+                                        <th>Address</th>
+                                        <th>username</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </thead>
@@ -58,19 +56,17 @@ body  {
                                     <tbody>
                                         <?php 
 
-                                            $sql = $innerjoin->innerjoin();
+                                            $sql = $adminuser->fetchdata();
                                             while($row = mysqli_fetch_array($sql)) {
 
                                         ?>
                                             <tr>
-                                                <td><?php echo $row['item_id']; ?></td>
-                                                <td><?php echo $row['item_name']; ?></td>
-                                                <td><?php echo $row['productbrand']; ?></td>
-                                                <td><?php echo $row['item_price']; ?> ฿</td>
-                                                <td><img src=".<?php echo $row['item_image']; ?>" width="100px" height="100px" alt=" "></td>
-                                                <td><?php echo $row['item_register']; ?></td>
-                                                <td><a href="adminupdateproduct.php?id=<?php echo $row['item_id']; ?>" class="fas fa-edit btn btn-primary" style="font-size: 16px;">&nbsp;แก้ไข</a></td>
-                                                <td><a href="admindeleteproduct.php?del=<?php echo $row['item_id']; ?>" class="fas fa-trash-alt btn btn-danger" style="font-size: 16px;">&nbsp;ลบข้อมูล</a></td>
+                                                <td><?php echo $row['user_id']; ?></td>
+                                                <td><?php echo $row['fullname']; ?></td>
+                                                <td><?php echo $row['address']; ?></td>
+                                                <td><?php echo $row['username']; ?></td>
+                                                <td><a href="adminupdateuser.php?id=<?php echo $row['user_id']; ?>" class="fas fa-edit btn btn-primary" style="font-size: 16px;">&nbsp;แก้ไข</a></td>
+                                                <td><a href="admindeleteproduct.php?del=<?php echo $row['user_id']; ?>" class="fas fa-trash-alt btn btn-danger" style="font-size: 16px;">&nbsp;ลบข้อมูล</a></td>
                                             </tr>
 
                                         <?php 

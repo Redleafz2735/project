@@ -47,7 +47,7 @@
                     <a class="nav-link" href="#">การสั่งทำ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">ประเภทสินค้า</a>
+                    <a class="nav-link" href="admincatagoty.php">ประเภทสินค้า</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="adminproduct.php">สินค้า</a>
@@ -65,8 +65,6 @@
                         <?php echo $_SESSION['fullname']; ?>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="userprofile.php">Userprofile</a>
-                        <a class="dropdown-item" href="#">Orders</a>
                         <a class="dropdown-item" href="logout.php">Logout</a>
                     </div>
                 </div>

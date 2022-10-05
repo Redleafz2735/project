@@ -21,6 +21,9 @@ require ('database/User.php');
 // Insertproduct class
 require ('database/ProductInsert.php');
 
+// Admin class
+require ('database/Admin.php');
+
 
 
 // DBController object
@@ -48,3 +51,11 @@ $updateuser = new User($db);
 $productinsert = new ProductInsert($db);
 $updateproduct= new Testproduct($db);
 $deletedata = new Testproduct($db);
+
+//แบ่งส่วน
+$adminuser = new Admin($db);
+$adminupdateuser = new Admin($db);
+$admindeletedatauser = new Admin($db);
+
+
+
