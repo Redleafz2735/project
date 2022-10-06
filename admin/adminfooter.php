@@ -6,19 +6,11 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-12">
-                <h4 class="font-rubik font-size-20">Mobile Shopee</h4>
+                <h4 class="font-rubik font-size-20">Aluminium Shop</h4>
                 <p class="font-size-14 font-rale text-white-50">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus, deserunt.</p>
             </div>
             <div class="col-lg-4 col-12">
                 <h4 class="font-rubik font-size-20">Newslatter</h4>
-                <form class="form-row">
-                    <div class="col">
-                        <input type="text" class="form-control" placeholder="Email *">
-                    </div>
-                    <div class="col">
-                        <button type="submit" class="btn btn-primary mb-2">Subscribe</button>
-                    </div>
-                </form>
             </div>
             <div class="col-lg-2 col-12">
                 <h4 class="font-rubik font-size-20">Information</h4>
@@ -51,7 +43,7 @@
     function checkusername(val) {
         $.ajax({
             type: 'POST',
-            url: 'checkuser_available.php',
+            url: '../checkuser_available.php',
             data: 'username='+val,
             success: function(data) {
             $('#usernameavailable').html(data);

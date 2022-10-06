@@ -1,6 +1,12 @@
+<?php 
+
+    ob_start();
+    session_start();
+    if ($_SESSION['admin_id'] == "") {
+        header("location: adminlogin.php");
+    } else {
+?>
 <?php
-ob_start();
-session_start();
 // include header.php file
 include ('adminheader.php');
 ?>
@@ -124,9 +130,15 @@ include ('adminheader.php');
     </div>
     <br>
     <br>
-
+    <br>
+    <br>
+    <br>
 
 <?php
 // include footer.php file
 include ('adminfooter.php');
+?>
+
+<?php 
+}
 ?>

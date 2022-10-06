@@ -57,5 +57,17 @@ $adminuser = new Admin($db);
 $adminupdateuser = new Admin($db);
 $admindeletedatauser = new Admin($db);
 
+//catagoly
+$admincatagory = new Admin($db);
+$admindeletecatagory = new Admin($db);
+
+$admindeleteuser = new Admin($db);
+
+//New admin
+$adminNew = new Admin($db);
+
+
+
+
 
 

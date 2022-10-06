@@ -45,22 +45,23 @@ body  {
                         <div class="text-center mb-4">
                             <h1><strong>Admin Login</strong></h1>
                         </div>
-                        <form action="checklogin.php" method="post">
-                        <?php if(isset($_SESSION['error'])) { ?>
-                            <div class="alert alert-danger" role="alert">
-                                <?php 
-                                    echo $_SESSION['error'];
-                                    unset($_SESSION['error']);
-                                ?>
-                            </div>
+                        <br>
+                        <form action="checkadminlogin.php" method="post">
+                        <?php if (isset($_SESSION['success'])) { ?>
+                                <div class="alert alert-success">
+                                    <?php 
+                                        echo $_SESSION['success'];
+                                        unset($_SESSION['success']); 
+                                    ?>
+                                </div>
                         <?php } ?>
-                        <?php if(isset($_SESSION['success'])) { ?>
-                            <div class="alert alert-success" role="alert">
-                                <?php 
-                                    echo $_SESSION['success'];
-                                    unset($_SESSION['success']);
-                                ?>
-                            </div>
+                        <?php if (isset($_SESSION['error'])) { ?>
+                                <div class="alert alert-danger">
+                                    <?php 
+                                        echo $_SESSION['error'];
+                                        unset($_SESSION['error']); 
+                                    ?>
+                                </div>
                         <?php } ?>
                         <div class="mb-4" style= "margin-left: 11rem; margin-right: 11rem;">
                             <label for="username" class="form-label"><h6><strong>Username</strong></h6></label>

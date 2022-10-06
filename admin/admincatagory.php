@@ -1,6 +1,12 @@
+<?php 
+
+    ob_start();
+    session_start();
+    if ($_SESSION['admin_id'] == "") {
+        header("location: adminlogin.php");
+    } else {
+?>
 <?php
-ob_start();
-session_start();
 // include header.php file
 include ('adminheader.php');
 ?>
@@ -41,7 +47,7 @@ body  {
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                            <form action="admininsertproducttype.php" method="post" enctype="multipart/form-data">
+                                            <form action="admininsertcatagoty.php" method="post" enctype="multipart/form-data">
                                                 <div class="mb-3">
                                                     <label for="productbrand" class="col-form-label">productbrand:</label>
                                                     <input type="text" required class="form-control" name="productbrand">
@@ -91,7 +97,7 @@ body  {
                                                 <td><?php echo $row['producttype_id']; ?></td>
                                                 <td><?php echo $row['productbrand']; ?></td>
                                                 <td><a href="adminupdatecatagory.php?id=<?php echo $row['producttype_id']; ?>" class="fas fa-edit btn btn-primary" style="font-size: 16px;">&nbsp;แก้ไข</a></td>
-                                                <td><a href="admindeleteproduct.php?del=<?php echo $row['producttype_id']; ?>" class="fas fa-trash-alt btn btn-danger" style="font-size: 16px;">&nbsp;ลบข้อมูล</a></td>
+                                                <td><a href="admindeletecatagory.php?del=<?php echo $row['producttype_id']; ?>" class="fas fa-trash-alt btn btn-danger" style="font-size: 16px;">&nbsp;ลบข้อมูล</a></td>
                                             </tr>
 
                                         <?php 
@@ -113,4 +119,7 @@ body  {
 <?php
 // include footer.php file
 include ('adminfooter.php');
+?>
+<?php 
+}
 ?>

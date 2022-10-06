@@ -1,6 +1,12 @@
+<?php 
+
+    ob_start();
+    session_start();
+    if ($_SESSION['admin_id'] == "") {
+        header("location: adminlogin.php");
+    } else {
+?>
 <?php
-ob_start();
-session_start();
 // include header.php file
 include ('adminheader.php');
 ?>
@@ -66,7 +72,7 @@ body  {
                                                 <td><?php echo $row['address']; ?></td>
                                                 <td><?php echo $row['username']; ?></td>
                                                 <td><a href="adminupdateuser.php?id=<?php echo $row['user_id']; ?>" class="fas fa-edit btn btn-primary" style="font-size: 16px;">&nbsp;แก้ไข</a></td>
-                                                <td><a href="admindeleteproduct.php?del=<?php echo $row['user_id']; ?>" class="fas fa-trash-alt btn btn-danger" style="font-size: 16px;">&nbsp;ลบข้อมูล</a></td>
+                                                <td><a href="admindeleteuser.php?del=<?php echo $row['user_id']; ?>" class="fas fa-trash-alt btn btn-danger" style="font-size: 16px;">&nbsp;ลบข้อมูล</a></td>
                                             </tr>
 
                                         <?php 
@@ -88,4 +94,7 @@ body  {
 <?php
 // include footer.php file
 include ('adminfooter.php');
+?>
+<?php 
+}
 ?>

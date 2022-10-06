@@ -11,14 +11,6 @@
             </div>
             <div class="col-lg-4 col-12">
                 <h4 class="font-rubik font-size-20">Newslatter</h4>
-                <form class="form-row">
-                    <div class="col">
-                        <input type="text" class="form-control" placeholder="Email *">
-                    </div>
-                    <div class="col">
-                        <button type="submit" class="btn btn-primary mb-2">Subscribe</button>
-                    </div>
-                </form>
             </div>
             <div class="col-lg-2 col-12">
                 <h4 class="font-rubik font-size-20">Information</h4>
