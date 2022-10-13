@@ -60,6 +60,10 @@ body  {
                                                     <input type="text" required class="form-control" name="item_price">
                                                 </div>
                                                 <div class="mb-3">
+                                                    <label for="item_qty" class="col-form-label">itemQty:</label>
+                                                    <input type="text" required class="form-control" name="item_qty">
+                                                </div>
+                                                <div class="mb-3">
                                                     <label for="item_image" class="col-form-label">item Image:</label>
                                                     <input type="file" required class="form-control" id="imgInput" name="item_image">
                                                     <img loading="lazy" width="100%" id="previewImg" alt="">
@@ -95,6 +99,7 @@ body  {
                                         <th>ID</th>
                                         <th>itemname</th>
                                         <th>itembran</th>
+                                        <th>itemQty</th>
                                         <th>itemprice</th>
                                         <th>itemimage</th>
                                         <th>itemregister</th>
@@ -113,11 +118,12 @@ body  {
                                                 <td><?php echo $row['item_id']; ?></td>
                                                 <td><?php echo $row['item_name']; ?></td>
                                                 <td><?php echo $row['productbrand']; ?></td>
+                                                <td><?php echo $row['item_qty']; ?></td>
                                                 <td><?php echo $row['item_price']; ?> ฿</td>
                                                 <td><img src=".<?php echo $row['item_image']; ?>" width="100px" height="100px" alt=" "></td>
                                                 <td><?php echo $row['item_register']; ?></td>
-                                                <td><a href="adminupdateproduct.php?id=<?php echo $row['item_id']; ?>" class="fas fa-edit btn btn-primary" style="font-size: 16px;">&nbsp;แก้ไข</a></td>
-                                                <td><a href="admindeleteproduct.php?del=<?php echo $row['item_id']; ?>" class="fas fa-trash-alt btn btn-danger" style="font-size: 16px;">&nbsp;ลบข้อมูล</a></td>
+                                                <td><a href="adminupdateproduct.php?id=<?php echo $row['item_id']; ?>" class="fas fa-edit btn btn-primary" style="font-size: 15px;">&nbsp;แก้ไข</a></td>
+                                                <td><a href="admindeleteproduct.php?del=<?php echo $row['item_id']; ?>" class="fas fa-trash-alt btn btn-danger" style="font-size: 15px;">&nbsp;ลบ</a></td>
                                             </tr>
 
                                         <?php 

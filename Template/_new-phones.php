@@ -6,7 +6,7 @@ shuffle($product_shuffle);
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     if (isset($_POST['new_phones_submit'])){
         // call method addToCart
-        $Cart->addToCart($_POST['user_id'], $_POST['item_id']);
+        $Cart->addToCart($_POST['user_id'], $_POST['item_id'], $_POST['itemqty']);
     }
 }
 ?>
@@ -28,7 +28,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                             </div>
                             <form method="post">
                                 <input type="hidden" name="item_id" value="<?php echo $item['item_id'] ?? '1'; ?>">
-                                <input type="hidden" name="user_id" value="<?php echo 1; ?>">
+                                <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
+                                <input type="hidden" name="itemqty" value="1">
                                 <?php
                                 if (in_array($item['item_id'], $Cart->getCartId($product->getData('cart')) ?? [])){
                                     echo '<button type="submit" disabled class="btn btn-success font-size-12">In the Cart</button>';

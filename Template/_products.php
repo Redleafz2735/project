@@ -3,6 +3,13 @@
     $item_id = $_GET['item_id'] ?? 1;
     foreach ($product->getData() as $item) :
         if ($item['item_id'] == $item_id) :
+
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
+        if (isset($_POST['special_price_submit'])){
+            // call method addToCart
+            $Cart->addToCart($_POST['user_id'], $_POST['item_id'], $_POST['itemqty']);
+        }
+    }
 ?>
 <section id="product" class="py-3">
     <div class="container">
@@ -11,16 +18,25 @@
                 <img src="<?php echo $item['item_image'] ?? "./assets/products/1.png" ?>" alt="product" class="img-fluid">
                 <div class="form-row pt-4 font-size-16 font-baloo">
                     <div class="col">
-                        <button type="submit" class="btn btn-danger form-control">Proceed to Buy</button>
-                    </div>
-                    <div class="col">
-                        <?php
-                        if (in_array($item['item_id'], $Cart->getCartId($product->getData('cart')) ?? [])){
-                            echo '<button type="submit" disabled class="btn btn-success font-size-16 form-control">In the Cart</button>';
-                        }else{
-                            echo '<button type="submit" name="top_sale_submit" class="btn btn-warning font-size-16 form-control">Add to Cart</button>';
-                        }
-                        ?>
+                        <form method="post">
+                            <input type="hidden" name="item_id" value="<?php echo $item['item_id'] ?? '1'; ?>">
+                            <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
+                            <div class="qty d-flex">
+                                <h5 class="font-baloo">ซื้อจำนวน</h5>
+                                <div class="text-center px-4 font-rale">
+                                    <input type="number" name="itemqty" value="" min='1' max='10'>
+                                </div>
+                            </div>
+                            <br>
+                            <?php
+                            if (in_array($item['item_id'], $Cart->getCartId($product->getData('cart')) ?? [])){
+                                echo '<button type="submit" disabled class="btn btn-success font-size-16 form-control">In the Cart</button>';
+                            }else{
+                                echo '<button type="submit" name="top_sale_submit" class="btn btn-warning font-size-16 form-control">Add to Cart</button>';
+                            }
+                            ?>
+                        </form>
+                        <br>
                     </div>
                 </div>
             </div>
@@ -102,11 +118,9 @@
                     <div class="col-6">
                         <!-- product qty section -->
                         <div class="qty d-flex">
-                            <h6 class="font-baloo">Qty</h6>
-                            <div class="px-4 d-flex font-rale">
-                                <button class="qty-up border bg-light" data-id="pro1"><i class="fas fa-angle-up"></i></button>
-                                <input type="text" data-id="pro1" class="qty_input border px-2 w-50 bg-light" disabled value="1" placeholder="1">
-                                <button data-id="pro1" class="qty-down border bg-light"><i class="fas fa-angle-down"></i></button>
+                            <h6 class="font-baloo">จำนวนคงเหลือ</h6>
+                            <div class="px-4 font-rale">
+                                <h6><?php echo $item['item_qty'] ?? 0; ?></h6>
                             </div>
                         </div>
                         <!-- !product qty section -->
@@ -132,7 +146,6 @@
 
 
             </div>
-
             <div class="col-12">
                 <h6 class="font-rubik">Product Description</h6>
                 <hr>

@@ -46,6 +46,10 @@ body  {
             <input type="text" value="<?php echo $row['item_price']; ?>" required class="form-control" name="item_price">
         </div>
         <div class="mb-3">
+            <label for="item_qty" class="col-form-label">item Qty:</label>
+            <input type="text" value="<?php echo $row['item_qty']; ?>" required class="form-control" name="item_qty">
+        </div>
+        <div class="mb-3">
             <label for="item_image" class="col-form-label">item image:</label>
             <input type="file" class="form-control" id="imgInput" name="item_image">
             <img width="350px" src=".<?php echo $row['item_image']; ?>" id="previewImg" alt="">

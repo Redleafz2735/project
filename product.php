@@ -1,7 +1,7 @@
 <?php 
 
     session_start();
-
+    ob_start();
     if ($_SESSION['user_id'] == "") {
         $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ!';
         header("location: login.php");

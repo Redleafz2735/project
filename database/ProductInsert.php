@@ -11,8 +11,9 @@ class ProductInsert
         $this->db = $db;
     }
 
-    public function Insertproduct($item_brand, $item_name, $item_price, $item_image, $item_register) {
-        $reg = mysqli_query($this->db->con, "INSERT INTO product(item_brand, item_name, item_price, item_image, item_register) VALUES('$item_brand', '$item_name', '$item_price', '$item_image', '$item_register')");
+    public function Insertproduct($item_brand, $item_name, $item_price, $item_image, $item_register, $item_qty) {
+        $reg = mysqli_query($this->db->con, "INSERT INTO product(item_brand, item_name, item_price, item_image, item_register, item_qty) 
+        VALUES('$item_brand', '$item_name', '$item_price', '$item_image', '$item_register', '$item_qty')");
         return $reg;
     }
 }

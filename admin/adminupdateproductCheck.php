@@ -12,6 +12,7 @@ if (isset($_POST['update'])) {
     $item_register = new DateTime();
     $timezone = new DateTimeZone('Asia/Bangkok');
     $i1 = $item_register->setTimezone($timezone);
+    $item_qty = $_POST['item_qty'];
 
     $img2 = $_POST['img2'];
     $upload = $_FILES['item_image']['name'];
@@ -31,7 +32,7 @@ if (isset($_POST['update'])) {
                 move_uploaded_file($item_image['tmp_name'], $filePath);
                 $item_image = $truePath;
 
-                $sql = $updateproduct->updateproduct($item_brand, $item_name, $item_price, $item_image, $i1->format('Y-m-d h:i:sa'), $item_id); 
+                $sql = $updateproduct->updateproduct($item_brand, $item_name, $item_price, $item_image, $i1->format('Y-m-d h:i:sa'), $item_qty, $item_id); 
                 if ($sql) {
                     $_SESSION['success'] = "อัพเดทสินค้าสำเร็จ";
                     header("location: adminproduct.php"); 
@@ -42,7 +43,7 @@ if (isset($_POST['update'])) {
             }
         }
     } else {
-        $sql = $updateproduct->updateproduct($item_brand, $item_name, $item_price, $check, $i1->format('Y-m-d h:i:sa'), $item_id);
+        $sql = $updateproduct->updateproduct($item_brand, $item_name, $item_price, $check, $i1->format('Y-m-d h:i:sa'), $item_qty, $item_id);
         if ($sql) {
             $_SESSION['success'] = "อัพเดทสินค้าสำเร็จ";
             header("location: adminproduct.php"); 

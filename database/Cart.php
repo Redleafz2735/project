@@ -18,11 +18,12 @@ class Cart
                 // "Insert into cart(user_id) values (0)"
                 // get table columns
                 $columns = implode(',', array_keys($params));
-
+                print_r($columns);
                 $values = implode(',' , array_values($params));
-
+                print_r($values);
                 // create sql query
                 $query_string = sprintf("INSERT INTO %s(%s) VALUES(%s)", $table, $columns, $values);
+                print_r($query_string);
 
                 // execute query
                 $result = $this->db->con->query($query_string);
@@ -32,11 +33,12 @@ class Cart
     }
 
     // to get user_id and item_id and insert into cart table
-    public  function addToCart($userid, $itemid){
-        if (isset($userid) && isset($itemid)){
+    public  function addToCart($userid, $itemid, $itemqty){
+        if (isset($userid) && isset($itemid) && isset($itemqty)){
             $params = array(
                 "user_id" => $userid,
-                "item_id" => $itemid
+                "item_id" => $itemid,
+                "itemqty" => $itemqty
             );
 
             // insert data into cart
@@ -79,22 +81,5 @@ class Cart
             return $cart_id;
         }
     }
-
-    // Save for later
-    public function saveForLater($item_id = null, $saveTable = "wishlist", $fromTable = "cart"){
-        if ($item_id != null){
-            $query = "INSERT INTO {$saveTable} SELECT * FROM {$fromTable} WHERE item_id={$item_id};";
-            $query .= "DELETE FROM {$fromTable} WHERE item_id={$item_id};";
-
-            // execute multiple query
-            $result = $this->db->con->multi_query($query);
-
-            if($result){
-                header("Location :" . $_SERVER['PHP_SELF']);
-            }
-            return $result;
-        }
-    }
-
-
+    
 }
