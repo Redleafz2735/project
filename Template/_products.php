@@ -24,7 +24,7 @@
                             <div class="qty d-flex">
                                 <h5 class="font-baloo">ซื้อจำนวน</h5>
                                 <div class="text-center px-4 font-rale">
-                                    <input type="number" name="itemqty" value="" min='1' max='10'>
+                                    <input type="number" name="itemqty" value="1" min='1' max='10'>
                                 </div>
                             </div>
                             <br>

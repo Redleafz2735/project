@@ -13,7 +13,7 @@ if (isset($_POST['update'])) {
     $timezone = new DateTimeZone('Asia/Bangkok');
     $i1 = $item_register->setTimezone($timezone);
     $item_qty = $_POST['item_qty'];
-
+    
     $img2 = $_POST['img2'];
     $upload = $_FILES['item_image']['name'];
 
@@ -44,6 +44,7 @@ if (isset($_POST['update'])) {
         }
     } else {
         $sql = $updateproduct->updateproduct($item_brand, $item_name, $item_price, $check, $i1->format('Y-m-d h:i:sa'), $item_qty, $item_id);
+        print_r($sql);
         if ($sql) {
             $_SESSION['success'] = "อัพเดทสินค้าสำเร็จ";
             header("location: adminproduct.php"); 

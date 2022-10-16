@@ -47,24 +47,42 @@ body  {
                                             </div>
                                             <div class="modal-body">
                                             <form action="admininsertproduct.php" method="post" enctype="multipart/form-data">
+                                                <?php 
+
+                                                    $sql = $fetchdata->fetcatagory();
+                                                    while($row1 = mysqli_fetch_array($sql)) {
+
+                                                ?>
                                                 <div class="mb-3">
-                                                    <label for="item_brand" class="col-form-label">itembrand:</label>
-                                                    <input type="text" required class="form-control" name="item_brand">
+                                                    <tr>
+                                                    <label for="item_brand" class="col-form-label">ประเภทสินค้า</label>
+                                                        <td>
+                                                            <select required class="form-control" name="item_brand">
+                                                                <option>เลือกประเภทสินค้า</option>
+                                                                <?php foreach($sql as $row1) { ?>
+                                                                <option type="text" value="<?php echo $row1['producttype_id']; ?>"><?php echo $row1['productbrand']; ?></option>                 
+                                                                <?php }?>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
                                                 </div>
+                                                <?php 
+                                                    }
+                                                ?>
                                                 <div class="mb-3">
-                                                    <label for="item_name" class="col-form-label">itemname:</label>
+                                                    <label for="item_name" class="col-form-label">ชื่อสินค้า</label>
                                                     <input type="text" required class="form-control" name="item_name">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="item_price" class="col-form-label">itemprice:</label>
+                                                    <label for="item_price" class="col-form-label">ราคาสินค้า</label>
                                                     <input type="text" required class="form-control" name="item_price">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="item_qty" class="col-form-label">itemQty:</label>
+                                                    <label for="item_qty" class="col-form-label">จำนวนสินค้า</label>
                                                     <input type="text" required class="form-control" name="item_qty">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="item_image" class="col-form-label">item Image:</label>
+                                                    <label for="item_image" class="col-form-label">รูปภาพสินค้า</label>
                                                     <input type="file" required class="form-control" id="imgInput" name="item_image">
                                                     <img loading="lazy" width="100%" id="previewImg" alt="">
                                                 </div>
@@ -97,14 +115,14 @@ body  {
                                 <table id="myTable" class="table table-bordered table-striped"> 
                                     <thead>
                                         <th>ID</th>
-                                        <th>itemname</th>
-                                        <th>itembran</th>
-                                        <th>itemQty</th>
-                                        <th>itemprice</th>
-                                        <th>itemimage</th>
-                                        <th>itemregister</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
+                                        <th>ชื่อสินค้า</th>
+                                        <th>ประเภทสินค้า</th>
+                                        <th>จำนวนสินค้า</th>
+                                        <th>ราคาสินค้า</th>
+                                        <th>รูปภาพสินค้า</th>
+                                        <th>เวลาที่สินค้าถูกเพิ่ม</th>
+                                        <th>แก้ไข</th>
+                                        <th>ลบ</th>
                                     </thead>
 
                                     <tbody>

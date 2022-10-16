@@ -1,9 +1,11 @@
 <!-- Special Price -->
 <?php
-    $brand = array_map(function ($pro){ return $pro['item_brand']; }, $product_shuffle);
+
+    $brand = array_map(function ($row){ return $row['item_brand']; }, $product_shuffle);
     $unique = array_unique($brand);
     sort($unique);
     shuffle($product_shuffle);
+
 
 // request method post
 if($_SERVER['REQUEST_METHOD'] == "POST"){
@@ -14,7 +16,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 }
 
 $in_cart = $Cart->getCartId($product->getData('cart'));
-
 ?>
 <section id="special-price">
     <div class="container">
@@ -27,7 +28,6 @@ $in_cart = $Cart->getCartId($product->getData('cart'));
                 }, $unique);
             ?>
         </div>
-
         <div class="grid">
             <?php array_map(function ($item) use($in_cart){ ?>
             <div class="grid-item border <?php echo $item['item_brand'] ?? "Brand" ; ?>">

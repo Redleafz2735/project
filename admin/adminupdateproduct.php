@@ -27,37 +27,56 @@ body  {
     <?php 
 
             $item_id = $_GET['id'];
-            $sql = $updateproduct->fetchonerecord($item_id);
+            $sql = $updateproduct->innerjoin($item_id);
             while($row = mysqli_fetch_array($sql)) {
     ?>
     <form action="adminupdateproductCheck.php" method="post" enctype="multipart/form-data">
         <div class="mb-3">
+            <label for="item_id" class="col-form-label">ID</label>
             <input type="text" readonly value="<?php echo $row['item_id']; ?>" required class="form-control" name="item_id">
-            <label for="item_brand" class="col-form-label">item brand:</label>
-            <input type="text" value="<?php echo $row['item_brand']; ?>" required class="form-control" name="item_brand">
+            <?php 
+
+                $sql = $fetchdata->fetcatagory();
+                while($row1 = mysqli_fetch_array($sql)) {
+
+            ?>
+                <tr>
+                <label for="item_brand" class="col-form-label">ประเภทสินค้า</label>
+                    <td>
+                        <select required class="form-control" name="item_brand">
+                            <option><?php echo $row['productbrand']; ?></option>
+                            <?php foreach($sql as $row1) { ?>
+                            <option type="text" value="<?php echo $row1['producttype_id']; ?>"><?php echo $row1['productbrand']; ?></option>                 
+                            <?php }?>
+                        </select>
+                    </td>
+                </tr>
+            <?php 
+                }
+            ?>
             <input type="hidden" value="<?php echo $row['item_image']; ?>" required class="form-control" name="img2">
         </div>
         <div class="mb-3">
-            <label for="item_name" class="col-form-label">item name:</label>
+            <label for="item_name" class="col-form-label">ชื่อสินค้า</label>
             <input type="text" value="<?php echo $row['item_name']; ?>" required class="form-control" name="item_name">
         </div>
         <div class="mb-3">
-            <label for="item_price" class="col-form-label">item price:</label>
+            <label for="item_price" class="col-form-label">ราคาสินค้า</label>
             <input type="text" value="<?php echo $row['item_price']; ?>" required class="form-control" name="item_price">
         </div>
         <div class="mb-3">
-            <label for="item_qty" class="col-form-label">item Qty:</label>
+            <label for="item_qty" class="col-form-label">จำนวนสินค้า</label>
             <input type="text" value="<?php echo $row['item_qty']; ?>" required class="form-control" name="item_qty">
         </div>
         <div class="mb-3">
-            <label for="item_image" class="col-form-label">item image:</label>
+            <label for="item_image" class="col-form-label">รูปภาพสินค้า</label>
             <input type="file" class="form-control" id="imgInput" name="item_image">
             <img width="350px" src=".<?php echo $row['item_image']; ?>" id="previewImg" alt="">
         </div>
         <hr>
     <?php } ?>
-        <a href="adminproduct.php" class="btn btn-secondary">Go Back</a>
-        <button type="submit" name="update" class="btn btn-primary">Update</button>
+        <a href="adminproduct.php" class="btn btn-secondary">ย้อนกลับ</a>
+        <button type="submit" name="update" class="btn btn-primary">อัพเดท</button>
     </form>
 </div>
 <br>

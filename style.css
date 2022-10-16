@@ -69,6 +69,14 @@ button:focus {
     background: #FFD289;
 }
 
+.color-dark {
+    color: #000000;
+}
+
+.color-dark-bg {
+    background: #000000;
+}
+
 
 /*  top sale template   */
 

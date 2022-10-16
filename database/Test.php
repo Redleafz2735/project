@@ -59,4 +59,9 @@ class Testproduct
         $deleterecord = mysqli_query($this->db->con, "DELETE FROM product WHERE item_id = '$item_id'");
         return $deleterecord;
     }
+
+    public function fetcatagory() {
+        $result = mysqli_query($this->db->con, "SELECT * FROM producttype ORDER BY producttype_id asc");
+        return $result;
+    }
 }

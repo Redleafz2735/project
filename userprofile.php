@@ -16,7 +16,7 @@ include ('header.php');
 ?>
     
     <div class="container">
-        <h1 class="mt-5">User Profile</h1>
+        <h1 class="mt-5">ข้อมูลผู้ใช้</h1>
         <hr>
         <?php 
 
