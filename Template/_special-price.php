@@ -1,12 +1,5 @@
 <!-- Special Price -->
 <?php
-
-    $brand = array_map(function ($row){ return $row['item_brand']; }, $product_shuffle);
-    $unique = array_unique($brand);
-    sort($unique);
-    shuffle($product_shuffle);
-
-
 // request method post
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     if (isset($_POST['special_price_submit'])){
@@ -22,10 +15,16 @@ $in_cart = $Cart->getCartId($product->getData('cart'));
         <h4 class="font-rubik font-size-20">Special Price</h4>
         <div id="filters" class="button-group text-right font-baloo font-size-16">
             <button class="btn is-checked" data-filter="*">All Brand</button>
-            <?php
-                array_map(function ($brand){
-                    printf('<button class="btn" data-filter=".%s">%s</button>', $brand, $brand);
-                }, $unique);
+            <?php 
+
+                $sql = $fetchdata->fetcatagory();
+                while($row1 = mysqli_fetch_array($sql)) {
+            ?>
+                <?php foreach($sql as $row1) { ?>
+                    <button class="btn" data-filter=".<?php echo $row1['producttype_id']; ?>"><?php echo $row1['productbrand']; ?></button>
+                <?php }?>
+            <?php 
+                }
             ?>
         </div>
         <div class="grid">

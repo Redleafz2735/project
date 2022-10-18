@@ -79,9 +79,48 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                <div class="modal-body">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem nemo atque aspernatur mollitia, reprehenderit illo
-                                </div>
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-9">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">item Name</th>
+                                                    <th scope="col">item image</th>
+                                                    <th scope="col">item Price</th>
+                                                    <th scope="col">Quantity</th>
+                                                    <th scope="col">total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php 
+                                                    $total=0;
+                                                    $sql = $Cartjoin->cartjoin();
+                                                    while($row = mysqli_fetch_array($sql)) {
+                                                    $total=$total+$row['item_price'];
+                                                    ?>
+                                                    <tr>
+                                                        <td><?php echo $row['cart_id']; ?></td>
+                                                        <td><?php echo $row['item_name']; ?></td>
+                                                        <td><img src="<?php echo $row['item_image']; ?>" width="100px" height="100px" alt=" "></td>
+                                                        <td><?php echo $row['item_price']; ?> ฿</td>
+                                                        <td><input type='number' class='text-center' value='<?php echo $row['itemqty']; ?>' min='1' max='10'></td>
+                                                    </tr>
+                                                    
+
+                                                    <?php 
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-lg-4 mt-4">
+                                            <div class="border bg-light rounded p-4">
+                                                <h3>Total</h3>
+                                                <h5><?php echo $total ?> ฿</h5>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-primary">Save changes</button>

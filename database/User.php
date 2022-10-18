@@ -29,4 +29,13 @@ class User
         ");
         return $result;
     }
+
+    public function cartjoin() {
+        $result = mysqli_query($this->db->con,
+        "SELECT cart_id,cart.item_id,item_name,item_price,item_image,cart.itemqty FROM cart
+        INNER JOIN product
+        ON cart.item_id = product.item_id
+        WHERE cart.item_id");
+        return $result;
+    }
 }

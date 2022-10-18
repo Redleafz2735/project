@@ -46,6 +46,7 @@ $innerjoin = new Testproduct($db);
 
 //Userprofile
 $updateuser = new User($db);
+$Cartjoin = new User($db);
 
 //adminzone
 $productinsert = new ProductInsert($db);
@@ -62,6 +63,7 @@ $admincatagory = new Admin($db);
 $admindeletecatagory = new Admin($db);
 
 $admindeleteuser = new Admin($db);
+$updatecatagory = new Admin($db);
 
 //New admin
 $adminNew = new Admin($db);

@@ -30,15 +30,15 @@ body  {
             $sql = $adminupdateuser->fetchonerecordproducttype($producttype_id);
             while($row = mysqli_fetch_array($sql)) {
     ?>
-    <form action="adminupdateproductCheck.php" method="post" enctype="multipart/form-data">
+    <form action="adminupdateCheckcatagory.php" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <input type="text" readonly value="<?php echo $row['producttype_id']; ?>" required class="form-control" name="producttype_id">
             <label for="productbrand" class="col-form-label">Productbrand:</label>
             <input type="text" value="<?php echo $row['productbrand']; ?>" required class="form-control" name="productbrand">
         </div>
     <?php } ?>
-        <a href="admincatagoty.php" class="btn btn-secondary">Go Back</a>
-        <button type="submit" name="update" class="btn btn-primary">Update</button>
+        <a href="admincatagory.php" class="btn btn-secondary">Go Back</a>
+        <button type="submit" name="submit" class="btn btn-primary">Update</button>
     </form>
 </div>
 <br>

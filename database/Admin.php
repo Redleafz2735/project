@@ -57,4 +57,11 @@ class Admin
         return $signinquery;
     }
 
+    public function updatecatagory($producttype_id, $productbrand) {
+        $result = mysqli_query($this->db->con, "UPDATE producttype SET 
+            productbrand = '$productbrand'
+            WHERE producttype_id = '$producttype_id'
+        ");
+        return $result;
+    }
 }
