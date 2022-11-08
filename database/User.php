@@ -38,4 +38,17 @@ class User
         WHERE cart.item_id");
         return $result;
     }
+
+    public function getDatacart($table = 'cart'){
+        $result = $this->db->con->query("SELECT * FROM {$table} ");
+
+        $resultArray = array();
+
+        // fetch product data one by one
+        while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+            $resultArray[] = $item;
+        }
+
+        return $resultArray;
+    }
 }

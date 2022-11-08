@@ -33,7 +33,29 @@
 </footer>
 
 <!-- !start #footer -->
+<script>
 
+    var gt=0;
+    var iprice=document.getElementsByClassName('iprice');
+    var iqty=document.getElementsByClassName('iqty');
+    var itotal=document.getElementsByClassName('itotal');
+    var gtotal=document.getElementById('gtotal');
+
+    function subTotal()
+    {
+        gt=0;
+        for(i=0;i<iprice.length;i++)
+        {
+            itotal[i].innerText=(iprice[i].value)*(iqty[i].value);
+            $itotal = itotal;
+            gt=gt+(iprice[i].value)*(iqty[i].value);
+        }
+        gtotal.innerText=gt;
+    }
+
+    subTotal();
+
+</script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     function checkusername(val) {

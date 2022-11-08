@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 ?>
 <section id="new-phones">
     <div class="container">
-        <h4 class="font-rubik font-size-20">New Phones</h4>
+        <h4 class="font-rubik font-size-20">สินค้าเพิ่มเติม</h4>
         <hr>
 
         <!-- owl carousel -->
