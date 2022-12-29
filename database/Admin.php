@@ -64,4 +64,12 @@ class Admin
         ");
         return $result;
     }
+
+    public function updateOrderdetails($id, $status) {
+        $result = mysqli_query($this->db->con, "UPDATE order_details SET 
+            status = '$status'
+            WHERE id = '$id'
+        ");
+        return $result;
+    }
 }

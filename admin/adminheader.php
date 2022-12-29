@@ -53,7 +53,7 @@
                     <a class="nav-link" href="adminproduct.php">สินค้า</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">คำสั่งซื้อ</a>
+                    <a class="nav-link" href="adminOrder.php">คำสั่งซื้อ</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="adminuser.php">ลูกค้า</a>

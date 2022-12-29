@@ -24,6 +24,8 @@ require ('database/ProductInsert.php');
 // Admin class
 require ('database/Admin.php');
 
+// Order class
+require ('database/Orders.php');
 
 
 // DBController object
@@ -67,6 +69,9 @@ $updatecatagory = new Admin($db);
 
 //New admin
 $adminNew = new Admin($db);
+
+//Oders zone
+$Order = new Testorders($db);
 
 
 

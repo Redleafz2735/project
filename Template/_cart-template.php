@@ -93,21 +93,24 @@
                                                 </thead>
                                                 <tbody>
                                                     <?php 
-                                                    $baht="฿";
+
                                                     $sql = $Cartjoin->cartjoin();
                                                     while($row = mysqli_fetch_array($sql)) {
 
                                                     ?>
                                                     <tr>
                                                     <form method="post">
+                                                        <input type="text" name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
                                                         <td><?php echo $row['cart_id']; ?></td>
-                                                        <input type="hidden" name="item_id" value="<?php echo $row['item_id'] ?? '1'; ?>">
+                                                        <input type="text" name="item_id" value="<?php echo $row['item_id'] ?? '1'; ?>">
                                                         <td><?php echo $row['item_name']; ?></td>
                                                         <td><img src="<?php echo $row['item_image']; ?>" width="100px" height="100px" alt=" "></td>
                                                         <td><?php echo $row['item_price']; ?><input type="hidden" class='iprice' value="<?php echo $row['item_price']; ?>"> ฿</td>
                                                         <td><input type='number' class='text-center iqty' onchange='subTotal()' value='<?php echo $row['itemqty']; ?>' min='1' max='10'></td>
+                                                        <input type="text" name="quantity" value="<?php echo $row['itemqty']; ?>">
+                                                        <input type="text" name="item_price" value="<?php echo $row['item_price']; ?>">
                                                         <td class='itotal'></td>
-                                                        <input type="text" id="subtotal" name="subtotal" value = <?php echo $total ?> >
+                                                        <input type="text" id="subtotal" name="subtotal" value =<?php echo $total ?> >
                                                         <td>
                                                             <input type="hidden" value="<?php echo $row['item_id'] ?? 0; ?>" name="item_id">
                                                             <button type="submit" name="delete-cart-submit" class="btn font-baloo text-danger px-3 border-right">Delete</button>
