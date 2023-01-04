@@ -1,12 +1,18 @@
-<!-- Shopping cart section  -->
-<?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-        if (isset($_POST['delete-cart-submit'])){
-            $deletedrecord = $Cart->deleteCart($_POST['item_id']);
-            $cart = $product->getProduct($item['item_id']);
-        }
-    } 
+<?php 
 
+    ob_start();
+    session_start();
+    if ($_SESSION['user_id'] == "") {
+        $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ!';
+        header("location: login.php");
+    } else {
+?>
+
+
+
+<?php
+// include header.php file
+include ('header.php');
 ?>
 
 <section id="cart" class="py-3 mb-5">
@@ -45,7 +51,7 @@
                                     </h6>
                                 </div>
                             </div>
-                            <form method="post">
+                            <form method="post" action="cartdelete.php">
                                 <input type="hidden" value="<?php echo $row['item_id'] ?? 0; ?>" name="item_id">
                                 <button type="submit" name="delete-cart-submit" class="btn font-baloo text-danger px-3 border-right">Delete</button>
                             </form>
@@ -71,7 +77,7 @@
                     <div class="border-top py-4">
                         <h5>ยอดรวม</h5>
                         <!-- ราคารวมทั้งหมด -->
-                        <form method="post" action="_cartcheck.php">
+                        <form method="post" action="cartcheck.php">
                             <input type="hidden" id="subtotal" name="subtotal" value =<?php echo $total ?> >
                             <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
                             <h5><span id="gtotal"></span> ฿</h5>
@@ -87,4 +93,21 @@
         <!--  !shopping cart items   -->
     </div>
 </section>
-<!-- !Shopping cart section  -->
+
+<?php
+
+    /*  include top sale section */
+        include ('Template/_new-phones.php');
+    /*  include top sale section */
+
+?>
+
+<?php
+// include footer.php file
+include ('footer.php');
+?>
+
+
+<?php 
+}
+?>

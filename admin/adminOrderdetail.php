@@ -60,10 +60,6 @@ body  {
                                             <td><strong>จำนวน</strong></td>
                                             <td><?php echo $row['quantity']; ?></td>
                                         </tr>
-                                        <tr>
-                                            <td><strong>เวลาที่สั่งซื้อ</strong></td>
-                                            <td><?php echo $row['created_at']; ?></td>
-                                        </tr>
                                         <form method="post" action="adminupdateOrdersdetail.php">
                                             <input type="hidden" value="<?php echo $row['id']; ?>" required class="form-control" name="id">
                                             <tr>

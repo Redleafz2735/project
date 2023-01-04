@@ -51,4 +51,10 @@ class User
 
         return $resultArray;
     }
+
+    public function insertOrder($user_id, $subtotal) {
+        $reg = mysqli_query($this->db->con, "INSERT INTO orders(user_id, subtotal) VALUES('$user_id', '$subtotal')");
+        return $reg;
+    }
+
 }

@@ -57,7 +57,6 @@ body  {
                                         <th>itemprice</th>
                                         <th>address</th>
                                         <th>quantity</th>
-                                        <th>Time</th>
                                         <th>Status</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -76,7 +75,6 @@ body  {
                                             <td><?php echo $row['item_price']; ?> ฿</td>
                                             <td><?php echo $row['address']; ?></td>
                                             <td><?php echo $row['quantity']; ?></td>
-                                            <td><?php echo $row['created_at']; ?></td>
                                             <?php $status=$row['status'];
                                                 if($status=="" or $status=='NULL') { ?>
                                                 <td> <button type="button" class="btn btn-secondary" style="font-weight:bold;"><i class="fas fa-bars"></i> รอรับออเดอร์</button></td>

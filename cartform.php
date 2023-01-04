@@ -1,14 +1,3 @@
-<!-- Shopping cart section  -->
-<?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-        if (isset($_POST['delete-cart-submit'])){
-            $deletedrecord = $Cart->deleteCart($_POST['item_id']);
-            $cart = $product->getProduct($item['item_id']);
-        }
-    } 
-
-?>
-
 <section id="cart" class="py-3 mb-5">
     <div class="container-fluid w-75">
         <h5 class="font-baloo font-size-20">ตระกร้าสินค้า</h5>
@@ -45,7 +34,7 @@
                                     </h6>
                                 </div>
                             </div>
-                            <form method="post">
+                            <form method="post" action="cartdelete.php">
                                 <input type="hidden" value="<?php echo $row['item_id'] ?? 0; ?>" name="item_id">
                                 <button type="submit" name="delete-cart-submit" class="btn font-baloo text-danger px-3 border-right">Delete</button>
                             </form>
@@ -71,7 +60,7 @@
                     <div class="border-top py-4">
                         <h5>ยอดรวม</h5>
                         <!-- ราคารวมทั้งหมด -->
-                        <form method="post" action="_cartcheck.php">
+                        <form method="post" action="cartcheck.php">
                             <input type="hidden" id="subtotal" name="subtotal" value =<?php echo $total ?> >
                             <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
                             <h5><span id="gtotal"></span> ฿</h5>
@@ -87,4 +76,3 @@
         <!--  !shopping cart items   -->
     </div>
 </section>
-<!-- !Shopping cart section  -->

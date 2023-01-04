@@ -55,7 +55,7 @@ class Cart
         if($item_id != null){
             $result = $this->db->con->query("DELETE FROM {$table} WHERE item_id={$item_id}");
             if($result){
-                header("Location:" . $_SERVER['PHP_SELF']);
+                header("Location: cart.php");
             }
             return $result;
         }
