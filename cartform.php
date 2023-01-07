@@ -15,6 +15,10 @@
                 <div class="row border-top py-3 mt-3">
                     <div class="col-sm-2">
                         <img src="<?php echo $row['item_image'] ?? "../admin/assets/products/" ?>" style="height: 120px;" alt="cart1" class="img-fluid">
+                        <form method="post" action="cartdelete.php">
+                            <input type="hidden" value="<?php echo $row['item_id'] ?? 0; ?>" name="item_id">
+                            <button type="submit" name="delete-cart-submit" class="btn font-baloo text-danger px-3 border-right">Delete</button>
+                        </form>
                     </div>
                     <div class="col-sm-8">
                         <h5 class="font-baloo font-size-20"><?php echo $row['item_name'] ?? "Unknown"; ?></h5>
@@ -23,21 +27,18 @@
                             <div class="d-flex font-rale w-25">
                                 <h6 class="font-baloo">จำนวน</h6>
                                 <div class="px-4 font-rale">
+                                <form method="post" action="cartcheck.php">
                                     <h6>
-                                        <input type='number' class='text-center iqty' onchange='subTotal()' value='<?php echo $row['itemqty']; ?>' min='1' max='10'>
+                                        <input type='number' class='text-center iqty' name="quantity" onchange='subTotal()' value='<?php echo $row['itemqty']; ?>' min='1' max='10'>
                                         <!-- ไอดีสินค้า -->
                                         <input type="hidden" value="<?php echo $row['item_id'] ?? 0; ?>" name="item_id">
                                         <!-- ราคา -->
-                                        <input type="hidden" class='iprice' value="<?php echo $row['item_price']; ?>">
+                                        <input type="hidden" class='iprice' name="item_price" value="<?php echo $row['item_price']; ?>">
                                         <!-- ไอดีผู้ใช้ -->
                                         <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
                                     </h6>
                                 </div>
                             </div>
-                            <form method="post" action="cartdelete.php">
-                                <input type="hidden" value="<?php echo $row['item_id'] ?? 0; ?>" name="item_id">
-                                <button type="submit" name="delete-cart-submit" class="btn font-baloo text-danger px-3 border-right">Delete</button>
-                            </form>
                         </div>
                         <!-- !product qty -->
 
@@ -60,9 +61,7 @@
                     <div class="border-top py-4">
                         <h5>ยอดรวม</h5>
                         <!-- ราคารวมทั้งหมด -->
-                        <form method="post" action="cartcheck.php">
                             <input type="hidden" id="subtotal" name="subtotal" value =<?php echo $total ?> >
-                            <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
                             <h5><span id="gtotal"></span> ฿</h5>
                             <button type="submit" name="submit" id="submit" class="btn btn-warning mt-3">
                                 ยืนยันการสั่งซื้อ

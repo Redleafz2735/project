@@ -57,4 +57,29 @@ class User
         return $reg;
     }
 
+    public function insertDataOrder($uuid, $user_id, $subtotal, $status, $item_id, $item_price, $quantity)
+    {
+        // Start the transaction
+        mysqli_begin_transaction($this->db->con);
+
+        try {
+
+            // Insert the UUID into the oder table
+            $sql = "INSERT INTO oders(oder_id, user_id, subtotal) VALUES('$uuid', '$user_id', '$subtotal', '$status')";
+            mysqli_query($this->db->con, $sql);
+
+            // Insert the UUID into the oder_detail table
+            $sql = "INSERT INTO oder_details(oder_id, item_id, item_price, quantity) VALUES('$uuid', '$item_id', '$item_price', '$quantity')";
+            mysqli_query($this->db->con, $sql);
+
+            // Commit the transaction
+            mysqli_commit($this->db->con);
+        } catch (Exception $e) {
+            // Rollback the transaction if any errors occur
+            mysqli_rollback($this->db->con);
+            throw $e;
+        }
+        
+    }
+
 }
