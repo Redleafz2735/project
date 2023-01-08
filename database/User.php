@@ -30,15 +30,15 @@ class User
         return $result;
     }
 
-    public function cartjoin() {
+    public function cartjoin($user_id) {
         $result = mysqli_query($this->db->con,
-        "SELECT cart_id,cart.item_id,item_name,item_price,item_image,cart.itemqty FROM cart
+        "SELECT cart_id,cart.user_id,cart.item_id,item_name,item_price,item_image,cart.itemqty FROM cart
         INNER JOIN product
         ON cart.item_id = product.item_id
-        WHERE cart.item_id");
+        WHERE cart.user_id = '$user_id'");
         return $result;
     }
-
+    
     public function getDatacart($table = 'cart'){
         $result = $this->db->con->query("SELECT * FROM {$table} ");
 
@@ -52,34 +52,19 @@ class User
         return $resultArray;
     }
 
-    public function insertOrder($user_id, $subtotal, $status) {
-        $reg = mysqli_query($this->db->con, "INSERT INTO orders(user_id, subtotal) VALUES('$uuid', '$user_id', '$subtotal', '$status')");
+    public function insertOrder($uuid, $user_id, $subtotal, $status) {
+        $reg = mysqli_query($this->db->con, "INSERT INTO orders(order_id, user_id, subtotal, status) VALUES('$uuid', '$user_id', '$subtotal', '$status')");
         return $reg;
     }
 
-    public function insertDataOrder($uuid, $user_id, $subtotal, $status, $item_id, $item_price, $quantity)
-    {
-        // Start the transaction
-        mysqli_begin_transaction($this->db->con);
-
-        try {
-
-            // Insert the UUID into the oder table
-            $sql = "INSERT INTO oders(oder_id, user_id, subtotal) VALUES('$uuid', '$user_id', '$subtotal', '$status')";
-            mysqli_query($this->db->con, $sql);
-
-            // Insert the UUID into the oder_detail table
-            $sql = "INSERT INTO oder_details(oder_id, item_id, item_price, quantity) VALUES('$uuid', '$item_id', '$item_price', '$quantity')";
-            mysqli_query($this->db->con, $sql);
-
-            // Commit the transaction
-            mysqli_commit($this->db->con);
-        } catch (Exception $e) {
-            // Rollback the transaction if any errors occur
-            mysqli_rollback($this->db->con);
-            throw $e;
-        }
+    public function insertOrderdetails($uuid, $item_id, $item_price, $quantity) {
+        $reg = mysqli_query($this->db->con, "INSERT INTO order_details(order_id, item_id, item_price, quantity) VALUES('$uuid', '$item_id', '$item_price', '$quantity')");
         
+    }
+
+    public function deletecartza($cart_id) {
+        $deleterecord = mysqli_query($this->db->con, "DELETE FROM cart WHERE cart_id = '$cart_id'");
+        return $deleterecord;
     }
 
 }

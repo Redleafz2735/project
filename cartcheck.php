@@ -17,25 +17,22 @@
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
 
-    if (isset($_POST['submit'])) {
-        $uuid = guidv4();
-        echo $uuid;
-        $user_id = $_POST['user_id'];
-        print_r($user_id);
-        $subtotal = $_POST['subtotal'];
-        print_r($subtotal);
-        $status = "NULL";
-        print_r($status);
-        $item_id = $_POST['item_id'];
-        print_r($item_id);
-        $item_price = $_POST['item_price'];
-        print_r($item_price);
-        $quantity = $_POST['quantity'];
-        print_r($quantity);
 
-        $sql = $Insertorders->insertOrder();
-        while($row = mysqli_fetch_array($sql)) {
-            $sql2 = "INSERT INTO orders(user_id, subtotal, status) VALUES('$uuid', '$user_id', '$subtotal', '$status')"
+    if (isset($_POST['submit'])) {
+        $user_id = $_POST['user_id'];
+        $sql1 = $Cartjoin->cartjoin($user_id);
+        $uuid = guidv4();
+        $subtotal = $_POST['subtotal'];
+        $status = "NULL";
+        $sql = $Insertorders->insertOrder($uuid, $user_id, $subtotal, $status);
+        while($row = mysqli_fetch_array($sql1)) {
+        // print_r($row);
+        $sql2 = $Insertorders->insertOrderdetails($uuid, $row['item_id'], $row['item_price'], $row['itemqty']);   
+        } if ($sql) {
+            echo "<script>alert('อัพเดทสำเร็จ!');</script>";
+            echo "<script>window.location.href='cart.php'</script>";
         }
-    }
+    
+
+}
 ?>

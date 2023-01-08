@@ -6,7 +6,7 @@
             <div class="col-sm-9">
             <?php 
                 $total=0;
-                $sql = $Cartjoin->cartjoin();
+                $sql = $Cartjoin->cartjoin($_SESSION['user_id']);
                 while($row = mysqli_fetch_array($sql)) {
                 $total=$total+$row['item_price']*$row['itemqty'];
                 $itotal=$row['item_price']*$row['itemqty'];
@@ -15,10 +15,6 @@
                 <div class="row border-top py-3 mt-3">
                     <div class="col-sm-2">
                         <img src="<?php echo $row['item_image'] ?? "../admin/assets/products/" ?>" style="height: 120px;" alt="cart1" class="img-fluid">
-                        <form method="post" action="cartdelete.php">
-                            <input type="hidden" value="<?php echo $row['item_id'] ?? 0; ?>" name="item_id">
-                            <button type="submit" name="delete-cart-submit" class="btn font-baloo text-danger px-3 border-right">Delete</button>
-                        </form>
                     </div>
                     <div class="col-sm-8">
                         <h5 class="font-baloo font-size-20"><?php echo $row['item_name'] ?? "Unknown"; ?></h5>
@@ -31,13 +27,14 @@
                                     <h6>
                                         <input type='number' class='text-center iqty' name="quantity" onchange='subTotal()' value='<?php echo $row['itemqty']; ?>' min='1' max='10'>
                                         <!-- ไอดีสินค้า -->
-                                        <input type="text" value="<?php echo $row['item_id'] ?? 0; ?>" name="item_id">
+                                        <input type="hidden" value="<?php echo $row['item_id'] ?? 0; ?>" name="item_id">
                                         <!-- ราคา -->
-                                        <input type="text" class='iprice' name="item_price" value="<?php echo $row['item_price']; ?>">
+                                        <input type="hidden" class='iprice' name="item_price" value="<?php echo $row['item_price']; ?>">
                                         <!-- ไอดีผู้ใช้ -->
-                                        <input type="text" name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
+                                        <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
                                     </h6>
                                 </div>
+                                <a href="cartdeleteza.php?del=<?php echo $row['cart_id']; ?>" class="btn font-baloo text-danger px-3 border-right" style="font-size: 15px;">&nbsp;ลบ</a>
                             </div>
                         </div>
                         <!-- !product qty -->

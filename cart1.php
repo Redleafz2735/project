@@ -66,7 +66,8 @@ include ('header.php');
                                                 <td><?php echo $row['item_name']; ?></td>
                                                 <td><input type='number' class='text-center iqty' name="quantity" onchange='subTotal()' value='<?php echo $row['itemqty']; ?>' min='1' max='10'></td>
                                                 <td><?php echo $itotal; ?></td>
-                                                <td><a href="admindeleteproduct.php?del=<?php echo $row['item_id']; ?>" class="fas fa-trash-alt btn btn-danger" style="font-size: 15px;">&nbsp;ลบ</a></td>
+                                                <input type="hidden" value="<?php echo $row['item_id'] ?? 0; ?>" name="item_id">
+                                                <td><a href="cartdeleteza.php?del=<?php echo $row['cart_id']; ?>" class="fas fa-trash-alt btn btn-danger" style="font-size: 15px;">&nbsp;ลบ</a></td>
                                             </tr>
                                     </tbody>
                                     <?php
