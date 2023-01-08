@@ -19,6 +19,7 @@
 
     if (isset($_POST['submit'])) {
         $uuid = guidv4();
+        echo $uuid;
         $user_id = $_POST['user_id'];
         print_r($user_id);
         $subtotal = $_POST['subtotal'];
@@ -32,7 +33,9 @@
         $quantity = $_POST['quantity'];
         print_r($quantity);
 
-
-
+        $sql = $Insertorders->insertOrder();
+        while($row = mysqli_fetch_array($sql)) {
+            $sql2 = "INSERT INTO orders(user_id, subtotal, status) VALUES('$uuid', '$user_id', '$subtotal', '$status')"
+        }
     }
 ?>

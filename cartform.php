@@ -31,11 +31,11 @@
                                     <h6>
                                         <input type='number' class='text-center iqty' name="quantity" onchange='subTotal()' value='<?php echo $row['itemqty']; ?>' min='1' max='10'>
                                         <!-- ไอดีสินค้า -->
-                                        <input type="hidden" value="<?php echo $row['item_id'] ?? 0; ?>" name="item_id">
+                                        <input type="text" value="<?php echo $row['item_id'] ?? 0; ?>" name="item_id">
                                         <!-- ราคา -->
-                                        <input type="hidden" class='iprice' name="item_price" value="<?php echo $row['item_price']; ?>">
+                                        <input type="text" class='iprice' name="item_price" value="<?php echo $row['item_price']; ?>">
                                         <!-- ไอดีผู้ใช้ -->
-                                        <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
+                                        <input type="text" name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
                                     </h6>
                                 </div>
                             </div>

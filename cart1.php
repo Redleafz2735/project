@@ -14,86 +14,75 @@
 // include header.php file
 include ('header.php');
 ?>
-
-<section id="cart" class="py-3 mb-5">
-    <div class="container-fluid w-75">
-        <h5 class="font-baloo font-size-20">ตระกร้าสินค้า</h5>
-        <!--  shopping cart items   -->
+<br>
+<br>
+<div class="container">
         <div class="row">
-            <div class="col-sm-9">
-            <?php 
-                $total=0;
-                $sql = $Cartjoin->cartjoin();
-                while($row = mysqli_fetch_array($sql)) {
-                $total=$total+$row['item_price']*$row['itemqty'];
-                $itotal=$row['item_price']*$row['itemqty'];
-            ?>
-                <!-- cart item -->
-                <div class="row border-top py-3 mt-3">
-                    <div class="col-sm-2">
-                        <img src="<?php echo $row['item_image'] ?? "../admin/assets/products/" ?>" style="height: 120px;" alt="cart1" class="img-fluid">
-                    </div>
-                    <div class="col-sm-8">
-                        <h5 class="font-baloo font-size-20"><?php echo $row['item_name'] ?? "Unknown"; ?></h5>
-                        <!-- product qty -->
-                        <div class="qty d-flex pt-2">
-                            <div class="d-flex font-rale w-25">
-                                <h6 class="font-baloo">จำนวน</h6>
-                                <div class="px-4 font-rale">
-                                    <h6>
-                                        <input type='number' class='text-center iqty' onchange='subTotal()' value='<?php echo $row['itemqty']; ?>' min='1' max='10'>
-                                        <!-- ไอดีสินค้า -->
-                                        <input type="hidden" value="<?php echo $row['item_id'] ?? 0; ?>" name="item_id">
-                                        <!-- ราคา -->
-                                        <input type="hidden" class='iprice' value="<?php echo $row['item_price']; ?>">
-                                        <!-- ไอดีผู้ใช้ -->
-                                        <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
-                                    </h6>
+            <div class="col-md-3">
+                <div class="card shadow-lg p-30 card-responsive" style="width: 70rem;">
+                    <div class="card-body">
+                        <div class="font-rubik ">
+                                <div class="float-right">
+                                <span><i class="fa fa-file" style="color:#9466de; font-size: 2.5em;"></i></span>
                                 </div>
+                                <h1><strong>Orders</strong></h1>
+                                <br>
+                                <hr>
+                                <?php if (isset($_SESSION['success'])) { ?>
+                                    <div class="alert alert-success">
+                                        <?php 
+                                            echo $_SESSION['success'];
+                                            unset($_SESSION['success']); 
+                                        ?>
+                                    </div>
+                                <?php } ?>
+                                <?php if (isset($_SESSION['error'])) { ?>
+                                    <div class="alert alert-danger">
+                                        <?php 
+                                            echo $_SESSION['error'];
+                                            unset($_SESSION['error']); 
+                                        ?>
+                                    </div>
+                                <?php } ?>
+                                <table id="myTable" class="table table-bordered table-striped"> 
+                                    <thead>
+                                        <th>สินค้า</th>
+                                        <th>ชื่อสินค้า</th>
+                                        <th>จำนวน</th>
+                                        <th>ราคารวม</th>
+                                        <th>ลบ</th>
+                                    </thead>
+        
+                                    <tbody>
+                                        <?php 
+                                            $total=0;
+                                            $sql = $Cartjoin->cartjoin();
+                                            while($row = mysqli_fetch_array($sql)) {
+                                            $total=$total+$row['item_price']*$row['itemqty'];
+                                            $itotal=$row['item_price']*$row['itemqty'];
+                                        ?>
+                                            <tr>
+                                                <td><img src="<?php echo $row['item_image']; ?>" width="100px" height="100px" alt=" "></td>
+                                                <td><?php echo $row['item_name']; ?></td>
+                                                <td><input type='number' class='text-center iqty' name="quantity" onchange='subTotal()' value='<?php echo $row['itemqty']; ?>' min='1' max='10'></td>
+                                                <td><?php echo $itotal; ?></td>
+                                                <td><a href="admindeleteproduct.php?del=<?php echo $row['item_id']; ?>" class="fas fa-trash-alt btn btn-danger" style="font-size: 15px;">&nbsp;ลบ</a></td>
+                                            </tr>
+                                    </tbody>
+                                    <?php
+                                    }
+                                    ?>
+                                </table>
                             </div>
-                            <form method="post" action="cartdelete.php">
-                                <input type="hidden" value="<?php echo $row['item_id'] ?? 0; ?>" name="item_id">
-                                <button type="submit" name="delete-cart-submit" class="btn font-baloo text-danger px-3 border-right">Delete</button>
-                            </form>
-                        </div>
-                        <!-- !product qty -->
-
-                    </div>
-
-                    <div class="col-sm-2 text-right">
-                        <div class="font-size-20 text-danger font-baloo">
-                            <p><span class='itotal'><?php echo $row['item_price'] ?? 0; ?></span> ฿</p>
                         </div>
                     </div>
                 </div>
-                <!-- !cart item -->
-                <?php
-                    }
-                ?>
             </div>
-            <!-- subtotal section-->
-            <div class="col-sm-3">
-                <div class="sub-total border text-center mt-2">
-                    <div class="border-top py-4">
-                        <h5>ยอดรวม</h5>
-                        <!-- ราคารวมทั้งหมด -->
-                        <form method="post" action="cartcheck.php">
-                            <input type="hidden" id="subtotal" name="subtotal" value =<?php echo $total ?> >
-                            <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
-                            <h5><span id="gtotal"></span> ฿</h5>
-                            <button type="submit" name="submit" id="submit" class="btn btn-warning mt-3">
-                                ยืนยันการสั่งซื้อ
-                            </button>
-                        </form>       
-                    </div>
-                </div>
-            </div>
-            <!-- !subtotal section-->
-        </div>
-        <!--  !shopping cart items   -->
+        </div>        
     </div>
-</section>
-
+</div>
+<br>
+<br>
 <?php
 
     /*  include top sale section */
