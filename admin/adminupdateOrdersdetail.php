@@ -5,10 +5,12 @@
 
 
     if(isset($_POST['submit'])) {
-        $id = $_POST['id'];
+        $order_id = $_POST['order_id'];
+        printf($order_id);
         $status = $_POST['status'];
+        print_r($status);
 
-        $sql = $updatecatagory->updateOrderdetails($id, $status);
+        $sql = $updatecatagory->updateOrderdetails($order_id, $status);
         if ($sql) {
             $_SESSION['success'] = "อัพเดทสถานะสำเร็จ";
             header("location: adminOrder.php"); 

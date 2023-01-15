@@ -2,23 +2,18 @@
 
     ob_start();
     session_start();
-    if ($_SESSION['admin_id'] == "") {
-        header("location: adminlogin.php");
+    if ($_SESSION['user_id'] == "") {
+        $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ!';
+        header("location: login.php");
     } else {
 ?>
+
+
+
 <?php
 // include header.php file
-include ('adminheader.php');
+include ('header.php');
 ?>
-<style>
-body  {
-    background-image: url("./yousef-espanioly-c9Bh_Wf3aUw-unsplash.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 100%;
-}
-</style>
 <br>
 <br>
 <div class="container">
@@ -27,11 +22,9 @@ body  {
                 <div class="card shadow-lg p-30 card-responsive" style="width: 70rem;">
                     <div class="card-body">
                         <div class="font-rubik ">
-                                <div class="float-right">
-                                <span><i class="fa fa-file" style="color:#9466de; font-size: 2.5em;"></i></span>
-                                </div>
-                                <h1><strong>คำสั่งซื้อ</strong></h1>
+                                <h3><strong>ออเดอร์ของฉัน</strong></h3>
                                 <br>
+                                <p>*หากต้องการยกเลิกออเดอร์ให้แจ้งเข้ามาในไลน์</p>
                                 <hr>
                                 <?php if (isset($_SESSION['success'])) { ?>
                                     <div class="alert alert-success">
@@ -55,14 +48,14 @@ body  {
                                         <th>ราคารวมทั้งหมด</th>
                                         <th>สถานะ</th>
                                         <th>เวลา</th>
-                                        <th>แก้ไข</th>
-                                        <th>ลบ</th>
+                                        <th>รายละเอียด</th>
                                     </thead>
 
                                     <tbody>
                                         <?php
-                                            
-                                            $sql = $Order->Orderinnerjoin();
+
+                                            $user_id = $_SESSION['user_id'];
+                                            $sql = $userorder->OrderUser($user_id);
                                             while($row = mysqli_fetch_array($sql)) {
                                         ?>
                                         <tr>
@@ -80,8 +73,7 @@ body  {
                                                 <td> <button type="button" class="btn btn-danger"><i class="far fa-times-circle"></i> ยกเลิกออเดอร์</button></td>
                                                 <?php } ?>
                                             <td><?php echo $row['datetime']; ?></td>
-                                            <td><a href="adminOrderdetail.php?id=<?php echo $row['order_id']; ?>" class="fas fa-edit btn btn-primary" style="font-size: 16px;">&nbsp;แก้ไข</a></td>
-                                            <td><a href="" class="fas fa-trash-alt btn btn-danger" style="font-size: 16px;">&nbsp;ลบ</a></td>
+                                            <td><a href="userOrderdetail.php?id=<?php echo $row['order_id']; ?>" class="fas fa-edit btn btn-primary" style="font-size: 16px;">&nbsp;รายละเอียด</a></td>
                                         </tr>
                                         <?php 
                                         }
@@ -98,10 +90,14 @@ body  {
 </div>
 <br>
 <br>
+<br>
+<br>
 <?php
 // include footer.php file
-include ('adminfooter.php');
+include ('footer.php');
 ?>
+
+
 <?php 
 }
 ?>

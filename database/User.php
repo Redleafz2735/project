@@ -67,4 +67,29 @@ class User
         return $deleterecord;
     }
 
+    public function updatecart($itemqty, $cart_id) {
+        $result = mysqli_query($this->db->con, "UPDATE cart SET 
+            itemqty = '$itemqty'
+            WHERE cart_id = '$cart_id'
+        ");
+    }
+
+    public function OrderUser($user_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT orders.order_id, orders.user_id, users.fullname, orders.subtotal, orders.status, orders.datetime FROM orders
+        INNER JOIN users ON orders.user_id = users.user_id
+        WHERE orders.user_id = '$user_id'");
+        return $result;
+    }
+
+    public function OrderUserdetails($order_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT order_details.id, product.item_name, order_details.item_price, order_details.quantity FROM order_details
+        INNER JOIN product ON order_details.item_id = product.item_id
+        WHERE order_details.order_id = '$order_id'");
+        return $result;
+    }
+
+    
+
 }

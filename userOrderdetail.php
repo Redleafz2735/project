@@ -2,23 +2,18 @@
 
     ob_start();
     session_start();
-    if ($_SESSION['admin_id'] == "") {
-        header("location: adminlogin.php");
+    if ($_SESSION['user_id'] == "") {
+        $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ!';
+        header("location: login.php");
     } else {
 ?>
+
+
+
 <?php
 // include header.php file
-include ('adminheader.php');
+include ('header.php');
 ?>
-<style>
-body  {
-    background-image: url("./yousef-espanioly-c9Bh_Wf3aUw-unsplash.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 100%;
-}
-</style>
 <br>
 <br>
 <div class="container">
@@ -30,14 +25,14 @@ body  {
                             <div class="float-right">
                                 <span><i class="fa fa-file" style="color:#9466de; font-size: 2.5em;"></i></span>
                                 </div>
-                                <h2><strong>รายละเอียดออเดอร์</strong></h2>
+                                <h2><strong>รายละเอียดสินค้า</strong></h2>
                                 <br>
                                 <hr>
                                 <table class="table table-striped table-dark">
                                     <tbody>
                                         <?php
                                             $order_id = $_GET['id'];
-                                            $sql = $Order->Orderinnerjoinza($order_id);
+                                            $sql = $userorder->OrderUserdetails($order_id);
                                             while($row = mysqli_fetch_array($sql)) {
                                         ?>
                                         <tr>
@@ -52,29 +47,14 @@ body  {
                                             <td><strong>จำนวน</strong></td>
                                             <td><?php echo $row['quantity']; ?></td>
                                         </tr>
-                                        <?php 
-                                            }
-                                        ?> 
-                                        <form method="post" action="adminupdateOrdersdetail.php">
-                                            <input type="hidden" value="<?php echo $order_id ?>" required class="form-control" name="order_id">
-                                            <tr>
-                                                <td><strong>สถานะ</strong></td>
-                                                <td>
-                                                    <select class="form-control" name="status">
-                                                        <option>อัพเดทสถานะ</option>
-                                                        <option value="in process">กำลังเตรียมการ</option>
-                                                        <option value="success">เรียบร้อย</option>
-                                                        <option value="rejected">ยกเลิก</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
                                     </tbody>
+                                    <?php 
+                                    }
+                                    ?>
                                 </table>
                                 <td>
-                                    <a href="adminOrder.php" class="btn btn-secondary">Go Back</a>
-                                    <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+                                    <a href="userorder.php" class="btn btn-secondary">Go Back</a>
                                 </td>
-                                </form> 
                             </div>
                         </div>
                     </div>
@@ -85,10 +65,14 @@ body  {
 </div>
 <br>
 <br>
+<br>
+<br>
 <?php
 // include footer.php file
-include ('adminfooter.php');
+include ('footer.php');
 ?>
+
+
 <?php 
 }
 ?>

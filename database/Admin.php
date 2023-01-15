@@ -65,10 +65,10 @@ class Admin
         return $result;
     }
 
-    public function updateOrderdetails($id, $status) {
-        $result = mysqli_query($this->db->con, "UPDATE order_details SET 
+    public function updateOrderdetails($order_id, $status) {
+        $result = mysqli_query($this->db->con, "UPDATE orders SET 
             status = '$status'
-            WHERE id = '$id'
+            WHERE order_id = '$order_id'
         ");
         return $result;
     }

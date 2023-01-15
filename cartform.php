@@ -25,7 +25,7 @@
                                 <div class="px-4 font-rale">
                                 <form method="post" action="cartcheck.php">
                                     <h6>
-                                        <input type='number' class='text-center iqty' name="quantity" onchange='subTotal()' value='<?php echo $row['itemqty']; ?>' min='1' max='10'>
+                                        <input type='number' readonly class='text-center iqty' name="quantity" onchange='subTotal()' value='<?php echo $row['itemqty']; ?>' min='1' max='10'>
                                         <!-- ไอดีสินค้า -->
                                         <input type="hidden" value="<?php echo $row['item_id'] ?? 0; ?>" name="item_id">
                                         <!-- ราคา -->

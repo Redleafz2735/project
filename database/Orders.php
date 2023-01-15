@@ -12,21 +12,33 @@ class Testorders
 
     public function Orderinnerjoin() {
         $result = mysqli_query($this->db->con,
-        "SELECT order_details.id,order_details.order_id,users.fullname,product.item_name,product.item_price,users.address,order_details.quantity,order_details.status FROM order_details
-        INNER JOIN orders ON order_details.order_id = orders.order_id 
-        INNER JOIN product ON order_details.item_id = product.item_id
-        INNER JOIN users ON order_details.user_id = users.user_id
-        WHERE order_details.id");
+        "SELECT orders.order_id, orders.user_id, users.fullname, orders.subtotal, orders.status, orders.datetime FROM orders
+        INNER JOIN users ON orders.user_id = users.user_id");
         return $result;
     }
 
-    public function Orderinnerjoinza($id) {
+    public function Orderinnerjoinza($order_id) {
         $result = mysqli_query($this->db->con,
-        "SELECT order_details.id,order_details.order_id,users.fullname,product.item_name,product.item_price,users.address,order_details.quantity,order_details.status FROM order_details
-        INNER JOIN orders ON order_details.order_id = orders.order_id 
+        "SELECT order_details.id, product.item_name, order_details.item_price, order_details.quantity FROM order_details
         INNER JOIN product ON order_details.item_id = product.item_id
-        INNER JOIN users ON order_details.user_id = users.user_id
-        WHERE order_details.id = '$id' ");
+        WHERE order_details.order_id = '$order_id'");
+        return $result;
+    }
+
+    public function updateProductqty($item_id, $new_qty) {
+        $result = mysqli_query($this->db->con, "UPDATE product SET 
+            item_qty = '$new_qty'
+            WHERE item_id = '$item_id'
+        ");
+    }
+
+    public function fetchdataproduct($item_id) {
+        $result = mysqli_query($this->db->con, "SELECT * FROM product WHERE product.item_id='$item_id' LIMIT 1");
+        return $result;
+    }
+
+    public function deleteallcart() {
+        $result = mysqli_query($this->db->con, "TRUNCATE TABLE cart");
         return $result;
     }
 }

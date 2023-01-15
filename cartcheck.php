@@ -26,11 +26,20 @@
         $status = "NULL";
         $sql = $Insertorders->insertOrder($uuid, $user_id, $subtotal, $status);
         while($row = mysqli_fetch_array($sql1)) {
-        // print_r($row);
-        $sql2 = $Insertorders->insertOrderdetails($uuid, $row['item_id'], $row['item_price'], $row['itemqty']);   
-        } if ($sql) {
-            echo "<script>alert('อัพเดทสำเร็จ!');</script>";
-            echo "<script>window.location.href='cart.php'</script>";
+            $QTY = $Order->fetchdataproduct($row['item_id']);
+            while($rowbad = mysqli_fetch_array($QTY)){
+            
+        $sql2 = $Insertorders->insertOrderdetails($uuid, $row['item_id'], $row['item_price'], $row['itemqty']);
+        $oldqty = $rowbad['item_qty'];
+        $cartqty = $row['itemqty'];
+        $new_qty = $oldqty - $cartqty;
+        $sql3 = $Order->updateProductqty($row['item_id'], $new_qty);
+            }        
+        } 
+        $sql4 = $Order->deleteallcart();
+        if ($sql) {
+            echo "<script>alert('สั่งซื้อเรียบร้อย');</script>";
+            echo "<script>window.location.href='userorder.php'</script>";
         }
     
 

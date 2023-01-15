@@ -9,7 +9,7 @@
 
         if ($sql) {
             $_SESSION['success'] = "ลบตระกร้าสำเร็จ";
-            header("location: cart1.php");
+            header("location: cart.php");
         }
     }
 

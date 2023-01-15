@@ -48,6 +48,7 @@ $innerjoin = new Testproduct($db);
 
 //Userprofile
 $updateuser = new User($db);
+$userorder = new User($db);
 $Cartjoin = new User($db);
 $Insertorders = new User($db);
 $deletecart = new User($db);
