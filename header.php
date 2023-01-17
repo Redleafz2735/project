@@ -48,7 +48,7 @@
                     <a class="nav-link" href="index.php">หน้าแรก</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">สั่งทำ</a>
+                    <a class="nav-link" href="made.php">สั่งทำ</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">สินค้า</a>

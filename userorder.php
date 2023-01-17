@@ -24,7 +24,7 @@ include ('header.php');
                         <div class="font-rubik ">
                                 <h3><strong>ออเดอร์ของฉัน</strong></h3>
                                 <br>
-                                <p>*หากต้องการยกเลิกออเดอร์ให้แจ้งเข้ามาในไลน์</p>
+                                <p class="font-rale text-danger">*หากต้องการยกเลิกออเดอร์ให้แจ้งเข้ามาในไลน์</p>
                                 <hr>
                                 <?php if (isset($_SESSION['success'])) { ?>
                                     <div class="alert alert-success">

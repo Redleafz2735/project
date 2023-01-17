@@ -14,10 +14,10 @@
             </div>
             <div class="col-lg-3 col-12">
                 <div class="d-flex flex-column flex-wrap">
-                    <a href="#" class="font-rubik font-size-17 text-white-50 pb-1">หน้าแรก</a>
-                    <a href="#" class="font-rubik font-size-17 text-white-50 pb-1">สั่งทำ</a>
-                    <a href="#" class="font-rubik font-size-17 text-white-50 pb-1">สินค้า</a>
-                    <a href="#" class="font-rubik font-size-17 text-white-50 pb-1">สินค้าใหม่</a>
+                    <a href="#" class="font-rubik font-size-17 text-white-50 pb-1">Line @aluminiumshop62</a>
+                    <a href="#" class="font-rubik font-size-17 text-white-50 pb-1">เบอร์ 081-323-7233</a>
+                    <a href="#" class="font-rubik font-size-17 text-white-50 pb-1">facebook อลูมิเนียมช้อป</a>
+                    <a href="#" class="font-rubik font-size-17 text-white-50 pb-1">IG Alumiuim_shop62</a>
                 </div>
             </div>
             <div class="col-lg-2 col-12">
