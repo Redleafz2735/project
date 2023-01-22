@@ -31,8 +31,10 @@
                             <?php
                             if (in_array($item['item_id'], $Cart->getCartId($product->getData('cart')) ?? [])){
                                 echo '<button type="submit" disabled class="btn btn-success font-size-16 form-control">In the Cart</button>';
+                            }else if($item['item_qty']==0){
+                                echo '<button type="submit" disabled class="btn btn-danger font-size-16 form-control">SOLD OUT</button>';
                             }else{
-                                echo '<button type="submit" name="top_sale_submit" class="btn btn-warning font-size-16 form-control">Add to Cart</button>';
+                                echo '<button type="submit" name="special_price_submit" class="btn btn-warning font-size-16 form-control">Add to Cart</button>';
                             }
                             ?>
                         </form>

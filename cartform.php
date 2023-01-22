@@ -25,15 +25,18 @@
                                 <div class="px-4 font-rale">
                                 <form method="post" action="cartcheck.php">
                                     <h6>
-                                        <input type='number' readonly class='text-center iqty' name="quantity" onchange='subTotal()' value='<?php echo $row['itemqty']; ?>' min='1' max='10'>
+                                        <input type='number' readonly class='text-center iqty' name="itemqty" onchange='subTotal()' value='<?php echo $row['itemqty']; ?>' min='1' max='10'>
                                         <!-- ไอดีสินค้า -->
                                         <input type="hidden" value="<?php echo $row['item_id'] ?? 0; ?>" name="item_id">
                                         <!-- ราคา -->
                                         <input type="hidden" class='iprice' name="item_price" value="<?php echo $row['item_price']; ?>">
                                         <!-- ไอดีผู้ใช้ -->
                                         <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
+                                        <!-- ไอดีสินค้า-->
+                                        <input type="hidden" name="cart_id" value="<?php echo $row['cart_id']; ?>">
                                     </h6>
                                 </div>
+                                <a href="update_cart.php?id=<?php echo $row['cart_id']; ?>" class="btn font-baloo px-3 border-right">Edit</a>
                                 <a href="cartdeleteza.php?del=<?php echo $row['cart_id']; ?>" class="btn font-baloo text-danger px-3 border-right" style="font-size: 15px;">&nbsp;ลบ</a>
                             </div>
                         </div>

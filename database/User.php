@@ -39,19 +39,6 @@ class User
         return $result;
     }
     
-    public function getDatacart($table = 'cart'){
-        $result = $this->db->con->query("SELECT * FROM {$table} ");
-
-        $resultArray = array();
-
-        // fetch product data one by one
-        while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-            $resultArray[] = $item;
-        }
-
-        return $resultArray;
-    }
-
     public function insertOrder($uuid, $user_id, $subtotal, $status) {
         $reg = mysqli_query($this->db->con, "INSERT INTO orders(order_id, user_id, subtotal, status) VALUES('$uuid', '$user_id', '$subtotal', '$status')");
         return $reg;
@@ -66,12 +53,20 @@ class User
         $deleterecord = mysqli_query($this->db->con, "DELETE FROM cart WHERE cart_id = '$cart_id'");
         return $deleterecord;
     }
+    // cart
+    public function fetchdatacart($cart_id) {
+        $result = mysqli_query($this->db->con, "SELECT * FROM cart WHERE cart.cart_id = '$cart_id'");
+        return $result;
+    }
 
-    public function updatecart($itemqty, $cart_id) {
+    public function updatecartleafz($cart_id, $user_id, $item_id, $itemqty) {
         $result = mysqli_query($this->db->con, "UPDATE cart SET 
+            user_id = '$user_id',
+            item_id = '$item_id',
             itemqty = '$itemqty'
             WHERE cart_id = '$cart_id'
         ");
+        return $result;
     }
 
     public function OrderUser($user_id) {
@@ -90,6 +85,31 @@ class User
         return $result;
     }
 
-    
+    public function insertmadeOrder($uuid, $made_price, $user_id, $made_type, $status) {
+        $reg = mysqli_query($this->db->con, "INSERT INTO made_order(made_id, made_price, user_id, made_type, status) VALUES('$uuid', '$made_price', '$user_id', '$made_type', '$status')");
+        return $reg;
+    }
 
+    public function insertmadeOrderdetails($uuid, $size, $equidment, $color, $details) {
+        $reg = mysqli_query($this->db->con, "INSERT INTO made_order_details(made_id, size, equidment, color, details) VALUES('$uuid', '$size', '$equidment', '$color', '$details')");
+        
+    }
+
+    public function madeOrderUser($user_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_order.made_id, users.fullname, producttype.productbrand, made_order.made_price, made_order.status FROM made_order
+        INNER JOIN users ON made_order.user_id = users.user_id
+        INNER JOIN producttype ON made_order.made_type = producttype.producttype_id
+        WHERE made_order.user_id = '$user_id'");
+        return $result;
+    }
+
+    public function madeOrderUserdetails($made_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT producttype.productbrand, made_order_details.size, made_order_details.equidment, made_order_details.color, made_order_details.details FROM made_order_details
+        INNER JOIN made_order ON made_order_details.made_id = made_order.made_id 
+        INNER JOIN producttype ON made_order.made_type = producttype.producttype_id
+        WHERE made_order_details.made_id = '$made_id'");
+        return $result;
+    }
 }

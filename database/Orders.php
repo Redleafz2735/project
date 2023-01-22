@@ -41,6 +41,23 @@ class Testorders
         $result = mysqli_query($this->db->con, "TRUNCATE TABLE cart");
         return $result;
     }
+
+    public function madeOrderinnerjoin() {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_order.made_id, users.fullname, producttype.productbrand, made_order.made_price, made_order.status FROM made_order
+        INNER JOIN users ON made_order.user_id = users.user_id
+        INNER JOIN producttype ON made_order.made_type = producttype.producttype_id");
+        return $result;
+    }
+
+    public function madeOrderinnerjoinza($made_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT producttype.productbrand, made_order_details.size, made_order_details.equidment, made_order_details.color, made_order_details.details FROM made_order_details
+        INNER JOIN made_order ON made_order_details.made_id = made_order.made_id 
+        INNER JOIN producttype ON made_order.made_type = producttype.producttype_id
+        WHERE made_order_details.made_id = '$made_id'");
+        return $result;
+    }
 }
 
 ?>

@@ -68,6 +68,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="userprofile.php">Userprofile</a>
                         <a class="dropdown-item" href="userorder.php">ออเดอร์ของฉัน</a>
+                        <a class="dropdown-item" href="usermadeorder.php">การสั่งทำของฉัน</a>
                         <a class="dropdown-item" href="logout.php">Logout</a>
                     </div>
                 </div>

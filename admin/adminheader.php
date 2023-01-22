@@ -44,7 +44,7 @@
                     <a class="nav-link" href="adminindex.php">หน้าแรก</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">การสั่งทำ</a>
+                    <a class="nav-link" href="adminmadeOrder.php">การสั่งทำ</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="admincatagory.php">ประเภทสินค้า</a>

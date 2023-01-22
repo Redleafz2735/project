@@ -72,4 +72,13 @@ class Admin
         ");
         return $result;
     }
+
+    public function updatemadeOrderdetails($made_id, $status, $made_price) {
+        $result = mysqli_query($this->db->con, "UPDATE made_order SET
+            made_price = '$made_price', 
+            status = '$status'
+            WHERE made_id = '$made_id'
+        ");
+        return $result;
+    }
 }

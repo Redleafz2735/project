@@ -34,6 +34,19 @@
 
 <!-- !start #footer -->
 <script>
+    // Attach a click event to the anchor tag
+    $(document).ready(function(){
+        $('.edit-link').click(function(){
+        // Retrieve the cart_id value from the data-cart-id attribute
+        var cartId = $(this).data('cart-id');
+        // Set the value of the cartId input field to the retrieved cart_id value
+        $("#cartId").val(cartId);
+        // Open the modal
+        $("#myModal").modal();
+        });
+    });
+</script>
+<script>
 
     var gt=0;
     var iprice=document.getElementsByClassName('iprice');
