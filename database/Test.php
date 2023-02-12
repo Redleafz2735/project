@@ -30,6 +30,15 @@ class Testproduct
         return $result;
     }
 
+    public function innerjoinupdade($item_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT item_id,product.item_brand,producttype.productbrand,item_name,item_price,item_image,item_register,item_qty FROM product
+        INNER JOIN producttype
+        ON product.item_brand = producttype.producttype_id
+        WHERE product.item_id = '$item_id'");
+        return $result;
+    }
+
     public function updateproduct($item_brand, $item_name, $item_price, $item_image, $item_register, $item_qty, $item_id) {
         if ($item_image == 1){
             $result = mysqli_query($this->db->con, "UPDATE product SET 
@@ -60,8 +69,15 @@ class Testproduct
         return $deleterecord;
     }
 
-    public function fetcatagory() {
-        $result = mysqli_query($this->db->con, "SELECT * FROM producttype ORDER BY producttype_id asc");
+    public function fetcatagory($itembrand) {
+        $result = mysqli_query($this->db->con, "SELECT * FROM producttype WHERE producttype.producttype_id = '$itembrand'
+        ORDER BY producttype_id asc");
+        return $result;
+    }
+
+    public function fetcatagory1() {
+        $result = mysqli_query($this->db->con, "SELECT * FROM producttype
+        ORDER BY producttype_id asc");
         return $result;
     }
 }

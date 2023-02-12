@@ -12,14 +12,17 @@ class Testorders
 
     public function Orderinnerjoin() {
         $result = mysqli_query($this->db->con,
-        "SELECT orders.order_id, orders.user_id, users.fullname, orders.subtotal, orders.status, orders.datetime FROM orders
-        INNER JOIN users ON orders.user_id = users.user_id");
+        "SELECT orders.order_id, orders.user_id, users.fullname, orders.subtotal, orders.status, orders.datetime FROM orders 
+        INNER JOIN users ON orders.user_id = users.user_id 
+        ORDER BY orders.datetime ASC
+        ");
         return $result;
     }
 
     public function Orderinnerjoinza($order_id) {
         $result = mysqli_query($this->db->con,
-        "SELECT order_details.id, product.item_name, order_details.item_price, order_details.quantity FROM order_details
+        "SELECT order_details.id, product.item_name, order_details.item_price, order_details.quantity, orders.status FROM order_details
+        INNER JOIN orders ON order_details.order_id = orders.order_id
         INNER JOIN product ON order_details.item_id = product.item_id
         WHERE order_details.order_id = '$order_id'");
         return $result;

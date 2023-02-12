@@ -49,7 +49,7 @@ body  {
                                             <form action="admininsertproduct.php" method="post" enctype="multipart/form-data">
                                                 <?php 
 
-                                                    $sql = $fetchdata->fetcatagory();
+                                                    $sql = $fetchdata->fetcatagory1();
                                                     while($row1 = mysqli_fetch_array($sql)) {
 
                                                 ?>

@@ -1,7 +1,7 @@
 <?php 
 
     session_start();
-    require_once "../functions.php";
+    require_once "functions.php";
 
 
     if(isset($_POST['submit'])) {
@@ -12,17 +12,16 @@
 
         if (empty($status)) {
             $_SESSION['error'] = 'กรุณาเลือกสถานะ';
-            header("location: adminOrder.php");
+            header("location: userOrder.php");
         }else {
 
             $sql = $updatecatagory->updateOrderdetails($order_id, $status);
-            $sql2 = $updatecatagory->deleteorderRequest($order_id);
-            if ($sql2) {
+            if ($sql) {
                 $_SESSION['success'] = "อัพเดทสถานะสำเร็จ";
-                header("location: adminOrder.php"); 
+                header("location: userorder.php"); 
             } else {
                 $_SESSION['error'] = "Data has not been inserted successfully";
-                header("location: adminOrder.php");
+                header("location: userorder.php");
             }
         }
     }

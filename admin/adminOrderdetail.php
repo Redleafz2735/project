@@ -52,22 +52,71 @@ body  {
                                             <td><strong>จำนวน</strong></td>
                                             <td><?php echo $row['quantity']; ?></td>
                                         </tr>
-                                        <?php 
+                                        <?php
+                                        $status = $row['status']; 
                                             }
-                                        ?> 
+                                        ?>
+                                        <?php
+                                            $sql1 = $adminOrder->OrderAdminrequest($order_id);
+                                            while($row1 = mysqli_fetch_array($sql1)) {
+                                            $status1 = $row1['r_status'];
+                                        ?>
+                                            <?php if($status1=='request'){ ?>
+
+                                            <td><strong class ='text-danger'>*สาเหตุที่ยกเลิก</strong></td>
+                                            <td><?php echo $row1['details']; ?></td>
+
+                                            <?php }else{ ?>
+
+                                            <?php } ?>
+                                        <?php
+                                            }
+                                        ?>
+                                        <?php if($status=='in process'){ ?>
                                         <form method="post" action="adminupdateOrdersdetail.php">
                                             <input type="hidden" value="<?php echo $order_id ?>" required class="form-control" name="order_id">
                                             <tr>
-                                                <td><strong>สถานะ</strong></td>
+                                                <td><strong>อัพเดทสถานะ</strong></td>
                                                 <td>
                                                     <select class="form-control" name="status">
-                                                        <option>อัพเดทสถานะ</option>
-                                                        <option value="in process">กำลังเตรียมการ</option>
+                                                        <option value="" disabled selected>กดที่นี่</option>
+                                                        <option value="finish">รอรับสินค้าที่หน้าร้าน</option>
                                                         <option value="success">เรียบร้อย</option>
                                                         <option value="rejected">ยกเลิก</option>
                                                     </select>
                                                 </td>
                                             </tr>
+                                        <?php }else if($status=='success'){ ?>
+        
+                                        <?php }else if($status=='rejected'){ ?>
+
+                                        <?php }else if($status=='finish'){ ?>
+                                        <form method="post" action="adminupdateOrdersdetail.php">
+                                            <input type="hidden" value="<?php echo $order_id ?>" required class="form-control" name="order_id">
+                                            <tr>
+                                                <td><strong>อัพเดทสถานะ</strong></td>
+                                                <td>
+                                                    <select class="form-control" name="status">
+                                                        <option value="" disabled selected>กดที่นี่</option>
+                                                        <option value="success">เรียบร้อย</option>
+                                                        <option value="rejected">ยกเลิก</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        <?php }else{ ?>
+                                        <form method="post" action="adminupdateOrdersdetail.php">
+                                            <input type="hidden" value="<?php echo $order_id ?>" required class="form-control" name="order_id">
+                                            <tr>
+                                                <td><strong>อัพเดทสถานะ</strong></td>
+                                                <td>
+                                                    <select class="form-control" name="status">
+                                                        <option value="" disabled selected>กดที่นี่</option>
+                                                        <option value="in process">กำลังเตรียมการ</option>
+                                                        <option value="rejected">ยกเลิก</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                                 <td>

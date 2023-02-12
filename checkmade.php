@@ -27,13 +27,6 @@
         $color = $_POST['color'];
         $size = $_POST['size'];
         $details = $_POST['details'];
-
-        $sql = $Insertorders->insertmadeOrder($uuid, $made_price, $user_id, $made_type, $status);
-        $sql2 = $Insertorders->insertmadeOrderdetails($uuid, $size, $equidment, $color, $details);
-        if ($sql) {
-            echo "<script>alert('สั่งทำเรียบร้อย');</script>";
-            echo "<script>window.location.href='usermadeorder.php'</script>";
-        }
     }
 
 ?>

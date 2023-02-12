@@ -17,7 +17,7 @@ $in_cart = $Cart->getCartId($product->getData('cart'));
             <button class="btn is-checked" data-filter="*">All Brand</button>
             <?php 
 
-                $sql = $fetchdata->fetcatagory();
+                $sql = $fetchdata->fetcatagory1();
                 while($row1 = mysqli_fetch_array($sql)) {
             ?>
                 <?php foreach($sql as $row1) { ?>

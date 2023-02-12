@@ -27,16 +27,15 @@ body  {
     <?php 
 
             $item_id = $_GET['id'];
-            $sql = $updateproduct->innerjoin($item_id);
+            $sql = $updateproduct->innerjoinupdade($item_id);
             while($row = mysqli_fetch_array($sql)) {
     ?>
     <form action="adminupdateproductCheck.php" method="post" enctype="multipart/form-data">
         <div class="mb-3">
-            <label for="item_id" class="col-form-label">ID</label>
-            <input type="text" readonly value="<?php echo $row['item_id']; ?>" required class="form-control" name="item_id">
+            <input type="hidden" readonly value="<?php echo $row['item_id']; ?>" required class="form-control" name="item_id">
             <?php 
-
-                $sql = $fetchdata->fetcatagory();
+                $itembrand = $row['item_brand'];
+                $sql = $fetchdata->fetcatagory($itembrand);
                 while($row1 = mysqli_fetch_array($sql)) {
 
             ?>
@@ -44,7 +43,7 @@ body  {
                 <label for="item_brand" class="col-form-label">ประเภทสินค้า</label>
                     <td>
                         <select required class="form-control" name="item_brand">
-                            <option><?php echo $row['productbrand']; ?></option>
+                            <option type="text" value="<?php echo $row1['producttype_id']; ?>"><?php echo $row1['productbrand']; ?></option>                 
                             <?php foreach($sql as $row1) { ?>
                             <option type="text" value="<?php echo $row1['producttype_id']; ?>"><?php echo $row1['productbrand']; ?></option>                 
                             <?php }?>
@@ -71,6 +70,7 @@ body  {
         <div class="mb-3">
             <label for="item_image" class="col-form-label">รูปภาพสินค้า</label>
             <input type="file" class="form-control" id="imgInput" name="item_image">
+            <br>
             <img width="350px" src=".<?php echo $row['item_image']; ?>" id="previewImg" alt="">
         </div>
         <hr>

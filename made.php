@@ -20,7 +20,7 @@ include ('header.php');
                     <div class="font-rubik ">
                         <h2 class="text-center"><strong>สั่งทำสินค้า</strong></h2>
                         <hr>
-                        <form action="checkmade.php" method="post">
+                        <form action="madeprocess.php" method="post">
                             <!--Text Field-->
                             <?php if(isset($_SESSION['error'])) { ?>
                                 <div class="alert alert-danger" role="alert">
@@ -38,19 +38,19 @@ include ('header.php');
                                     ?>
                                 </div>
                             <?php } ?>
+                            <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
                             <?php 
 
-                                $sql = $fetchdata->fetcatagory();
-                                while($row1 = mysqli_fetch_array($sql)) {
+                                $sql = $user->fetblueprint();
+                                while($row = mysqli_fetch_array($sql)) {
 
                             ?>
-                            <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
                             <div class="mb-3">
-                                <label for="item_brand" class="col-form-label">ประเภทสินค้า</label>
-                                    <select required class="form-control" name="made_type">
-                                    <option>เลือกประเภทสินค้า</option>
-                                    <?php foreach($sql as $row1) { ?>
-                                    <option type="text" value="<?php echo $row1['producttype_id']; ?>"><?php echo $row1['productbrand']; ?></option>                 
+                                <label for="blue_id" class="col-form-label">สินค้าที่จะสั่งทำ</label>
+                                    <select required class="form-control" name="blue_id">
+                                    <option value="" disabled selected>เลือกสินค้า</option>
+                                    <?php foreach($sql as $row) { ?>
+                                        <option type="text" value="<?php echo $row['blue_id']; ?>"><?php echo $row['name']; ?></option>                 
                                     <?php }?>
                                 </select>
                             </div>
@@ -58,33 +58,31 @@ include ('header.php');
                                 }
                             ?>
                             <div class="mb-3">
-                                <label for="equidment" class="col-form-label">วัสดุอุปกรณ์</label>
-                                <select name="equidment" required class="form-control">
-                                    <option>เลือกวัสดุอุปกรณ์</option>
-                                    <option>อลูมิเนียม</option>
-                                    <option>อลูมิเนียมลายไม้</option>
-                                    <option>อลูมิเนียมอบ</option>
-                                </select>
+                                <label for="made_qty" class="form-lable">จำนวน</label>
+                                <input type="number" class="form-control" name="made_qty" value='1' min='1' max='500'>
                             </div>
                             <div class="mb-3">
                                 <label for="color" class="col-form-label">สี</label>
                                 <select name="color" required class="form-control">
+                                    <option value="" disabled selected>เลือกสี</option>
                                     <option>สีขาว</option>
                                     <option>สีดำ</option>
-                                    <option>สีชา</option>
-                                    <option>สีเทา</option>
-                                    <option>ไม่เอาสี</option>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="size">ขนาด</label>
-                                <input type="text" name="size" class="form-control" id="size" placeholder="กรอกขนาดที่จะสั่ง เช่น 130*50 cm">
+                                <select name="size" required class="form-control">
+                                    <option value="" disabled selected>เลือกขนาด</option>
+                                    <option>เล็ก</option>
+                                    <option>มารตฐาน</option>
+                                    <option>ใหญ่</option>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label class="form-lable">รายละเอียดเพิ่มเติม</label>
+                                <label class="form-lable">รายละเอียดขนาดเพิ่มเติม</label>
                                 <textarea class="form-control" name="details" cols="30" rows="5"></textarea>
                             </div>
-                            <input type="submit" name="submit" id="submit" value="บันทึกข้อมูล" class="btn btn-primary">
+                            <input type="submit" name="submit" id="submit" value="ประเมินราคา" class="btn btn-primary">
                         </form>
                     </div>
                 </div>

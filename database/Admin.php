@@ -81,4 +81,80 @@ class Admin
         ");
         return $result;
     }
+
+    // NULL 
+    public function OrderAdmin() {
+        $result = mysqli_query($this->db->con,
+        "SELECT orders.order_id, orders.user_id, users.fullname, orders.subtotal, orders.status, orders.datetime 
+        FROM orders
+        INNER JOIN users ON orders.user_id = users.user_id 
+        WHERE orders.user_id AND orders.status = 'NULL'
+        ORDER BY orders.datetime ASC");
+        return $result;
+    }
+
+    // IN PROCESSC
+    public function OrderAdmin1() {
+        $result = mysqli_query($this->db->con,
+        "SELECT orders.order_id, orders.user_id, users.fullname, orders.subtotal, orders.status, orders.datetime 
+        FROM orders
+        INNER JOIN users ON orders.user_id = users.user_id 
+        WHERE orders.user_id AND orders.status = 'in process'
+        ORDER BY orders.datetime ASC");
+        return $result;
+    }
+    // Success
+    public function OrderAdmin2() {
+        $result = mysqli_query($this->db->con,
+        "SELECT orders.order_id, orders.user_id, users.fullname, orders.subtotal, orders.status, orders.datetime 
+        FROM orders
+        INNER JOIN users ON orders.user_id = users.user_id 
+        WHERE orders.user_id AND orders.status = 'success'
+        ORDER BY orders.datetime ASC");
+        return $result;
+    }
+    // รอรับหน้าร้าน
+    public function OrderAdmin5() {
+        $result = mysqli_query($this->db->con,
+        "SELECT orders.order_id, orders.user_id, users.fullname, orders.subtotal, orders.status, orders.datetime 
+        FROM orders
+        INNER JOIN users ON orders.user_id = users.user_id 
+        WHERE orders.user_id AND orders.status = 'finish'
+        ORDER BY orders.datetime ASC");
+        return $result;
+    }
+    // rejected
+    public function OrderAdmin3() {
+        $result = mysqli_query($this->db->con,
+        "SELECT orders.order_id, orders.user_id, users.fullname, orders.subtotal, orders.status, orders.datetime 
+        FROM orders
+        INNER JOIN users ON orders.user_id = users.user_id 
+        WHERE orders.user_id AND orders.status = 'rejected'
+        ORDER BY orders.datetime ASC");
+        return $result;
+    }
+    // request
+    public function OrderAdmin4() {
+        $result = mysqli_query($this->db->con,
+        "SELECT orders.order_id, orders.user_id, users.fullname, orders.subtotal, orders.status, orders.datetime, order_request.r_status, order_request.details
+        FROM orders
+        INNER JOIN order_request ON orders.order_id = order_request.order_id
+        INNER JOIN users ON orders.user_id = users.user_id
+        WHERE orders.user_id AND orders.status = 'in process' AND order_request.r_status = 'request'
+        ORDER BY orders.datetime ASC");
+        return $result;
+    }
+
+    // ลบรีเควส
+    public function deleteorderRequest($order_id) {
+        $deleterecord = mysqli_query($this->db->con, "DELETE FROM order_request WHERE order_id = '$order_id'");
+        return $deleterecord;
+    }
+
+    public function OrderAdminrequest($order_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT order_request.order_id, order_request.r_status, order_request.details FROM order_request
+        WHERE order_request.order_id = '$order_id' AND order_request.r_status = 'request'");
+        return $result;
+    }
 }

@@ -68,18 +68,73 @@ class User
         ");
         return $result;
     }
-
+    // NULL 
     public function OrderUser($user_id) {
         $result = mysqli_query($this->db->con,
-        "SELECT orders.order_id, orders.user_id, users.fullname, orders.subtotal, orders.status, orders.datetime FROM orders
+        "SELECT orders.order_id, orders.user_id, users.fullname, orders.subtotal, orders.status, orders.datetime 
+        FROM orders
+        INNER JOIN users ON orders.user_id = users.user_id 
+        WHERE orders.user_id = '$user_id' AND orders.status = 'NULL'
+        ORDER BY orders.datetime ASC");
+        return $result;
+    }
+
+    // IN PROCESSC
+    public function OrderUser1($user_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT orders.order_id, orders.user_id, users.fullname, orders.subtotal, orders.status, orders.datetime 
+        FROM orders
+        INNER JOIN users ON orders.user_id = users.user_id 
+        WHERE orders.user_id = '$user_id' AND orders.status = 'in process'
+        ORDER BY orders.datetime ASC");
+        return $result;
+    }
+    // Success
+    public function OrderUser2($user_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT orders.order_id, orders.user_id, users.fullname, orders.subtotal, orders.status, orders.datetime 
+        FROM orders
+        INNER JOIN users ON orders.user_id = users.user_id 
+        WHERE orders.user_id = '$user_id' AND orders.status = 'success'
+        ORDER BY orders.datetime ASC");
+        return $result;
+    }
+    // Success
+    public function OrderUser5($user_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT orders.order_id, orders.user_id, users.fullname, orders.subtotal, orders.status, orders.datetime 
+        FROM orders
+        INNER JOIN users ON orders.user_id = users.user_id 
+        WHERE orders.user_id = '$user_id' AND orders.status = 'finish'
+        ORDER BY orders.datetime ASC");
+        return $result;
+    }
+    // rejected
+    public function OrderUser3($user_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT orders.order_id, orders.user_id, users.fullname, orders.subtotal, orders.status, orders.datetime 
+        FROM orders
+        INNER JOIN users ON orders.user_id = users.user_id 
+        WHERE orders.user_id = '$user_id' AND orders.status = 'rejected'
+        ORDER BY orders.datetime ASC");
+        return $result;
+    }
+    // request
+    public function OrderUser4($user_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT orders.order_id, orders.user_id, users.fullname, orders.subtotal, orders.status, orders.datetime, order_request.r_status, order_request.details
+        FROM orders
+        INNER JOIN order_request ON orders.order_id = order_request.order_id
         INNER JOIN users ON orders.user_id = users.user_id
-        WHERE orders.user_id = '$user_id'");
+        WHERE orders.user_id = '$user_id' AND orders.status = 'in process' AND order_request.r_status = 'request'
+        ORDER BY orders.datetime ASC");
         return $result;
     }
 
     public function OrderUserdetails($order_id) {
         $result = mysqli_query($this->db->con,
-        "SELECT order_details.id, product.item_name, order_details.item_price, order_details.quantity FROM order_details
+        "SELECT order_details.id, product.item_name, order_details.item_price, order_details.quantity, orders.status FROM order_details
+        INNER JOIN orders ON order_details.order_id = orders.order_id
         INNER JOIN product ON order_details.item_id = product.item_id
         WHERE order_details.order_id = '$order_id'");
         return $result;
@@ -112,4 +167,33 @@ class User
         WHERE made_order_details.made_id = '$made_id'");
         return $result;
     }
+
+    public function insertrequestorder($order_id, $status, $details) {
+        $reg = mysqli_query($this->db->con, "INSERT INTO order_request(order_id, r_status, details) VALUES('$order_id', '$status', '$details')");
+        return $reg;
+    }
+
+    public function fetblueprint() {
+        $result = mysqli_query($this->db->con, "SELECT * FROM blueprint
+        ORDER BY blueprint.id asc");
+        return $result;
+    }
+
+    public function fetblueprint1($blue_id) {
+        $result = mysqli_query($this->db->con, "SELECT * FROM blueprint
+        WHERE blueprint.blue_id = '$blue_id'
+        ORDER BY blueprint.id asc");
+        return $result;
+    }
+
+    public function fetblueprintmaterail($blue_id) {
+        $result = mysqli_query($this->db->con, "SELECT blueprint.blue_id,product.item_name,product.item_image,blueprint_material.M_Qty,
+        blueprint_material.M_Price
+        FROM blueprint_material
+        INNER JOIN blueprint ON blueprint_material.blue_id = blueprint.blue_id
+        INNER JOIN product ON blueprint_material.item_id = product.item_id
+        WHERE blueprint.blue_id = '$blue_id'");
+        return $result;
+    }
+
 }

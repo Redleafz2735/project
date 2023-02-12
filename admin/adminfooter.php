@@ -79,7 +79,7 @@
         $(document).ready(function() {
         var table = $('#myTable').DataTable( {
         rowReorder: {
-            selector: 'td:nth-child(2)'
+            selector: 'td:nth-child(4)'
         },
         responsive: true
     } );

@@ -52,6 +52,7 @@ $userorder = new User($db);
 $Cartjoin = new User($db);
 $Insertorders = new User($db);
 $deletecart = new User($db);
+$user = new User($db);
 
 //adminzone
 $productinsert = new ProductInsert($db);
@@ -62,6 +63,7 @@ $deletedata = new Testproduct($db);
 $adminuser = new Admin($db);
 $adminupdateuser = new Admin($db);
 $admindeletedatauser = new Admin($db);
+$adminOrder = new Admin($db);
 
 //catagoly
 $admincatagory = new Admin($db);
