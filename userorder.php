@@ -22,6 +22,7 @@ include ('header.php');
                 <div class="card shadow-lg p-30 card-responsive" style="width: 70rem;">
                     <div class="card-body">
                         <div class="font-rubik ">
+                                <h3><strong>ออเดอร์ของฉัน</strong></h3>
                                 <h6>
                                     <nav>
                                         <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">

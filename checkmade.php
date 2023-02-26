@@ -18,15 +18,30 @@
     }
 
     if (isset($_POST['submit'])) {
+        $made_id = guidv4();
         $user_id = $_POST['user_id'];
-        $uuid = guidv4();
-        $made_type = $_POST['made_type'];
-        $made_price = "0";
-        $status = "NULL";
-        $equidment = $_POST['equidment'];
+        $blue_id = $_POST['blue_id'];
+        $made_qty = $_POST['made_qty'];
         $color = $_POST['color'];
         $size = $_POST['size'];
         $details = $_POST['details'];
+        $made_price = $_POST['made_price'];
+        $status = "NULL";
+
+        $sql = $Insertorders->insertmadeOrder($made_id, $blue_id, $user_id, $color, $made_price, $size, $details, $status, $made_qty);
+
+        $sql1 = $user->fetblueprintmaterailsend($blue_id);
+            while($row1 = mysqli_fetch_array($sql1)) {
+            $MQTY = $row1['M_Qty']*$made_qty;
+            $MPRICE = $row1['M_Price']*$made_qty;
+
+            $sql2 = $Insertorders->insertmadeOrderdetails($made_id, $blue_id, $row1['item_id'], $MPRICE, $MQTY);
+        }
+        if ($sql) {
+            echo "<script>alert('สั่งทำเรียบร้อย');</script>";
+            echo "<script>window.location.href='usermadeorder.php'</script>";
+        }
+
     }
 
 ?>

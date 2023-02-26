@@ -28,40 +28,201 @@ include ('header.php');
                                 <h2><strong>รายละเอียดการสั่งทำ</strong></h2>
                                 <br>
                                 <hr>
-                                <table class="table table-striped table-dark">
+                                <table class="table table-striped">
+                                    <?php
+                                        $made_id = $_GET['id'];
+                                        $sql = $userorder->madeOrderUserhaed($made_id);
+                                        while($row1 = mysqli_fetch_array($sql)) {
+                                    ?>
                                     <tbody>
-                                        <?php
-                                            $made_id = $_GET['id'];
-                                            $sql = $userorder->madeOrderUserdetails($made_id);
-                                            while($row = mysqli_fetch_array($sql)) {
-                                        ?>
                                         <tr>
-                                            <td><strong>สินค้า</strong></td>
-                                            <td><?php echo $row['productbrand']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>ขนาด</strong></td>
-                                            <td><?php echo $row['size']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>วัสดุ</strong></td>
-                                            <td><?php echo $row['equidment']; ?></td>
+                                            <td><strong>ชื่อสินค้า</strong></td>
+                                            <td><?php echo $row1['name']; ?></td>
                                         </tr>
                                         <tr>
                                             <td><strong>สี</strong></td>
-                                            <td><?php echo $row['color']; ?></td>
+                                            <td><?php echo $row1['color']; ?></td>
                                         </tr>
                                         <tr>
-                                            <td><strong>รายละเอียด</strong></td>
-                                            <td><?php echo $row['details']; ?></td>
+                                            <td><strong>จำนวน</strong></td>
+                                            <td><?php echo $row1['made_qty']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>ราคา</strong></td>
+                                            <td><?php echo $row1['made_price']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>ขนาด</strong></td>
+                                            <td><?php echo $row1['size']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>ขนาดความกว้างยาว</strong></td>
+                                            <td><?php echo $row1['details']; ?></td>
                                         </tr>
                                     </tbody>
                                     <?php 
-                                    }
+                                        }
                                     ?>
                                 </table>
+                                <h5><strong>วัสดุที่ใช้</strong></h5>
+                                <hr>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <th>รูป</th>
+                                        <th>ชื่อวัสดุ</th>
+                                        <th>จำนวน</th>
+                                        <th>ราคา</th>
+                                    </thead>
+                                    <?php
+                                        $sql = $userorder->madeOrderUserdetails($made_id);
+                                        while($row = mysqli_fetch_array($sql)) {
+                                    ?>
+                                    <tbody>
+                                        <tr>
+                                            <td><img src="<?php echo $row['item_image']; ?>" width="50px" height="50px" alt=" "></td>
+                                            <td><?php echo $row['item_name']; ?></td>
+                                            <td><?php echo $row['MD_price']; ?></td>
+                                            <td><?php echo $row['MD_Qty']; ?></td>
+                                        </tr>
+                                    </tbody>
+                                    <?php
+                                        $status = $row['status'];
+                                        }
+                                    ?>
+                                </table>
+                                <table class="table table-striped">
+                                <?php if($status=='in process'){ ?>
+                                        
+                                <?php }else if($status=='success'){ ?>
+        
+                                <?php }else if($status=='rejected'){ ?>
+        
+                                <?php }else if($status=='finish'){ ?>
+
+                                <?php }else if($status=='Acept'){ ?>
+                                <form method="post" action="usermadeorderupdate.php">
+                                                <input type="hidden" value="<?php echo $made_id ?>" required class="form-control" name="made_id">
+                                                <tr>
+                                                    <td><strong class='text-danger'>*หากต้องการยกเลิก</strong></td>
+                                                    <td>
+                                                        <select class="form-control" name="status">
+                                                            <option value="" disabled selected>กดที่นี่</option>
+                                                            <option value="rejected">ยกเลิก</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                <?php }else{ ?>
+                                <form method="post" action="usermadeorderupdate.php">
+                                                <input type="hidden" value="<?php echo $made_id ?>" required class="form-control" name="made_id">
+                                                <tr>
+                                                    <td><strong class='text-danger'>*หากต้องการยกเลิก</strong></td>
+                                                    <td>
+                                                        <select class="form-control" name="status">
+                                                            <option value="" disabled selected>กดที่นี่</option>
+                                                            <option value="rejected">ยกเลิก</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                        <?php } ?>
+                                </table>
                                 <td>
-                                    <a href="usermadeorder.php" class="btn btn-secondary">Go Back</a>
+                                    <a href="usermadeorder.php" class="btn btn-secondary">กลับไป</a>
+                                        <?php if($status=='in process'){ ?>
+                                                
+                                        <?php }else if($status=='success'){ ?>
+            
+                                        <?php }else if($status=='rejected'){ ?>
+            
+                                        <?php }else if($status=='finish'){ ?>
+                                        
+                                        <?php }else if($status=='Acept'){ ?>
+                                            <button class="btn btn-primary" type="submit" name="submit">บันทึกข้อมูล</button>
+                                        <?php }else{ ?>
+                                            <button class="btn btn-primary" type="submit" name="submit">บันทึกข้อมูล</button>
+                                        <?php } ?>
+                                    </form>
+                                    <?php if($status=='Acept'){ ?>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+                                            ยืนยัน
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalCenterTitle">ยืนยันการสั่งทำ</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form action="userorder_Acept.php" method="post">
+                                                        <div class="modal-body">
+                                                            <input type="hidden" class="form-control" value="<?php echo $made_id ?>" name="made_id">
+                                                            <table class="table table-striped">
+                                                                <th>สินค้า</th>
+                                                                <th>จำนวน</th>
+                                                                <th>ราคา</th>
+                                                                <?php
+                                                                    $sql = $userorder->madeOrderUserhaed($made_id);
+                                                                    while($row2 = mysqli_fetch_array($sql)) {
+                                                                ?>
+                                                                <tr>
+                                                                    <td><?php echo $row2['name']; ?></td>
+                                                                    <td><?php echo $row2['made_qty']; ?></td>
+                                                                    <td><?php echo $row2['made_price']; ?></td>
+                                                                </tr>
+                                                                <?php } ?>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">กลับไป</button>
+                                                            <button type="submit" name="submit" class="btn btn-primary">ยืนยัน</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php }else if($status=='in process'){ ?>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                                            ขอยกเลิก
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalCenterTitle">คำร้องขอยกเลิก</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form action="usermadeorder_request.php" method="post">
+                                                        <div class="modal-body">
+                                                            <input type="hidden" class="form-control" value="<?php echo $made_id ?>" name="made_id">
+                                                            <div class="mb-3">
+                                                                <label for="status" class="col-form-label">คำร้องขอยกเลิก</label>
+                                                                <select name="status" required class="form-control">
+                                                                    <option value="request">ขอยกเลิก</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label class="form-lable">สาเหตุที่ยกเลิก</label>
+                                                                <textarea class="form-control" name="details" cols="30" rows="5"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">กลับไป</button>
+                                                            <button type="submit" name="submit" class="btn btn-primary">ยืนยัน</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                <?php }else{
+
+                                } ?>
                                 </td>
                             </div>
                         </div>

@@ -99,7 +99,7 @@ class User
         ORDER BY orders.datetime ASC");
         return $result;
     }
-    // Success
+    // finish
     public function OrderUser5($user_id) {
         $result = mysqli_query($this->db->con,
         "SELECT orders.order_id, orders.user_id, users.fullname, orders.subtotal, orders.status, orders.datetime 
@@ -139,37 +139,105 @@ class User
         WHERE order_details.order_id = '$order_id'");
         return $result;
     }
-
-    public function insertmadeOrder($uuid, $made_price, $user_id, $made_type, $status) {
-        $reg = mysqli_query($this->db->con, "INSERT INTO made_order(made_id, made_price, user_id, made_type, status) VALUES('$uuid', '$made_price', '$user_id', '$made_type', '$status')");
-        return $reg;
-    }
-
-    public function insertmadeOrderdetails($uuid, $size, $equidment, $color, $details) {
-        $reg = mysqli_query($this->db->con, "INSERT INTO made_order_details(made_id, size, equidment, color, details) VALUES('$uuid', '$size', '$equidment', '$color', '$details')");
-        
-    }
-
+    //made Orders
+    // NULL 
     public function madeOrderUser($user_id) {
         $result = mysqli_query($this->db->con,
-        "SELECT made_order.made_id, users.fullname, producttype.productbrand, made_order.made_price, made_order.status FROM made_order
-        INNER JOIN users ON made_order.user_id = users.user_id
-        INNER JOIN producttype ON made_order.made_type = producttype.producttype_id
-        WHERE made_order.user_id = '$user_id'");
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status FROM made_orders
+        INNER JOIN users ON made_orders.user_id = users.user_id
+        INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
+        WHERE made_orders.user_id = '$user_id' AND made_orders.status = 'NULL'
+        ORDER BY made_orders.datetime ASC");
+        return $result;
+    }
+    // Acept
+    public function madeOrderUser1($user_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status FROM made_orders
+        INNER JOIN users ON made_orders.user_id = users.user_id
+        INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
+        WHERE made_orders.user_id = '$user_id' AND made_orders.status = 'Acept'
+        ORDER BY made_orders.datetime ASC");
+        return $result;
+    }
+    // IN PROCESSC
+    public function madeOrderUser2($user_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status FROM made_orders
+        INNER JOIN users ON made_orders.user_id = users.user_id
+        INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
+        WHERE made_orders.user_id = '$user_id' AND made_orders.status = 'in process'
+        ORDER BY made_orders.datetime ASC");
+        return $result;
+    }
+    // finish
+    public function madeOrderUser3($user_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status FROM made_orders
+        INNER JOIN users ON made_orders.user_id = users.user_id
+        INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
+        WHERE made_orders.user_id = '$user_id' AND made_orders.status = 'finish'
+        ORDER BY made_orders.datetime ASC");
+        return $result;
+    }
+    // Success
+    public function madeOrderUser4($user_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status FROM made_orders
+        INNER JOIN users ON made_orders.user_id = users.user_id
+        INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
+        WHERE made_orders.user_id = '$user_id' AND made_orders.status = 'success'
+        ORDER BY made_orders.datetime ASC");
+        return $result;
+    }
+    // rejected
+    public function madeOrderUser5($user_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status FROM made_orders
+        INNER JOIN users ON made_orders.user_id = users.user_id
+        INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
+        WHERE made_orders.user_id = '$user_id' AND made_orders.status = 'rejected'
+        ORDER BY made_orders.datetime ASC");
+        return $result;
+    }
+    // request
+    public function madeOrderUser6($user_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status, made_request.m_status FROM made_orders
+		INNER JOIN made_request ON made_orders.made_id = made_request.made_id
+        INNER JOIN users ON made_orders.user_id = users.user_id
+        INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
+        WHERE made_orders.user_id = '$user_id' AND made_orders.status = 'in process' AND made_request.m_status = 'request'
+        ORDER BY made_orders.datetime ASC");
+        return $result;
+    }
+
+    public function madeOrderUserhaed($made_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_orders.made_id, blueprint.name, made_orders.color, made_orders.made_qty,
+        made_orders.made_price, made_orders.size, made_orders.details
+        FROM made_orders
+        INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
+        WHERE made_orders.made_id  = '$made_id'");
         return $result;
     }
 
     public function madeOrderUserdetails($made_id) {
         $result = mysqli_query($this->db->con,
-        "SELECT producttype.productbrand, made_order_details.size, made_order_details.equidment, made_order_details.color, made_order_details.details FROM made_order_details
-        INNER JOIN made_order ON made_order_details.made_id = made_order.made_id 
-        INNER JOIN producttype ON made_order.made_type = producttype.producttype_id
+        "SELECT made_order_details.made_id, product.item_image, product.item_name, made_order_details.MD_price, made_order_details.MD_Qty, made_orders.status FROM made_order_details 
+        INNER JOIN made_orders ON made_order_details.made_id = made_orders.made_id 
+        INNER JOIN product ON made_order_details.item_id = product.item_id 
         WHERE made_order_details.made_id = '$made_id'");
         return $result;
     }
 
     public function insertrequestorder($order_id, $status, $details) {
         $reg = mysqli_query($this->db->con, "INSERT INTO order_request(order_id, r_status, details) VALUES('$order_id', '$status', '$details')");
+        return $reg;
+    }
+
+    public function insertrequestmadeorder($made_id, $status, $details) {
+        $reg = mysqli_query($this->db->con, "INSERT INTO made_request(made_id, m_status, m_details) VALUES('$made_id', '$status', '$details')");
         return $reg;
     }
 
@@ -196,4 +264,23 @@ class User
         return $result;
     }
 
+    public function fetblueprintmaterailsend($blue_id) {
+        $result = mysqli_query($this->db->con, "SELECT blueprint.blue_id,product.item_id,product.item_name,product.item_image,blueprint_material.M_Qty,
+        blueprint_material.M_Price
+        FROM blueprint_material
+        INNER JOIN blueprint ON blueprint_material.blue_id = blueprint.blue_id
+        INNER JOIN product ON blueprint_material.item_id = product.item_id
+        WHERE blueprint.blue_id = '$blue_id'");
+        return $result;
+    }
+
+    public function insertmadeOrder($made_id, $blue_id, $user_id, $color, $made_price, $size, $details, $status, $made_qty) {
+        $reg = mysqli_query($this->db->con, "INSERT INTO made_orders(made_id, blue_id, user_id, color, made_price, size, details, status, made_qty) VALUES('$made_id', '$blue_id', '$user_id', '$color', '$made_price', '$size', '$details', '$status', '$made_qty')");
+        return $reg;
+    }
+
+    public function insertmadeOrderdetails($made_id, $blue_id, $item_id, $MD_price, $MD_Qty) {
+        $reg = mysqli_query($this->db->con, "INSERT INTO made_order_details(made_id, blue_id, item_id, MD_price, MD_Qty) VALUES('$made_id', '$blue_id', '$item_id', '$MD_price', '$MD_Qty')");
+        
+    }
 }
