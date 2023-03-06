@@ -224,7 +224,7 @@ class User
 
     public function madeOrderUserdetails($made_id) {
         $result = mysqli_query($this->db->con,
-        "SELECT made_order_details.made_id, product.item_image, product.item_name, made_order_details.MD_price, made_order_details.MD_Qty, made_orders.status FROM made_order_details 
+        "SELECT made_order_details.id, made_order_details.made_id, product.item_image, product.item_name, made_order_details.MD_price, made_order_details.MD_Qty, made_orders.status FROM made_order_details 
         INNER JOIN made_orders ON made_order_details.made_id = made_orders.made_id 
         INNER JOIN product ON made_order_details.item_id = product.item_id 
         WHERE made_order_details.made_id = '$made_id'");

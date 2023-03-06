@@ -34,7 +34,7 @@
 <header id="header">
     <!-- Primary Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark color-second-bg">
-        <a class="navbar-brand" href="#">Admin panel</a>
+        <a class="navbar-brand" href="#">Admin Dashboard</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -44,7 +44,7 @@
                     <a class="nav-link" href="adminindex.php">หน้าแรก</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="adminmadeOrder.php">การสั่งทำ</a>
+                    <a class="nav-link" href="admincompany.php">การสั่งสินค้า</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="admincatagory.php">ประเภทสินค้า</a>
@@ -54,6 +54,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="adminOrder.php">คำสั่งซื้อ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="adminmadeOrder.php">การสั่งทำ</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="adminuser.php">ลูกค้า</a>

@@ -63,6 +63,22 @@ include ('header.php');
                                     <?php 
                                         }
                                     ?>
+                                    <?php
+                                        $sql1 = $adminOrder->madeOrderAdminrequest($made_id);
+                                        while($row2 = mysqli_fetch_array($sql1)) {
+                                        $status1 = $row2['m_status'];
+                                    ?>
+                                            <?php if($status1=='request'){ ?>
+
+                                            <td><strong class ='text-danger'>*สาเหตุที่ยกเลิก</strong></td>
+                                            <td><?php echo $row2['m_details']; ?></td>
+
+                                            <?php }else{ ?>
+
+                                            <?php } ?>
+                                    <?php
+                                        }
+                                    ?>
                                 </table>
                                 <h5><strong>วัสดุที่ใช้</strong></h5>
                                 <hr>
@@ -81,8 +97,8 @@ include ('header.php');
                                         <tr>
                                             <td><img src="<?php echo $row['item_image']; ?>" width="50px" height="50px" alt=" "></td>
                                             <td><?php echo $row['item_name']; ?></td>
-                                            <td><?php echo $row['MD_price']; ?></td>
                                             <td><?php echo $row['MD_Qty']; ?></td>
+                                            <td><?php echo $row['MD_price']; ?></td>
                                         </tr>
                                     </tbody>
                                     <?php
@@ -136,9 +152,9 @@ include ('header.php');
                                         <?php }else if($status=='finish'){ ?>
                                         
                                         <?php }else if($status=='Acept'){ ?>
-                                            <button class="btn btn-primary" type="submit" name="submit">บันทึกข้อมูล</button>
+                                            <button class="btn btn-danger" type="submit" name="submit">ยกเลิก</button>
                                         <?php }else{ ?>
-                                            <button class="btn btn-primary" type="submit" name="submit">บันทึกข้อมูล</button>
+                                            <button class="btn btn-danger" type="submit" name="submit">ยกเลิก</button>
                                         <?php } ?>
                                     </form>
                                     <?php if($status=='Acept'){ ?>

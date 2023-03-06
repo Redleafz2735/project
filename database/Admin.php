@@ -64,7 +64,7 @@ class Admin
         ");
         return $result;
     }
-
+    // ปรับสถานะ ออเดอร์
     public function updateOrderdetails($order_id, $status) {
         $result = mysqli_query($this->db->con, "UPDATE orders SET 
             status = '$status'
@@ -154,6 +154,106 @@ class Admin
         $result = mysqli_query($this->db->con,
         "SELECT order_request.order_id, order_request.r_status, order_request.details FROM order_request
         WHERE order_request.order_id = '$order_id' AND order_request.r_status = 'request'");
+        return $result;
+    }
+
+    public function madeOrderAdminrequest($made_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_request.made_id, made_request.m_status, made_request.m_details FROM made_request
+        WHERE made_request.made_id = '$made_id' AND made_request.m_status = 'request'");
+        return $result;
+    }
+
+    //NULL
+    public function madeOrderUser() {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status FROM made_orders
+        INNER JOIN users ON made_orders.user_id = users.user_id
+        INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
+        WHERE made_orders.user_id AND made_orders.status = 'NULL'
+        ORDER BY made_orders.datetime ASC");
+        return $result;
+    }
+    //Acept
+    public function madeOrderUser1() {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status FROM made_orders
+        INNER JOIN users ON made_orders.user_id = users.user_id
+        INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
+        WHERE made_orders.user_id AND made_orders.status = 'Acept'
+        ORDER BY made_orders.datetime ASC");
+        return $result;
+    }
+    //in process
+    public function madeOrderUser2() {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status FROM made_orders
+        INNER JOIN users ON made_orders.user_id = users.user_id
+        INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
+        WHERE made_orders.user_id AND made_orders.status = 'in process'
+        ORDER BY made_orders.datetime ASC");
+        return $result;
+    }
+    //finish
+    public function madeOrderUser3() {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status FROM made_orders
+        INNER JOIN users ON made_orders.user_id = users.user_id
+        INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
+        WHERE made_orders.user_id AND made_orders.status = 'finish'
+        ORDER BY made_orders.datetime ASC");
+        return $result;
+    }
+    //success
+    public function madeOrderUser4() {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status FROM made_orders
+        INNER JOIN users ON made_orders.user_id = users.user_id
+        INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
+        WHERE made_orders.user_id AND made_orders.status = 'success'
+        ORDER BY made_orders.datetime ASC");
+        return $result;
+    }
+    //rejected
+    public function madeOrderUser5() {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status FROM made_orders
+        INNER JOIN users ON made_orders.user_id = users.user_id
+        INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
+        WHERE made_orders.user_id AND made_orders.status = 'rejected'
+        ORDER BY made_orders.datetime ASC");
+        return $result;
+    }
+    //request
+    public function madeOrderUser6() {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status, made_request.m_status FROM made_orders
+		INNER JOIN made_request ON made_orders.made_id = made_request.made_id
+        INNER JOIN users ON made_orders.user_id = users.user_id
+        INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
+        WHERE made_orders.user_id AND made_orders.status = 'in process' AND made_request.m_status = 'request'
+        ORDER BY made_orders.datetime ASC");
+        return $result;
+    }
+    // ลบรีเควส สั่งทำ
+    public function deletemadeorderRequest($made_id) {
+        $deleterecord = mysqli_query($this->db->con, "DELETE FROM made_request WHERE made_id = '$made_id'");
+        return $deleterecord;
+    }
+    
+    public function madedetailadmin($id) {
+        $result = mysqli_query($this->db->con,"SELECT made_order_details.id, made_order_details.made_id, product.item_image, product.item_name, made_order_details.MD_price, made_order_details.MD_Qty FROM made_order_details
+        INNER JOIN product ON made_order_details.item_id = product.item_id
+        WHERE made_order_details.id ='$id'");
+        return $result;
+    }
+
+    public function updatemadeOrdersdetail($id, $MD_Qty, $MD_price) {
+        $result = mysqli_query($this->db->con, "UPDATE made_order_details SET 
+            MD_Qty = '$MD_Qty',
+            MD_price = '$MD_price'
+            WHERE id = '$id'
+        ");
         return $result;
     }
 }

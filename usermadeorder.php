@@ -451,7 +451,7 @@ include ('header.php');
                                         </table>
                                     </div>
                                     <!--ออเดอร์ที่ถูกร้องขอยกเลิก -->
-                                    <div class="tab-pane fade" id="nav-request" role="tabpanel" aria-labelledby="nav-request-tab"></div>
+                                    <div class="tab-pane fade" id="nav-request" role="tabpanel" aria-labelledby="nav-request-tab">
                                         <p class="font-rale text-danger">*รอแอดมินพิจารณาคำขอ</p>
                                         <hr>
                                         <?php if (isset($_SESSION['success'])) { ?>
