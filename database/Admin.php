@@ -256,4 +256,9 @@ class Admin
         ");
         return $result;
     }
+
+    public function company() {
+        $result = mysqli_query($this->db->con,"SELECT company.company_id, company.company_name, company.company_image FROM company");
+        return $result;
+    }
 }
