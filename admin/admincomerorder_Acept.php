@@ -1,33 +1,33 @@
 <?php 
 
     session_start();
-    require_once "functions.php";
-
+    require_once "../functions.php";
 
     if(isset($_POST['submit'])) {
-        $made_id = $_POST['made_id'];
-        $status = "in process";
+        $adminorders_id = $_POST['adminorders_id'];
+        $status = "success";
 
-        $sql1 = $userorder->madeOrderUserdetails($made_id);
+        $sql1 = $Order->adminOrderinnerjoinza($adminorders_id);
         while($row = mysqli_fetch_array($sql1)) {
             $QTY = $Order->fetchdataproduct($row['item_id']);
             while($rowbad = mysqli_fetch_array($QTY)){
 
                 $oldqty = $rowbad['item_qty'];
-                $cartqty = $row['MD_Qty'];
-                $new_qty = $oldqty - $cartqty;
+                $cartqty = $row['Admin_Qty'];
+                $new_qty = $oldqty + $cartqty;
                 $sql2 = $Order->updateProductqty($row['item_id'], $new_qty);
             }
 
         }
-        $sql = $updatecatagory->updatemadeOrders($made_id, $status);
+        $sql = $adminOrder->updateadminOrders($adminorders_id, $status);
         if ($sql) {
             $_SESSION['success'] = "อัพเดทสถานะสำเร็จ";
-            header("location: usermadeorder.php"); 
+            header("location: adminincome.php"); 
         } else {
             $_SESSION['error'] = "Data has not been inserted successfully";
-            header("location: usermadeorder.php");
+            header("location: adminincome.php");
         }
         
     }
+
 ?>

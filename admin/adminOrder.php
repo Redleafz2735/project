@@ -27,6 +27,7 @@ body  {
                 <div class="card shadow-lg p-30 card-responsive" style="width: 70rem;">
                     <div class="card-body">
                         <div class="font-rubik ">
+                        <h3><strong>คำสั่งซื้อ</strong></h3>
                                 <div class="float-right">
                                 <span><i class="fa fa-file" style="color:#9466de; font-size: 2em;"></i></span>
                                 </div>

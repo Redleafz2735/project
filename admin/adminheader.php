@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js">
     
+    <!-- chart js -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+
     <?php
     // require functions.php file
     require ('../functions.php');
@@ -61,6 +64,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="adminuser.php">ลูกค้า</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="adminincome.php">ออเดอร์สั่งสินค้า</a>
+                </li>
             </ul>
             <?php if(isset($_SESSION['admin_id'])) { ?> 
                 <div class="dropdown">
@@ -69,8 +75,19 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="adminlogout.php">Logout</a>
+                        <a class="dropdown-item" href="admincompanyIN.php">รายการสังสินค้าเข้า</a>
                     </div>
                 </div>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <form action="#" class="font-size-14 font-rale">
+                    <a class="py-2 rounded-pill bg-secondary">
+                        <span class="font-size-20 px-2 text-white"><i class="fas fa-user-tie" style="color:black;"></i></span>
+                    </a>
+                </form>
             <?php }else{ ?>       
                 
             <?php 

@@ -2,32 +2,30 @@
 <!-- !start #main-site -->
 
 <!-- start #footer -->
-<footer id="footer" class="bg-dark text-white py-5">
+<footer id="footer" class="bg-dark text-white py-4">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-12">
-                <h4 class="font-rubik font-size-20">Aluminium Shop</h4>
-                <p class="font-size-14 font-rale text-white-50">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus, deserunt.</p>
+                <h4 class="font-rubik font-size-20">Aluminuim Shop</h4>
+                <p class="font-size-30 font-rubik text-white-50">306/15 หมู่บ้านกฤษณาร่มเกล้า ถ.ร่มเกล้า แขวง/เขต มีนบุรี กรุงเทพฯ 10510</p>
             </div>
             <div class="col-lg-4 col-12">
-                <h4 class="font-rubik font-size-20">Newslatter</h4>
+                
             </div>
-            <div class="col-lg-2 col-12">
-                <h4 class="font-rubik font-size-20">Information</h4>
+            <div class="col-lg-3 col-12">
                 <div class="d-flex flex-column flex-wrap">
-                    <a href="#" class="font-rale font-size-14 text-white-50 pb-1">About Us</a>
-                    <a href="#" class="font-rale font-size-14 text-white-50 pb-1">Delivery Information</a>
-                    <a href="#" class="font-rale font-size-14 text-white-50 pb-1">Privacy Policy</a>
-                    <a href="#" class="font-rale font-size-14 text-white-50 pb-1">Terms & Conditions</a>
+                    <a href="#" class="font-rubik font-size-17 text-white-50 pb-1">Line @aluminiumshop62</a>
+                    <a href="#" class="font-rubik font-size-17 text-white-50 pb-1">เบอร์ 081-323-7233</a>
+                    <a href="#" class="font-rubik font-size-17 text-white-50 pb-1">facebook อลูมิเนียมช้อป</a>
+                    <a href="#" class="font-rubik font-size-17 text-white-50 pb-1">IG Alumiuim_shop62</a>
                 </div>
             </div>
             <div class="col-lg-2 col-12">
-                <h4 class="font-rubik font-size-20">Account</h4>
                 <div class="d-flex flex-column flex-wrap">
-                    <a href="#" class="font-rale font-size-14 text-white-50 pb-1">My Account</a>
-                    <a href="#" class="font-rale font-size-14 text-white-50 pb-1">Order History</a>
-                    <a href="#" class="font-rale font-size-14 text-white-50 pb-1">Wish List</a>
-                    <a href="#" class="font-rale font-size-14 text-white-50 pb-1">Newslatters</a>
+                    <a href="#" class="font-rubik font-size-17 text-white-50 pb-1">คำถามที่พบบ่อย</a>
+                    <a href="#" class="font-rubik font-size-17 text-white-50 pb-1">นโยบายการคืนเงิน</a>
+                    <a href="#" class="font-rubik font-size-17 text-white-50 pb-1">นโยบายและความเป็นส่วนตัว</a>
+                    <a href="#" class="font-rubik font-size-17 text-white-50 pb-1">ข้อตกลงและเงื่อนไข</a>
                 </div>
             </div>
         </div>

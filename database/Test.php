@@ -69,6 +69,11 @@ class Testproduct
         return $deleterecord;
     }
 
+    public function deleteadmincart($A_id) {
+        $deleterecord = mysqli_query($this->db->con, "DELETE FROM admincart WHERE A_id = '$A_id'");
+        return $deleterecord;
+    }
+
     public function fetcatagory($itembrand) {
         $result = mysqli_query($this->db->con, "SELECT * FROM producttype WHERE producttype.producttype_id = '$itembrand'
         ORDER BY producttype_id asc");

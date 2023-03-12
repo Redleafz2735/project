@@ -61,6 +61,15 @@ class Testorders
         WHERE made_order_details.made_id = '$made_id'");
         return $result;
     }
+
+    public function adminOrderinnerjoinza($adminorders_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT adminorders_details.id, adminorders_details.adminorders_id, adminorders_details.item_id, product.item_name, adminorders_details.Admin_price, adminorders_details.Admin_Qty, adminorders.admin_status FROM adminorders_details
+        INNER JOIN adminorders ON adminorders_details.adminorders_id = adminorders.adminorders_id
+        INNER JOIN product ON adminorders_details.item_id = product.item_id
+        WHERE adminorders_details.adminorders_id = '$adminorders_id'");
+        return $result;
+    }
 }
 
 ?>

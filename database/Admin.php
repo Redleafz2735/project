@@ -81,6 +81,14 @@ class Admin
         return $result;
     }
 
+    public function updateadminOrders($adminorders_id, $status) {
+        $result = mysqli_query($this->db->con, "UPDATE adminorders SET 
+            admin_status = '$status'
+            WHERE adminorders_id = '$adminorders_id'
+        ");
+        return $result;
+    }
+
     // NULL 
     public function OrderAdmin() {
         $result = mysqli_query($this->db->con,
@@ -259,6 +267,157 @@ class Admin
 
     public function company() {
         $result = mysqli_query($this->db->con,"SELECT company.company_id, company.company_name, company.company_image FROM company");
+        return $result;
+    }
+
+    public function companydetails($company_id) {
+        $result = mysqli_query($this->db->con,"SELECT company.company_id, company.company_name, product.item_id, product.item_name, product.item_price, product.item_image FROM companydetails
+        INNER JOIN company ON company.company_id = companydetails.company_id
+        INNER JOIN product ON product.item_id = companydetails.item_id
+        WHERE company.company_id = '$company_id'");
+        return $result;
+    }
+
+    public function admincart($admin_id, $company_id, $item_id, $item_qty, $trueprice) {
+        $result = mysqli_query($this->db->con,"INSERT INTO admincart(admin_id, company_id, item_id, A_qty, A_price) 
+        VALUES('$admin_id', '$company_id', '$item_id', '$item_qty', '$trueprice')");
+        return $result;
+    }
+
+    public function admincartfetch() {
+        $result = mysqli_query($this->db->con,"SELECT admincart.A_id, admincart.admin_id, admincart.company_id, admincart.item_id, product.item_image, company.company_name, product.item_name,
+        admincart.A_qty, admincart.A_price FROM admincart
+        INNER JOIN company ON company.company_id = admincart.company_id
+        INNER JOIN product ON product.item_id = admincart.item_id");
+        return $result;
+    }
+
+    public function adminInsertOrders($uuid, $admin_id, $total, $status) {
+        $result = mysqli_query($this->db->con,"INSERT INTO adminorders(adminorders_id, admintotal, admin_id, admin_status) 
+        VALUES('$uuid', '$total', '$admin_id', '$status')");
+        return $result;
+    }
+
+    public function adminInsertOrdersdetails($uuid, $item_id, $Admin_price, $Admin_Qty) {
+        $result = mysqli_query($this->db->con,"INSERT INTO adminorders_details(adminorders_id, item_id, Admin_price, Admin_Qty) 
+        VALUES('$uuid', '$item_id', '$Admin_price', '$Admin_Qty')");
+    }
+
+    public function deletealladmincart() {
+        $result = mysqli_query($this->db->con, "TRUNCATE TABLE admincart");
+        return $result;
+    }
+    //NULL
+    public function Adminorder() {
+        $result = mysqli_query($this->db->con,
+        "SELECT adminorders.adminorders_id, admins.fullname, adminorders.admintotal, adminorders.admin_status, adminorders.admin_datetime
+        FROM adminorders
+        INNER JOIN admins ON admins.admin_id = adminorders.admin_id 
+        WHERE admins.admin_id AND adminorders.admin_status = 'NULL'
+        ORDER BY adminorders.admin_datetime ASC");
+        return $result;
+    }
+    //in process
+    public function Adminorder1() {
+        $result = mysqli_query($this->db->con,
+        "SELECT adminorders.adminorders_id, admins.fullname, adminorders.admintotal, adminorders.admin_status, adminorders.admin_datetime
+        FROM adminorders
+        INNER JOIN admins ON admins.admin_id = adminorders.admin_id 
+        WHERE admins.admin_id AND adminorders.admin_status = 'in process'
+        ORDER BY adminorders.admin_datetime ASC");
+        return $result;
+    }
+    //success
+    public function Adminorder2() {
+        $result = mysqli_query($this->db->con,
+        "SELECT adminorders.adminorders_id, admins.fullname, adminorders.admintotal, adminorders.admin_status, adminorders.admin_datetime
+        FROM adminorders
+        INNER JOIN admins ON admins.admin_id = adminorders.admin_id 
+        WHERE admins.admin_id AND adminorders.admin_status = 'success'
+        ORDER BY adminorders.admin_datetime ASC");
+        return $result;
+    }
+    //rejected
+    public function Adminorder3() {
+        $result = mysqli_query($this->db->con,
+        "SELECT adminorders.adminorders_id, admins.fullname, adminorders.admintotal, adminorders.admin_status, adminorders.admin_datetime
+        FROM adminorders
+        INNER JOIN admins ON admins.admin_id = adminorders.admin_id 
+        WHERE admins.admin_id AND adminorders.admin_status = 'rejected'
+        ORDER BY adminorders.admin_datetime ASC");
+        return $result;
+    }
+
+    public function NumUser() {
+        $result = mysqli_query($this->db->con,
+        "SELECT users.user_id FROM users ORDER BY users.user_id ASC");
+        return $result;
+    }
+
+    public function Numproduct() {
+        $result = mysqli_query($this->db->con,
+        "SELECT product.item_id FROM product ORDER BY product.item_id ASC");
+        return $result;
+    }
+
+    public function NumOrders() {
+        $result = mysqli_query($this->db->con,
+        "SELECT orders.status FROM orders WHERE orders.status = 'NULL'");
+        return $result;
+    }
+
+    public function NummadeOrders() {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_orders.status FROM made_orders WHERE made_orders.status = 'NULL'");
+        return $result;
+    }
+
+    public function Numcompany() {
+        $result = mysqli_query($this->db->con,
+        "SELECT company.company_id FROM company ORDER BY company.company_id ASC");
+        return $result;
+    }
+
+    public function Editqty($A_id) {
+        $result = mysqli_query($this->db->con,
+        "SELECT admincart.A_id, admincart.A_qty, product.item_price FROM admincart
+        INNER JOIN product ON admincart.item_id = product.item_id
+        WHERE admincart.A_id  = '$A_id'");
+        return $result;
+    }
+
+    public function updateadmincartleafz($A_id, $A_qty, $price) {
+        $result = mysqli_query($this->db->con, "UPDATE admincart SET 
+            A_qty = '$A_qty',
+            A_price = '$price'
+            WHERE A_id = '$A_id'
+        ");
+        return $result;
+    }
+
+    public function Numcatagory() {
+        $result = mysqli_query($this->db->con,
+        "SELECT producttype.producttype_id FROM producttype ORDER BY producttype.producttype_id ASC");
+        return $result;
+    }
+
+    public function NumOrders1() {
+        $result = mysqli_query($this->db->con,
+        "SELECT orders.status FROM orders WHERE orders.status = 'in process'");
+        return $result;
+    }
+
+    public function NummadeOrders1() {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_orders.status FROM made_orders WHERE made_orders.status = 'in process'");
+        return $result;
+    }
+
+    public function Countallorders() {
+        $result = mysqli_query($this->db->con,
+        "SELECT product.item_name, SUM(order_details.quantity) AS quantity FROM order_details
+        INNER JOIN product ON order_details.item_id = product.item_id
+        GROUP BY product.item_name");
         return $result;
     }
 }

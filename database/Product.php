@@ -41,4 +41,18 @@ class Product
         }
     }
 
+    //adminproduct
+    public function getData1($table = 'companydetails'){
+        $result = $this->db->con->query("SELECT * FROM {$table} ");
+
+        $resultArray = array();
+
+        // fetch product data one by one
+        while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+            $resultArray[] = $item;
+        }
+
+        return $resultArray;
+    }
+
 }
