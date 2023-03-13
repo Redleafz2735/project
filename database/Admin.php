@@ -53,7 +53,7 @@ class Admin
     }
 
     public function signinadmin($username, $password) {
-        $signinquery = mysqli_query($this->db->con, "SELECT admin_id, fullname FROM admins WHERE username = '$username' AND password = '$password'");
+        $signinquery = mysqli_query($this->db->con, "SELECT admin_id, A_fullname FROM admins WHERE username = '$username' AND password = '$password'");
         return $signinquery;
     }
 
@@ -310,7 +310,7 @@ class Admin
     //NULL
     public function Adminorder() {
         $result = mysqli_query($this->db->con,
-        "SELECT adminorders.adminorders_id, admins.fullname, adminorders.admintotal, adminorders.admin_status, adminorders.admin_datetime
+        "SELECT adminorders.adminorders_id, admins.A_fullname, adminorders.admintotal, adminorders.admin_status, adminorders.admin_datetime
         FROM adminorders
         INNER JOIN admins ON admins.admin_id = adminorders.admin_id 
         WHERE admins.admin_id AND adminorders.admin_status = 'NULL'
@@ -320,7 +320,7 @@ class Admin
     //in process
     public function Adminorder1() {
         $result = mysqli_query($this->db->con,
-        "SELECT adminorders.adminorders_id, admins.fullname, adminorders.admintotal, adminorders.admin_status, adminorders.admin_datetime
+        "SELECT adminorders.adminorders_id, admins.A_fullname, adminorders.admintotal, adminorders.admin_status, adminorders.admin_datetime
         FROM adminorders
         INNER JOIN admins ON admins.admin_id = adminorders.admin_id 
         WHERE admins.admin_id AND adminorders.admin_status = 'in process'
@@ -330,7 +330,7 @@ class Admin
     //success
     public function Adminorder2() {
         $result = mysqli_query($this->db->con,
-        "SELECT adminorders.adminorders_id, admins.fullname, adminorders.admintotal, adminorders.admin_status, adminorders.admin_datetime
+        "SELECT adminorders.adminorders_id, admins.A_fullname, adminorders.admintotal, adminorders.admin_status, adminorders.admin_datetime
         FROM adminorders
         INNER JOIN admins ON admins.admin_id = adminorders.admin_id 
         WHERE admins.admin_id AND adminorders.admin_status = 'success'
@@ -340,7 +340,7 @@ class Admin
     //rejected
     public function Adminorder3() {
         $result = mysqli_query($this->db->con,
-        "SELECT adminorders.adminorders_id, admins.fullname, adminorders.admintotal, adminorders.admin_status, adminorders.admin_datetime
+        "SELECT adminorders.adminorders_id, admins.A_fullname, adminorders.admintotal, adminorders.admin_status, adminorders.admin_datetime
         FROM adminorders
         INNER JOIN admins ON admins.admin_id = adminorders.admin_id 
         WHERE admins.admin_id AND adminorders.admin_status = 'rejected'
@@ -417,6 +417,38 @@ class Admin
         $result = mysqli_query($this->db->con,
         "SELECT product.item_name, SUM(order_details.quantity) AS quantity FROM order_details
         INNER JOIN product ON order_details.item_id = product.item_id
+        GROUP BY product.item_name");
+        return $result;
+    }
+
+    public function NumOrders2() {
+        $result = mysqli_query($this->db->con,
+        "SELECT orders.status FROM orders WHERE orders.status = 'success'");
+        return $result;
+    }
+
+    public function NummadeOrders2() {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_orders.status FROM made_orders WHERE made_orders.status = 'success'");
+        return $result;
+    }
+
+    public function NumOrders3() {
+        $result = mysqli_query($this->db->con,
+        "SELECT orders.status FROM orders WHERE orders.status = 'rejected'");
+        return $result;
+    }
+
+    public function NummadeOrders3() {
+        $result = mysqli_query($this->db->con,
+        "SELECT made_orders.status FROM made_orders WHERE made_orders.status = 'rejected'");
+        return $result;
+    }
+
+    public function Countalladminorders() {
+        $result = mysqli_query($this->db->con,
+        "SELECT product.item_name, SUM(adminorders_details.Admin_Qty) AS adminquantity FROM adminorders_details
+        INNER JOIN product ON adminorders_details.item_id = product.item_id
         GROUP BY product.item_name");
         return $result;
     }

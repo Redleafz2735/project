@@ -91,7 +91,7 @@ body  {
                                                     while($row = mysqli_fetch_array($sql)) {
                                                 ?>
                                                 <tr>
-                                                    <td><?php echo $row['fullname']; ?></td>
+                                                    <td><?php echo $row['A_fullname']; ?></td>
                                                     <td><?php echo $row['admintotal']; ?></td>
                                                     <td><?php echo $row['admin_datetime']; ?></td>
                                                     <?php $status=$row['admin_status'];
@@ -148,7 +148,7 @@ body  {
                                                     while($row = mysqli_fetch_array($sql)) {
                                                 ?>
                                                 <tr>
-                                                    <td><?php echo $row['fullname']; ?></td>
+                                                    <td><?php echo $row['A_fullname']; ?></td>
                                                     <td><?php echo $row['admintotal']; ?></td>
                                                     <td><?php echo $row['admin_datetime']; ?></td>
                                                     <?php $status=$row['admin_status'];
@@ -205,7 +205,7 @@ body  {
                                                     while($row = mysqli_fetch_array($sql)) {
                                                 ?>
                                                 <tr>
-                                                    <td><?php echo $row['fullname']; ?></td>
+                                                    <td><?php echo $row['A_fullname']; ?></td>
                                                     <td><?php echo $row['admintotal']; ?></td>
                                                     <td><?php echo $row['admin_datetime']; ?></td>
                                                     <?php $status=$row['admin_status'];
@@ -262,7 +262,7 @@ body  {
                                                     while($row = mysqli_fetch_array($sql)) {
                                                 ?>
                                                 <tr>
-                                                    <td><?php echo $row['fullname']; ?></td>
+                                                    <td><?php echo $row['A_fullname']; ?></td>
                                                     <td><?php echo $row['admintotal']; ?></td>
                                                     <td><?php echo $row['admin_datetime']; ?></td>
                                                     <?php $status=$row['admin_status'];

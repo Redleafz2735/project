@@ -71,7 +71,7 @@
             <?php if(isset($_SESSION['admin_id'])) { ?> 
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <?php echo $_SESSION['fullname']; ?>
+                        <?php echo $_SESSION['A_fullname']; ?>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="adminlogout.php">Logout</a>

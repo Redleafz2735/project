@@ -141,7 +141,16 @@ include ('adminheader.php');
                         <span><i class="fa fa-check-square" style="color:#28a745; font-size: 2.5em;"></i></span>
                     </div>
                     <div class="font-rubik text-right">
-                        <h2> 5 </h2>
+                        <?php 
+                            $sql10 = $adminuser->NummadeOrders2();
+                            $countOrders2 = mysqli_num_rows($sql10);
+
+                            $sql11 = $adminuser->NummadeOrders2();
+                            $countmadeOrders2 = mysqli_num_rows($sql11);
+
+                            $countallorder2 = $countOrders2 + $countmadeOrders2;
+                        ?>
+                        <h2><?php echo $countallorder2 ?></h2>
                         <p class="m-b-0">ออเดอร์สำเร็จ</p>
                     </div>
                 </div>
@@ -155,7 +164,16 @@ include ('adminheader.php');
                         <span><i class="fa fa-times-circle" style="color:#dc3545; font-size: 2.5em;"></i></span>
                     </div>
                     <div class="font-rubik text-right">
-                        <h2> 4 </h2>
+                        <?php 
+                            $sql13 = $adminuser->NummadeOrders3();
+                            $countOrders3 = mysqli_num_rows($sql13);
+
+                            $sql14 = $adminuser->NummadeOrders3();
+                            $countmadeOrders3 = mysqli_num_rows($sql14);
+
+                            $countallorder3 = $countOrders3 + $countmadeOrders3;
+                        ?>
+                        <h2><?php echo $countallorder3 ?></h2>
                         <p class="m-b-0">ออเดอร์ยกเลิก</p>
                     </div>
                 </div>
@@ -164,6 +182,9 @@ include ('adminheader.php');
         <?php
             $sql8 = $adminuser->Countallorders();
             $sql9 = $adminuser->Countallorders();
+            $sql15 = $adminuser->Countalladminorders();
+            $sql16 = $adminuser->Countalladminorders();
+
             //$row2 = mysqli_fetch_array($sql8);
         ?>
         
@@ -211,32 +232,49 @@ include ('adminheader.php');
 
             <div class="col-sm-12 mt-5">
                 <div class="chart-container" style="position: relative; height:73.5vh; width:80vw">
-                    <canvas id="myChart1"></canvas>
+                    <canvas id="myChartza"></canvas>
                 </div>
 
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
                 <script>
-                const ctx = document.getElementById('myChart1');
-                var mylabel = `<?php while($chartdata = mysqli_fetch_array($sql8)){
-                                    echo $chartdata['item_name'] . ",";                                   
+                const atx = document.getElementById('myChartza');
+                var mylabel1 = `<?php while($chartdata2 = mysqli_fetch_array($sql15)){
+                                    echo $chartdata2['item_name'] . ",";                                   
                                 }
                             ?>`
-                var mydata = `<?php
-                                while($chartdata1 = mysqli_fetch_array($sql9)){
-                                    echo $chartdata1['quantity'] . ",";
+                var mydata1 = `<?php
+                                while($chartdata3 = mysqli_fetch_array($sql16)){
+                                    echo $chartdata3['adminquantity'] . ",";
                                 }
                             ?>`;
-                const chartdata = mydata.split(",")
-                const chartlabel = mylabel.split(",")
-                new Chart(ctx, {
+                const chartdata2 = mydata1.split(",")
+                const chartlabel2 = mylabel1.split(",")
+                new Chart(atx, {
                     type: 'bar',
                     data: {
-                    
-                    labels: chartlabel,
+                    labels: chartlabel2,
                     datasets: [{
-                        label: 'ยอดการขาย',
-                        data: chartdata,
+                        label: 'ยอดการสั่งซื้อ',
+                        data: chartdata2,
+                        backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(201, 203, 207, 0.2)'
+                        ],
+                        borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)'
+                        ],
                         borderWidth: 1
                     }]
                     },

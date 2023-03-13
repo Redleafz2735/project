@@ -23,12 +23,13 @@
             
             if ($num > 0) {
                 $_SESSION['admin_id'] = $num['admin_id'];
-                $_SESSION['fullname'] = $num['fullname'];
+                $_SESSION['A_fullname'] = $num['A_fullname'];
                 echo "<script>window.location.href='adminindex.php'</script>";
             } else {
                 echo "<script>alert('รหัสผ่าน หรือ Username ผิดโปรดลองใหม่อีกครั้ง');</script>";
                 echo "<script>window.location.href='adminlogin.php'</script>";
             }
+            
         }
     }
 ?>

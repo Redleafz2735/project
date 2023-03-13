@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2023 at 06:24 AM
+-- Generation Time: Mar 13, 2023 at 05:04 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -24,12 +24,88 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admincart`
+--
+
+CREATE TABLE `admincart` (
+  `A_id` int(11) NOT NULL,
+  `admin_id` int(11) NOT NULL,
+  `company_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `A_qty` int(11) NOT NULL,
+  `A_price` double(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admincart`
+--
+
+INSERT INTO `admincart` (`A_id`, `admin_id`, `company_id`, `item_id`, `A_qty`, `A_price`) VALUES
+(1, 1, 2, 15, 4, 4800.00);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `adminorders`
+--
+
+CREATE TABLE `adminorders` (
+  `id` int(11) NOT NULL,
+  `adminorders_id` varchar(255) NOT NULL,
+  `admintotal` double(10,2) NOT NULL,
+  `admin_id` int(11) NOT NULL,
+  `admin_datetime` datetime NOT NULL DEFAULT current_timestamp(),
+  `admin_status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `adminorders`
+--
+
+INSERT INTO `adminorders` (`id`, `adminorders_id`, `admintotal`, `admin_id`, `admin_datetime`, `admin_status`) VALUES
+(1, 'e5469471-904f-4230-8553-0221c6a3a258', 4820.00, 1, '2023-03-12 13:26:55', 'success'),
+(2, 'd749d778-f18d-45f2-94c8-adbb7864407d', 19820.00, 1, '2023-03-12 22:19:45', 'success');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `adminorders_details`
+--
+
+CREATE TABLE `adminorders_details` (
+  `id` int(11) NOT NULL,
+  `adminorders_id` varchar(255) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `Admin_price` double(10,2) NOT NULL,
+  `Admin_Qty` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `adminorders_details`
+--
+
+INSERT INTO `adminorders_details` (`id`, `adminorders_id`, `item_id`, `Admin_price`, `Admin_Qty`) VALUES
+(1, 'e5469471-904f-4230-8553-0221c6a3a258', 14, 980.00, 1),
+(2, 'e5469471-904f-4230-8553-0221c6a3a258', 18, 1250.00, 1),
+(3, 'e5469471-904f-4230-8553-0221c6a3a258', 19, 130.00, 1),
+(4, 'e5469471-904f-4230-8553-0221c6a3a258', 24, 640.00, 1),
+(5, 'e5469471-904f-4230-8553-0221c6a3a258', 21, 620.00, 1),
+(6, 'e5469471-904f-4230-8553-0221c6a3a258', 16, 1200.00, 1),
+(7, 'd749d778-f18d-45f2-94c8-adbb7864407d', 21, 620.00, 1),
+(8, 'd749d778-f18d-45f2-94c8-adbb7864407d', 25, 500.00, 1),
+(9, 'd749d778-f18d-45f2-94c8-adbb7864407d', 23, 3900.00, 15),
+(10, 'd749d778-f18d-45f2-94c8-adbb7864407d', 14, 9800.00, 10),
+(11, 'd749d778-f18d-45f2-94c8-adbb7864407d', 18, 5000.00, 4);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `admins`
 --
 
 CREATE TABLE `admins` (
   `admin_id` int(11) NOT NULL COMMENT 'รหัสพนักงาน',
-  `fullname` varchar(255) NOT NULL COMMENT 'ชื่อ-นามสกุล',
+  `A_fullname` varchar(255) NOT NULL COMMENT 'ชื่อ-นามสกุล',
   `username` varchar(255) NOT NULL COMMENT 'Username',
   `password` varchar(255) NOT NULL COMMENT 'password'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -38,7 +114,7 @@ CREATE TABLE `admins` (
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`admin_id`, `fullname`, `username`, `password`) VALUES
+INSERT INTO `admins` (`admin_id`, `A_fullname`, `username`, `password`) VALUES
 (1, 'Admin', 'Devpetch', 'e10adc3949ba59abbe56e057f20f883e');
 
 -- --------------------------------------------------------
@@ -59,9 +135,9 @@ CREATE TABLE `blueprint` (
 --
 
 INSERT INTO `blueprint` (`id`, `blue_id`, `name`, `price`) VALUES
-(1, 1, 'ประตูบานสวิง', 4500.00),
+(1, 1, 'ประตูบานสวิง', 5630.00),
 (2, 2, 'หน้าต่างบานเลื่อน', 4455.00),
-(3, 3, 'หน้าต่างบานกระทุ้ง', 1200.00);
+(3, 3, 'หน้าต่างบานกระทุ้ง', 2220.00);
 
 -- --------------------------------------------------------
 
@@ -96,7 +172,29 @@ INSERT INTO `blueprint_material` (`id`, `blue_id`, `item_id`, `M_Qty`, `M_Price`
 (12, 2, 32, 1, 35.00),
 (13, 2, 33, 8, 120.00),
 (14, 2, 34, 8, 320.00),
-(15, 2, 35, 2, 1000.00);
+(15, 2, 35, 2, 1000.00),
+(16, 1, 14, 1, 300.00),
+(17, 1, 18, 1, 300.00),
+(18, 1, 15, 1, 300.00),
+(19, 1, 16, 1, 300.00),
+(20, 1, 17, 1, 300.00),
+(21, 1, 36, 1, 1400.00),
+(22, 1, 37, 1, 150.00),
+(23, 1, 38, 1, 1200.00),
+(24, 1, 33, 18, 270.00),
+(25, 1, 19, 20, 30.00),
+(26, 1, 39, 1, 140.00),
+(27, 1, 40, 1, 140.00),
+(28, 1, 35, 1, 800.00),
+(29, 3, 14, 1, 300.00),
+(30, 3, 22, 1, 300.00),
+(31, 3, 23, 1, 300.00),
+(32, 3, 33, 8, 120.00),
+(33, 3, 41, 1, 250.00),
+(34, 3, 35, 1, 450.00),
+(35, 3, 43, 1, 140.00),
+(36, 3, 44, 2, 200.00),
+(37, 3, 45, 2, 160.00);
 
 -- --------------------------------------------------------
 
@@ -250,8 +348,9 @@ CREATE TABLE `made_orders` (
 --
 
 INSERT INTO `made_orders` (`id`, `made_id`, `blue_id`, `user_id`, `color`, `made_price`, `datetime`, `size`, `details`, `status`, `made_qty`) VALUES
-(1, 'ee1f4ba4-1b19-4004-98c7-fae2f19ed5ce', 2, 1, 'สีดำ', 8910.00, '2023-02-18 15:00:00', 'มารตฐาน', '150*50 CM', 'success', 2),
-(2, '73f867de-1859-4ac6-948f-01e3fe4ca262', 2, 1, 'สีดำ', 4455.00, '2023-03-02 20:30:18', 'ใหญ่', '400*200', 'rejected', 1);
+(1, 'ee1f4ba4-1b19-4004-98c7-fae2f19ed5ce', 2, 1, 'สีดำ', 8910.00, '2023-02-18 15:00:00', 'มารตฐาน', '150*50 CM', 'in process', 2),
+(2, '73f867de-1859-4ac6-948f-01e3fe4ca262', 2, 1, 'สีดำ', 4455.00, '2023-03-02 20:30:18', 'ใหญ่', '400*200', 'NULL', 1),
+(3, '63df085d-9e92-464c-a1cc-14d3488f9334', 2, 1, 'สีขาว', 13365.00, '2023-03-12 22:31:49', 'มารตฐาน', '200*150 CM', 'success', 3);
 
 -- --------------------------------------------------------
 
@@ -302,7 +401,22 @@ INSERT INTO `made_order_details` (`id`, `made_id`, `blue_id`, `item_id`, `MD_pri
 (27, '73f867de-1859-4ac6-948f-01e3fe4ca262', 2, 32, 35.00, 1),
 (28, '73f867de-1859-4ac6-948f-01e3fe4ca262', 2, 33, 120.00, 8),
 (29, '73f867de-1859-4ac6-948f-01e3fe4ca262', 2, 34, 320.00, 8),
-(30, '73f867de-1859-4ac6-948f-01e3fe4ca262', 2, 35, 1000.00, 2);
+(30, '73f867de-1859-4ac6-948f-01e3fe4ca262', 2, 35, 1000.00, 2),
+(31, '63df085d-9e92-464c-a1cc-14d3488f9334', 2, 14, 900.00, 3),
+(32, '63df085d-9e92-464c-a1cc-14d3488f9334', 2, 20, 900.00, 3),
+(33, '63df085d-9e92-464c-a1cc-14d3488f9334', 2, 25, 900.00, 3),
+(34, '63df085d-9e92-464c-a1cc-14d3488f9334', 2, 24, 900.00, 3),
+(35, '63df085d-9e92-464c-a1cc-14d3488f9334', 2, 27, 900.00, 3),
+(36, '63df085d-9e92-464c-a1cc-14d3488f9334', 2, 28, 900.00, 3),
+(37, '63df085d-9e92-464c-a1cc-14d3488f9334', 2, 21, 900.00, 3),
+(38, '63df085d-9e92-464c-a1cc-14d3488f9334', 2, 26, 900.00, 3),
+(39, '63df085d-9e92-464c-a1cc-14d3488f9334', 2, 29, 780.00, 6),
+(40, '63df085d-9e92-464c-a1cc-14d3488f9334', 2, 30, 540.00, 12),
+(41, '63df085d-9e92-464c-a1cc-14d3488f9334', 2, 31, 420.00, 3),
+(42, '63df085d-9e92-464c-a1cc-14d3488f9334', 2, 32, 105.00, 3),
+(43, '63df085d-9e92-464c-a1cc-14d3488f9334', 2, 33, 360.00, 24),
+(44, '63df085d-9e92-464c-a1cc-14d3488f9334', 2, 34, 960.00, 24),
+(45, '63df085d-9e92-464c-a1cc-14d3488f9334', 2, 35, 3000.00, 6);
 
 -- --------------------------------------------------------
 
@@ -348,6 +462,7 @@ INSERT INTO `orders` (`order_id`, `subtotal`, `user_id`, `datetime`, `status`) V
 ('c8b47258-866c-4a44-8fc3-7da9e582f546', 5200.00, 6, '2023-02-05 16:59:20', 'in process'),
 ('cb76a249-72f7-40ec-88a8-5ae0d09ef306', 3500.00, 6, '2023-02-05 16:59:49', 'in process'),
 ('d326fb90-1f33-4a54-82dc-56ae934caee2', 17000.00, 6, '2023-02-05 17:05:34', 'NULL'),
+('e2efa00b-ea77-44cb-a21d-1b2ae6a65a79', 5880.00, 1, '2023-03-13 01:03:01', 'NULL'),
 ('e85f6230-43cb-407c-8036-9dd5ff9728c1', 5500.00, 3, '2023-01-15 19:06:34', 'finish'),
 ('edede0c4-2ed2-419c-9f7a-14d1c3b36a56', 10500.00, 1, '2023-01-15 14:02:37', 'rejected'),
 ('ffb8a80c-e93c-425a-a917-b8e09b57f68e', 17000.00, 6, '2023-02-05 16:58:24', 'in process');
@@ -401,7 +516,8 @@ INSERT INTO `order_details` (`id`, `order_id`, `item_id`, `item_price`, `quantit
 (28, 'd326fb90-1f33-4a54-82dc-56ae934caee2', 2, 3500.00, 1),
 (29, 'd326fb90-1f33-4a54-82dc-56ae934caee2', 8, 3500.00, 1),
 (30, 'd326fb90-1f33-4a54-82dc-56ae934caee2', 2, 3500.00, 1),
-(31, 'd326fb90-1f33-4a54-82dc-56ae934caee2', 1, 2500.00, 1);
+(31, 'd326fb90-1f33-4a54-82dc-56ae934caee2', 1, 2500.00, 1),
+(32, 'e2efa00b-ea77-44cb-a21d-1b2ae6a65a79', 14, 980.00, 6);
 
 -- --------------------------------------------------------
 
@@ -458,26 +574,35 @@ INSERT INTO `product` (`item_id`, `item_brand`, `item_name`, `item_price`, `item
 (11, 3, 'โต๊ะปิกนิก', 2500.00, './assets/products/1832267164.png', '2022-10-07 11:57:01', 998),
 (14, 5, 'กล่องเรียบ', 980.00, './assets/products/660721803.png', '2023-02-05 05:42:00', 999),
 (15, 5, 'เสาบนสวิง', 1200.00, './assets/products/758554432.png', '2023-02-05 06:07:24', 999),
-(16, 5, 'เสาล่างสวิง', 1200.00, './assets/products/1310258870.png', '2023-02-05 06:08:17', 999),
+(16, 5, 'เสาล่างสวิง', 1200.00, './assets/products/1310258870.png', '2023-02-05 06:08:17', 1000),
 (17, 5, 'ธรณีสวิง', 1100.00, './assets/products/1173711610.png', '2023-02-06 09:33:31', 999),
-(18, 5, 'เสาข้างสวิง', 1250.00, './assets/products/2190999.png', '2023-02-06 09:41:22', 999),
-(19, 6, 'รีเวท', 130.00, './assets/products/1515064033.jpg', '2023-02-11 05:51:37', 500),
-(20, 5, 'เฟรมบน', 630.00, './assets/products/505247154.png', '2023-02-11 05:51:50', 999),
-(21, 5, 'เสากุญแจ', 620.00, './assets/products/1941792796.png', '2023-02-11 02:52:25', 999),
+(18, 5, 'เสาข้างสวิง', 1250.00, './assets/products/2190999.png', '2023-02-06 09:41:22', 1004),
+(19, 6, 'รีเวท', 130.00, './assets/products/1367924176.png', '2023-03-10 06:22:54', 501),
+(20, 5, 'เฟรมบน', 630.00, './assets/products/505247154.png', '2023-02-11 05:51:50', 994),
+(21, 5, 'เสากุญแจ', 620.00, './assets/products/1941792796.png', '2023-02-11 02:52:25', 996),
 (22, 5, 'กรอบนอก', 700.00, './assets/products/908035116.png', '2023-02-11 02:56:22', 999),
-(23, 5, 'คิ้วบานกระทุ้ง', 260.00, './assets/products/924279762.png', '2023-02-11 05:42:47', 999),
-(24, 5, 'เฟรมล่าง', 640.00, './assets/products/1533786506.png', '2023-02-11 05:52:15', 999),
-(25, 5, 'เฟรมข้าง', 500.00, './assets/products/210104872.png', '2023-02-11 05:48:39', 999),
-(26, 5, 'เสาเกี่ยว', 650.00, './assets/products/510342548.png', '2023-02-11 05:50:08', 999),
-(27, 5, 'ขวางบน', 250.00, './assets/products/131274843.png', '2023-02-12 11:35:48', 999),
-(28, 5, 'ขวางล่าง', 350.00, './assets/products/316758880.png', '2023-02-12 11:35:30', 999),
-(29, 7, 'มือจับล็อค', 130.00, './assets/products/112592465.png', '2023-02-12 01:35:47', 999),
-(30, 6, 'ล้อบานเลื่อน', 45.00, './assets/products/1138332628.png', '2023-02-12 01:35:05', 999),
-(31, 6, 'ยางหุ้ม', 140.00, './assets/products/659569350.png', '2023-02-12 12:29:46', 999),
-(32, 6, 'สักหลาดบานเลื่อน', 35.00, './assets/products/323669260.png', '2023-02-12 12:39:12', 500),
-(33, 6, 'น้อต 3 หุน', 15.00, './assets/products/2028419104.png', '2023-02-12 12:42:39', 999),
-(34, 6, 'น้อต 1/2 นิ้ว', 40.00, './assets/products/745852921.png', '2023-02-12 12:47:14', 999),
-(35, 6, 'กระจก', 800.00, './assets/products/282990825.png', '2023-02-12 01:07:43', 500);
+(23, 5, 'คิ้วบานกระทุ้ง', 260.00, './assets/products/924279762.png', '2023-02-11 05:42:47', 1014),
+(24, 5, 'เฟรมล่าง', 640.00, './assets/products/1533786506.png', '2023-02-11 05:52:15', 995),
+(25, 5, 'เฟรมข้าง', 500.00, './assets/products/210104872.png', '2023-02-11 05:48:39', 995),
+(26, 5, 'เสาเกี่ยว', 650.00, './assets/products/510342548.png', '2023-02-11 05:50:08', 994),
+(27, 5, 'ขวางบน', 250.00, './assets/products/131274843.png', '2023-02-12 11:35:48', 994),
+(28, 5, 'ขวางล่าง', 350.00, './assets/products/316758880.png', '2023-02-12 11:35:30', 994),
+(29, 7, 'มือจับล็อค', 130.00, './assets/products/766802905.png', '2023-03-13 05:27:26', 989),
+(30, 6, 'ล้อบานเลื่อน', 45.00, './assets/products/1138332628.png', '2023-02-12 01:35:05', 979),
+(31, 6, 'ยางหุ้ม', 140.00, './assets/products/1371643378.png', '2023-03-13 05:24:12', 994),
+(32, 6, 'สักหลาดบานเลื่อน', 35.00, './assets/products/323669260.png', '2023-02-12 12:39:12', 495),
+(33, 6, 'น้อต 3 หุน', 15.00, './assets/products/2039392069.png', '2023-03-13 05:24:59', 959),
+(34, 6, 'น้อต 1/2 นิ้ว', 40.00, './assets/products/1100265524.png', '2023-03-13 05:33:05', 959),
+(35, 6, 'กระจก', 800.00, './assets/products/282990825.png', '2023-02-12 01:07:43', 490),
+(36, 5, 'กล่องjackson', 1470.00, './assets/products/1871978737.png', '2023-03-13 05:45:08', 999),
+(37, 7, 'มือจับบานประตูสวิง', 150.00, './assets/products/1778462947.png', '2023-03-13 05:49:20', 200),
+(38, 6, 'โช๊คบานสวิง', 1200.00, './assets/products/1913965388.png', '2023-03-13 06:02:56', 500),
+(39, 6, 'ยางเดิน', 140.00, './assets/products/192715147.png', '2023-03-13 06:20:03', 500),
+(40, 6, 'ยางอัดเล้ก', 140.00, './assets/products/1955758101.png', '2023-03-13 06:27:44', 500),
+(41, 5, 'ฉากข้อต่อบานกระทุ้ง', 300.00, './assets/products/1544404974.png', '2023-03-13 07:31:34', 999),
+(43, 7, 'มือจับกระทุ้ง', 140.00, './assets/products/523174968.png', '2023-03-13 07:42:11', 999),
+(44, 6, 'บานพับ', 100.00, './assets/products/139978405.png', '2023-03-13 07:43:46', 999),
+(45, 6, 'ยางลูกโป่ง', 160.00, './assets/products/2117690417.png', '2023-03-13 08:11:26', 500);
 
 -- --------------------------------------------------------
 
@@ -567,6 +692,24 @@ INSERT INTO `users` (`user_id`, `fullname`, `address`, `username`, `password`) V
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admincart`
+--
+ALTER TABLE `admincart`
+  ADD PRIMARY KEY (`A_id`);
+
+--
+-- Indexes for table `adminorders`
+--
+ALTER TABLE `adminorders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `adminorders_details`
+--
+ALTER TABLE `adminorders_details`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `admins`
@@ -669,6 +812,24 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `admincart`
+--
+ALTER TABLE `admincart`
+  MODIFY `A_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `adminorders`
+--
+ALTER TABLE `adminorders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `adminorders_details`
+--
+ALTER TABLE `adminorders_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
@@ -684,7 +845,7 @@ ALTER TABLE `blueprint`
 -- AUTO_INCREMENT for table `blueprint_material`
 --
 ALTER TABLE `blueprint_material`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -708,13 +869,13 @@ ALTER TABLE `companydetails`
 -- AUTO_INCREMENT for table `made_orders`
 --
 ALTER TABLE `made_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัส', AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัส', AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `made_order_details`
 --
 ALTER TABLE `made_order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `made_request`
@@ -726,7 +887,7 @@ ALTER TABLE `made_request`
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `order_request`
@@ -738,7 +899,7 @@ ALTER TABLE `order_request`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `producttype`
