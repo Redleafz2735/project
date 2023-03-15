@@ -19,23 +19,79 @@
 
     if (isset($_POST['submit'])) {
         $made_id = guidv4();
+        print_r($made_id);
+        echo '</br>';
         $user_id = $_POST['user_id'];
+        print_r($user_id);
+        echo '</br>';
         $blue_id = $_POST['blue_id'];
+        print_r($blue_id);
+        echo '</br>';
         $made_qty = $_POST['made_qty'];
+        print_r($made_qty);
+        echo '</br>';
         $color = $_POST['color'];
-        $size = $_POST['size'];
-        $details = $_POST['details'];
+        print_r($color);
+        echo '</br>';
+        $width = $_POST['width'];
+        print_r($width);
+        echo '</br>';
+        $height = $_POST['height'];
+        print_r( $height);
+        echo '</br>';
         $made_price = $_POST['made_price'];
+        print_r($made_price);
+        echo '</br>';
         $status = "NULL";
+        print_r($status);
+        echo '</br>';
 
-        $sql = $Insertorders->insertmadeOrder($made_id, $blue_id, $user_id, $color, $made_price, $size, $details, $status, $made_qty);
+        $width_cm = $width / 100;
+        $height_cm = $height / 100;
+        $area = $width_cm * $height_cm;
+        print_r($area);
+        echo '</br>';  
 
+        $sql = $Insertorders->insertmadeOrder($made_id, $blue_id, $user_id, $color, $made_price, $width, $height, $status, $made_qty);
+        
+        $total = 0;
         $sql1 = $user->fetblueprintmaterailsend($blue_id);
             while($row1 = mysqli_fetch_array($sql1)) {
             $MQTY = $row1['M_Qty']*$made_qty;
-            $MPRICE = $row1['M_Price']*$made_qty;
 
-            $sql2 = $Insertorders->insertmadeOrderdetails($made_id, $blue_id, $row1['item_id'], $MPRICE, $MQTY);
+            if($area <= '1'){
+                $price = $row1['item_price']-$row1['item_price']*70/100;
+                $total = $total+$price*$MQTY;             
+            } else if($area <= '5'){
+                $price = $row1['item_price']-$row1['item_price']*65/100;
+                $total = $total+$price*$MQTY;  
+            }else if($area <= '10'){
+                $price = $row1['item_price']-$row1['item_price']*60/100;
+                $total = $total+$price*$MQTY;  
+            }else if($area <= '15'){
+                $price = $row1['item_price']-$row1['item_price']*55/100;
+                $total = $total+$price*$MQTY;  
+            }else if($area <= '20'){
+                $price = $row1['item_price']-$row1['item_price']*50/100;
+                $total = $total+$price*$MQTY;  
+            }else if($area <= '25'){
+                $price = $row1['item_price']-$row1['item_price']*45/100;
+                $total = $total+$price*$MQTY;  
+            }else if($area <= '30'){
+                $price = $row1['item_price']-$row1['item_price']*40/100;
+                $total = $total+$price*$MQTY;  
+            }else if($area <= '36'){
+                $price = $row1['item_price']-$row1['item_price']*35/100;
+                $total = $total+$price*$MQTY;  
+            }else if ($area > '36'){
+                $price = $row1['item_price']-$row1['item_price']*20/100;
+                $total = $total+$price*$MQTY;  
+            }
+
+            print_r($price);
+            echo '</br>';  
+
+            $sql2 = $Insertorders->insertmadeOrderdetails($made_id, $blue_id, $row1['item_id'], $price, $MQTY);
         }
         if ($sql) {
             echo "<script>alert('สั่งทำเรียบร้อย');</script>";

@@ -21,20 +21,22 @@ body  {
 </style>
 <br>
 <br>
-    <div class="container">
+<?php
+    $blue_id = $_GET['id'];
+?>
+<div class="container">
         <div class="row">
             <div class="col-md-3">
                 <div class="card shadow-lg p-30 card-responsive" style="width: 70rem;">
                     <div class="card-body">
                         <div class="font-rubik ">
                             <div class="float-right">
-                                <span><i class="fa fa-th-large" style="color:#505050; font-size: 4rem;"></i></span>
+                                <span><i class="fa fa-file" style="color:#9466de; font-size: 2.5em;"></i></span>
                                 </div>
-                                <h1><strong>Catagory</strong></h1>
+                                <h2><strong>รายละเอียดBlueprint</strong></h2>
                                 <br>
-                                <!-- Button trigger modal -->
                                 <button type="button" class="fa fa-plus btn btn-success" style="font-size: 17.5px;" data-toggle="modal" data-target="#exampleModal">
-                                &nbsp;เพิ่มประเภทสินค้า
+                                &nbsp;เพิ่มBlueprintDetails
                                 </button>
                                 <!-- Modal -->
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -47,10 +49,29 @@ body  {
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                            <form action="admininsertcatagoty.php" method="post" enctype="multipart/form-data">
+                                            <form action="admininsertblueprintdetails.php" method="post" enctype="multipart/form-data">
+                                                <?php 
+
+                                                $sql = $adminuser->fetchdataproductforblueprint();
+                                                while($row = mysqli_fetch_array($sql)) {
+
+                                                ?>
                                                 <div class="mb-3">
-                                                    <label for="productbrand" class="col-form-label">productbrand:</label>
-                                                    <input type="text" required class="form-control" name="productbrand">
+                                                <label for="blue_id" class="col-form-label">สินค้าที่จะสั่งทำ</label>
+                                                    <select required class="form-control" name="item_id">
+                                                    <option value="" disabled selected>เลือกวัสดุ</option>
+                                                    <?php foreach($sql as $row) { ?>
+                                                        <option type="text" value="<?php echo $row['item_id']; ?>"><?php echo $row['item_name']; ?></option>                 
+                                                    <?php }?>
+                                                </select>
+                                                </div>
+                                                <?php 
+                                                }
+                                                ?>
+                                                <input type="hidden" class="form-control" value="<?php echo $blue_id ?>" name="blue_id">
+                                                <div class="mb-3">
+                                                    <label for="M_Qty" class="col-form-label">จำนวน:</label>
+                                                    <input type="number" required class="form-control" name="M_Qty" value="1" min ="1" max = "500">
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -78,34 +99,28 @@ body  {
                                         ?>
                                     </div>
                                 <?php } ?>
-                                <table id="myTable" class="table table-bordered table-striped"> 
+                                <table class="table table-striped">
                                     <thead>
-                                        <th>ID</th>
-                                        <th>Catagory</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
+                                        <th>รูป</th>
+                                        <th>ชื่อวัสดุ</th>
+                                        <th>จำนวน</th>
                                     </thead>
+                                    <?php
 
+                                        $sql = $adminOrder->fetchdataadminblueprint_matrial($blue_id);
+                                        while($row = mysqli_fetch_array($sql)){
+                                    ?>
                                     <tbody>
-                                        <?php 
-
-                                            $sql = $adminuser->fetchdataproducttype();
-                                            while($row = mysqli_fetch_array($sql)) {
-
-                                        ?>
-                                            <tr>
-                                                <td><?php echo $row['producttype_id']; ?></td>
-                                                <td><?php echo $row['productbrand']; ?></td>
-                                                <td><a href="adminupdatecatagory.php?id=<?php echo $row['producttype_id']; ?>" class="fas fa-edit btn btn-primary" style="font-size: 16px;">&nbsp;แก้ไข</a></td>
-                                                <td><a href="admindeletecatagory.php?del=<?php echo $row['producttype_id']; ?>" class="fas fa-trash-alt btn btn-danger" style="font-size: 16px;">&nbsp;ลบข้อมูล</a></td>
-                                            </tr>
-
-                                        <?php 
-
-                                            }
-                                        ?>
+                                            <td><img src="../<?php echo $row['item_image']; ?>" width="50px" height="50px" alt=" "></td>
+                                            <td><?php echo $row['item_name']; ?></td>
+                                            <td><?php echo $row['M_Qty']; ?></td>
                                     </tbody>
+                                    <?php 
+                                        }
+                                    ?>
                                 </table>
+                                <a href="adminblueprint.php" class="btn btn-secondary">Go Back</a>
+                                <button class="btn btn-primary" type="submit" name="submit">Submit</button>
                             </div>
                         </div>
                     </div>
@@ -114,6 +129,8 @@ body  {
         </div>        
     </div>
 </div>
+<br>
+<br>
 <br>
 <br>
 <?php

@@ -21,6 +21,9 @@
         $uuid = guidv4();
         print_r($uuid);
         echo "<br/>";
+        $company_id = $_POST['company_id'];
+        print_r($company_id);
+        echo "<br/>";
         $admin_id = $_POST['admin_id'];
         print_r($admin_id);
         echo "<br/>";
@@ -33,10 +36,10 @@
 
         $sql = $adminOrder->adminInsertOrders($uuid, $admin_id, $total, $status);
 
-        $sql1 = $adminuser->admincartfetch();
+        $sql1 = $adminuser->admincartfetch($company_id);
         while($row = mysqli_fetch_array($sql1)) {
 
-            $sql2 = $adminOrder->adminInsertOrdersdetails($uuid, $row['item_id'], $row['A_price'], $row['A_qty']);
+            $sql2 = $adminOrder->adminInsertOrdersdetails($uuid, $row['item_id'], $row['A_price'], $row['A_qty'], $row['company_id']);
         }
         $sql3 = $adminOrder->deletealladmincart();                         
         if ($sql) {

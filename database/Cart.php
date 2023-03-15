@@ -81,5 +81,14 @@ class Cart
             return $cart_id;
         }
     }
+
+    public function getCartId1($cartArray = null, $key = "company_id"){
+        if ($cartArray != null){
+            $cart_id = array_map(function ($value) use($key){
+                return $value[$key];
+            }, $cartArray);
+            return $cart_id;
+        }
+    }
     
 }

@@ -52,12 +52,12 @@ include ('header.php');
                                             <td><?php echo $row1['made_price']; ?></td>
                                         </tr>
                                         <tr>
-                                            <td><strong>ขนาด</strong></td>
-                                            <td><?php echo $row1['size']; ?></td>
+                                            <td><strong>ขนาดความกว้าง</strong></td>
+                                            <td><?php echo $row1['width']; ?></td>
                                         </tr>
                                         <tr>
-                                            <td><strong>ขนาดความกว้างยาว</strong></td>
-                                            <td><?php echo $row1['details']; ?></td>
+                                            <td><strong>ขนาดความยาว</strong></td>
+                                            <td><?php echo $row1['height']; ?></td>
                                         </tr>
                                     </tbody>
                                     <?php 
@@ -90,8 +90,11 @@ include ('header.php');
                                         <th>ราคา</th>
                                     </thead>
                                     <?php
+                                        $total = 0;
                                         $sql = $userorder->madeOrderUserdetails($made_id);
                                         while($row = mysqli_fetch_array($sql)) {
+                                        $total = $total+$row['MD_price']*$row['MD_Qty'];                                
+
                                     ?>
                                     <tbody>
                                         <tr>
@@ -104,7 +107,17 @@ include ('header.php');
                                     <?php
                                         $status = $row['status'];
                                         }
+                                        $vat = $total*35/100;
                                     ?>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>ค่าอุปกรณ์เพิ่มเติม+ค่าแรง</strong></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><?php echo $vat; ?></td>
+                                            <hr>
+                                        </tr>
+                                    </tbody>
                                 </table>
                                 <table class="table table-striped">
                                 <?php if($status=='in process'){ ?>
@@ -146,7 +159,8 @@ include ('header.php');
                                         <?php if($status=='in process'){ ?>
                                                 
                                         <?php }else if($status=='success'){ ?>
-            
+                                    <a href="usermadePDF.php?id=<?php echo $made_id; ?>" class="btn btn-danger">Download PDF</a>
+
                                         <?php }else if($status=='rejected'){ ?>
             
                                         <?php }else if($status=='finish'){ ?>

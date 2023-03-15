@@ -18,6 +18,9 @@ body  {
     width: 100%;
     height: 100%;
 }
+<?php
+    $company_id = $_GET['id'];
+?>
 </style>
 <br>
 <br>
@@ -57,7 +60,7 @@ body  {
                                 </thead>
                                     <?php
                                         $total=0;
-                                        $sql = $adminuser->admincartfetch();
+                                        $sql = $adminuser->admincartfetch($company_id);
                                         while($row1 = mysqli_fetch_array($sql)) {
                                         $total=$total+$row1['A_price'];
                                         
@@ -82,10 +85,12 @@ body  {
                                 <tr>
                                     <td><strong>ราคาทั้งหมด</strong></td>
                                     <td><?php echo $total; ?> ฿</td>
+                                    <input type="hidden" name="company_id" value="<?php echo $company_id; ?>">
                                     <input type="hidden" name="total" value="<?php echo $total; ?>">
                                     <input type="hidden" name="admin_id" value="<?php echo $_SESSION['admin_id']; ?>">
                                 </tr>
                             </table>
+                            <a href="admincompanydetail.php?id=<?php echo $company_id ?>" class="btn btn-secondary">Go Back</a>
                             <button type="submit" name="submit" id="submit" class="btn btn-success">ยืนยันการซื้อ</button>
                             </form> 
                         </div>

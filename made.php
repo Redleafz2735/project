@@ -6,6 +6,7 @@
         $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ!';
         header("location: login.php");
     } else {
+        
 ?>
 
 <?php
@@ -70,17 +71,12 @@ include ('header.php');
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="size">ขนาด</label>
-                                <select name="size" required class="form-control">
-                                    <option value="" disabled selected>เลือกขนาด</option>
-                                    <option>เล็ก</option>
-                                    <option>มารตฐาน</option>
-                                    <option>ใหญ่</option>
-                                </select>
+                                <label class="form-lable">ความกว้าง</label>
+                                <input type="text" class="form-control" id="width" name="width" placeholder="กรอกความกว้าง เช่น 200 ไม่ต้องมี CM">
                             </div>
                             <div class="mb-3">
-                                <label class="form-lable">รายละเอียดขนาดเพิ่มเติม</label>
-                                <textarea class="form-control" name="details" cols="30" rows="5"></textarea>
+                                <label class="form-lable">ความยาว</label>
+                                <input type="text" class="form-control" id="height" name="height" placeholder="กรอกความยาว เช่น 200 ไม่ต้องมี CM">
                             </div>
                             <input type="submit" name="submit" id="submit" value="ประเมินราคา" class="btn btn-primary">
                         </form>

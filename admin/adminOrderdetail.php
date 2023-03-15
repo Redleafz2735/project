@@ -28,6 +28,7 @@ body  {
                     <div class="card-body">
                         <div class="font-rubik ">
                             <div class="float-right">
+                                
                                 <span><i class="fa fa-file" style="color:#9466de; font-size: 2.5em;"></i></span>
                                 </div>
                                 <h2><strong>รายละเอียดออเดอร์</strong></h2>
@@ -122,6 +123,9 @@ body  {
                                 <td>
                                     <a href="adminOrder.php" class="btn btn-secondary">Go Back</a>
                                     <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+                                    <?php if($status=='success'){ ?>
+                                    <a href="adminPDF.php?id=<?php echo $order_id; ?>" class="btn btn-danger">Download PDF</a>
+                                    <?php }?>
                                 </td>
                                 </form> 
                             </div>

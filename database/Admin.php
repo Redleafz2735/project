@@ -36,6 +36,16 @@ class Admin
         return $reg;
     }
 
+    public function Insertblueprint($blue_id, $name) {
+        $reg = mysqli_query($this->db->con, "INSERT INTO blueprint(blue_id,name) VALUES('$blue_id','$name')");
+        return $reg;
+    }
+
+    public function Insertblueprintdetails($blue_id, $item_id, $M_Qty) {
+        $reg = mysqli_query($this->db->con, "INSERT INTO blueprint_material(blue_id,item_id,M_Qty) VALUES('$blue_id','$item_id','$M_Qty')");
+        return $reg;
+    }
+
     public function deleteproducttype($producttype_id) {
         $deleterecord = mysqli_query($this->db->con, "DELETE FROM producttype WHERE producttype_id = '$producttype_id'");
         return $deleterecord;
@@ -81,6 +91,15 @@ class Admin
         return $result;
     }
 
+    public function updatemadeOrders1($made_id, $made_price, $status) {
+        $result = mysqli_query($this->db->con, "UPDATE made_orders SET
+            made_price = '$made_price',
+            status = '$status'
+            WHERE made_id = '$made_id'
+        ");
+        return $result;
+    }
+
     public function updateadminOrders($adminorders_id, $status) {
         $result = mysqli_query($this->db->con, "UPDATE adminorders SET 
             admin_status = '$status'
@@ -96,7 +115,7 @@ class Admin
         FROM orders
         INNER JOIN users ON orders.user_id = users.user_id 
         WHERE orders.user_id AND orders.status = 'NULL'
-        ORDER BY orders.datetime ASC");
+        ORDER BY orders.datetime DESC");
         return $result;
     }
 
@@ -107,7 +126,7 @@ class Admin
         FROM orders
         INNER JOIN users ON orders.user_id = users.user_id 
         WHERE orders.user_id AND orders.status = 'in process'
-        ORDER BY orders.datetime ASC");
+        ORDER BY orders.datetime DESC");
         return $result;
     }
     // Success
@@ -117,7 +136,7 @@ class Admin
         FROM orders
         INNER JOIN users ON orders.user_id = users.user_id 
         WHERE orders.user_id AND orders.status = 'success'
-        ORDER BY orders.datetime ASC");
+        ORDER BY orders.datetime DESC");
         return $result;
     }
     // รอรับหน้าร้าน
@@ -127,7 +146,7 @@ class Admin
         FROM orders
         INNER JOIN users ON orders.user_id = users.user_id 
         WHERE orders.user_id AND orders.status = 'finish'
-        ORDER BY orders.datetime ASC");
+        ORDER BY orders.datetime DESC");
         return $result;
     }
     // rejected
@@ -137,7 +156,7 @@ class Admin
         FROM orders
         INNER JOIN users ON orders.user_id = users.user_id 
         WHERE orders.user_id AND orders.status = 'rejected'
-        ORDER BY orders.datetime ASC");
+        ORDER BY orders.datetime DESC");
         return $result;
     }
     // request
@@ -148,7 +167,7 @@ class Admin
         INNER JOIN order_request ON orders.order_id = order_request.order_id
         INNER JOIN users ON orders.user_id = users.user_id
         WHERE orders.user_id AND orders.status = 'in process' AND order_request.r_status = 'request'
-        ORDER BY orders.datetime ASC");
+        ORDER BY orders.datetime DESC");
         return $result;
     }
 
@@ -175,72 +194,72 @@ class Admin
     //NULL
     public function madeOrderUser() {
         $result = mysqli_query($this->db->con,
-        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status FROM made_orders
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.width, made_orders.height, made_orders.datetime, made_orders.status FROM made_orders
         INNER JOIN users ON made_orders.user_id = users.user_id
         INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
         WHERE made_orders.user_id AND made_orders.status = 'NULL'
-        ORDER BY made_orders.datetime ASC");
+        ORDER BY made_orders.datetime DESC");
         return $result;
     }
     //Acept
     public function madeOrderUser1() {
         $result = mysqli_query($this->db->con,
-        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status FROM made_orders
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.width, made_orders.height, made_orders.datetime, made_orders.status FROM made_orders
         INNER JOIN users ON made_orders.user_id = users.user_id
         INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
         WHERE made_orders.user_id AND made_orders.status = 'Acept'
-        ORDER BY made_orders.datetime ASC");
+        ORDER BY made_orders.datetime DESC");
         return $result;
     }
     //in process
     public function madeOrderUser2() {
         $result = mysqli_query($this->db->con,
-        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status FROM made_orders
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.width, made_orders.height, made_orders.datetime, made_orders.status FROM made_orders
         INNER JOIN users ON made_orders.user_id = users.user_id
         INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
         WHERE made_orders.user_id AND made_orders.status = 'in process'
-        ORDER BY made_orders.datetime ASC");
+        ORDER BY made_orders.datetime DESC");
         return $result;
     }
     //finish
     public function madeOrderUser3() {
         $result = mysqli_query($this->db->con,
-        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status FROM made_orders
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.width, made_orders.height, made_orders.datetime, made_orders.status FROM made_orders
         INNER JOIN users ON made_orders.user_id = users.user_id
         INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
         WHERE made_orders.user_id AND made_orders.status = 'finish'
-        ORDER BY made_orders.datetime ASC");
+        ORDER BY made_orders.datetime DESC");
         return $result;
     }
     //success
     public function madeOrderUser4() {
         $result = mysqli_query($this->db->con,
-        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status FROM made_orders
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.width, made_orders.height, made_orders.datetime, made_orders.status FROM made_orders
         INNER JOIN users ON made_orders.user_id = users.user_id
         INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
         WHERE made_orders.user_id AND made_orders.status = 'success'
-        ORDER BY made_orders.datetime ASC");
+        ORDER BY made_orders.datetime DESC");
         return $result;
     }
     //rejected
     public function madeOrderUser5() {
         $result = mysqli_query($this->db->con,
-        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status FROM made_orders
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.width, made_orders.height, made_orders.datetime, made_orders.status FROM made_orders
         INNER JOIN users ON made_orders.user_id = users.user_id
         INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
         WHERE made_orders.user_id AND made_orders.status = 'rejected'
-        ORDER BY made_orders.datetime ASC");
+        ORDER BY made_orders.datetime DESC");
         return $result;
     }
     //request
     public function madeOrderUser6() {
         $result = mysqli_query($this->db->con,
-        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.size, made_orders.details, made_orders.datetime, made_orders.status, made_request.m_status FROM made_orders
+        "SELECT made_orders.made_id, users.fullname, blueprint.name, made_orders.color, made_orders.made_qty, made_orders.made_price, made_orders.width, made_orders.height, made_orders.datetime, made_orders.status, made_request.m_status FROM made_orders
 		INNER JOIN made_request ON made_orders.made_id = made_request.made_id
         INNER JOIN users ON made_orders.user_id = users.user_id
         INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
         WHERE made_orders.user_id AND made_orders.status = 'in process' AND made_request.m_status = 'request'
-        ORDER BY made_orders.datetime ASC");
+        ORDER BY made_orders.datetime DESC");
         return $result;
     }
     // ลบรีเควส สั่งทำ
@@ -284,11 +303,13 @@ class Admin
         return $result;
     }
 
-    public function admincartfetch() {
+    public function admincartfetch($company_id) {
         $result = mysqli_query($this->db->con,"SELECT admincart.A_id, admincart.admin_id, admincart.company_id, admincart.item_id, product.item_image, company.company_name, product.item_name,
         admincart.A_qty, admincart.A_price FROM admincart
         INNER JOIN company ON company.company_id = admincart.company_id
-        INNER JOIN product ON product.item_id = admincart.item_id");
+        INNER JOIN product ON product.item_id = admincart.item_id
+        WHERE admincart.company_id = '$company_id'"
+        );
         return $result;
     }
 
@@ -298,9 +319,9 @@ class Admin
         return $result;
     }
 
-    public function adminInsertOrdersdetails($uuid, $item_id, $Admin_price, $Admin_Qty) {
-        $result = mysqli_query($this->db->con,"INSERT INTO adminorders_details(adminorders_id, item_id, Admin_price, Admin_Qty) 
-        VALUES('$uuid', '$item_id', '$Admin_price', '$Admin_Qty')");
+    public function adminInsertOrdersdetails($uuid, $item_id, $Admin_price, $Admin_Qty, $company_id) {
+        $result = mysqli_query($this->db->con,"INSERT INTO adminorders_details(adminorders_id, item_id, Admin_price, Admin_Qty, company_id) 
+        VALUES('$uuid', '$item_id', '$Admin_price', '$Admin_Qty', '$company_id')");
     }
 
     public function deletealladmincart() {
@@ -380,7 +401,7 @@ class Admin
 
     public function Editqty($A_id) {
         $result = mysqli_query($this->db->con,
-        "SELECT admincart.A_id, admincart.A_qty, product.item_price FROM admincart
+        "SELECT admincart.A_id, admincart.company_id, admincart.A_qty, product.item_price FROM admincart
         INNER JOIN product ON admincart.item_id = product.item_id
         WHERE admincart.A_id  = '$A_id'");
         return $result;
@@ -450,6 +471,25 @@ class Admin
         "SELECT product.item_name, SUM(adminorders_details.Admin_Qty) AS adminquantity FROM adminorders_details
         INNER JOIN product ON adminorders_details.item_id = product.item_id
         GROUP BY product.item_name");
+        return $result;
+    }
+
+    public function fetchdatablueprint() {
+        $result = mysqli_query($this->db->con, "SELECT * FROM blueprint");
+        return $result;
+    }
+
+    public function fetchdataadminblueprint_matrial($blue_id) {
+        $result = mysqli_query($this->db->con, "SELECT blueprint_material.id, blueprint_material.blue_id, blueprint_material.item_id, 
+        product.item_name, product.item_image, blueprint_material.M_Qty FROM blueprint_material
+        INNER JOIN product ON blueprint_material.item_id = product.item_id
+        WHERE blueprint_material.blue_id  = '$blue_id'");
+        return $result;
+    }
+
+    public function fetchdataproductforblueprint() {
+        $result = mysqli_query($this->db->con, "SELECT product.item_id, product.item_brand, product.item_name FROM product
+        WHERE product.item_brand = '5'");
         return $result;
     }
 }

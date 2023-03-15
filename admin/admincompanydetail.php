@@ -25,8 +25,6 @@ body  {
         $company = $row1['company_name'];
     }
 
-    $in_cart = $Cart->getCartId($product->getData1('admincart'));
-
 ?>
 </style>
 <br>
@@ -37,6 +35,9 @@ body  {
                 <div class="card shadow-lg p-30 card-responsive" style="width: 70rem;">
                     <div class="card-body">
                         <div class="font-rubik ">
+                            <div class="float-right">
+                                <a href="admincompanyIN.php?id=<?php echo $company_id; ?>" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> ตระกร้าสินค้า</a>
+                            </div>
                             <h3><strong><?php echo $company; ?></strong></h3>
                                 <?php if (isset($_SESSION['success'])) { ?>
                                     <div class="alert alert-success">
@@ -72,13 +73,7 @@ body  {
                                                 <input type="hidden" name="company_id" value="<?php echo $company_id; ?>">
                                                 <input type="hidden" name="item_id" value="<?php echo $row['item_id']; ?>">
                                                 <input type="hidden" name="item_price" value="<?php echo $row['item_price']; ?>">
-                                                <?php
-                                                    if (in_array($row['item_id'], $in_cart ?? [])){
-                                                        echo '<button type="submit" disabled class="btn btn-success font-size-18">อยู่ในรายการแล้ว</button>';
-                                                    }else{
-                                                        echo '<button type="submit" name="submit" class="btn btn-warning font-size-18">สั่งซื้อ</button>';
-                                                    }
-                                                ?>
+                                                <button type="submit" name="submit" class="btn btn-warning font-size-18">สั่งซื้อ</button>
                                             </div>
                                         </div>
                                     </div>

@@ -21,6 +21,13 @@ body  {
 </style>
 <br>
 <br>
+<?php
+    $adminorders_id = $_GET['id'];
+    $sql1 = $Order->adminOrderinnerjoinza($adminorders_id);
+    while($row1 = mysqli_fetch_array($sql1)) {
+    $status = $row1['admin_status'];
+    }                                   
+?>
 <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -33,26 +40,27 @@ body  {
                                 <h2><strong>รายละเอียดสินค้าที่นำเข้า</strong></h2>
                                 <br>
                                 <hr>
-                                <table class="table table-striped">
+                                <table class="table table-striped">                                   
                                     <thead>
                                         <th>ชื่อวัสดุ</th>
-                                        <th>จำนวน</th>
+                                        <th>บริษัท</th>
+                                        <th>จำนวนที่สั่ง</th>
                                         <th>ราคา</th>
                                     </thead>
-                                        <?php
-                                            $adminorders_id = $_GET['id'];
-                                            $sql = $Order->adminOrderinnerjoinza($adminorders_id);
-                                            while($row = mysqli_fetch_array($sql)) {
-                                        ?>
+                                    <?php
+                                        $adminorders_id = $_GET['id'];
+                                        $sql = $Order->adminOrderinnerjoinza($adminorders_id);
+                                        while($row = mysqli_fetch_array($sql)) {
+                                    ?>
                                     <tbody>
                                         <tr>
                                             <td><?php echo $row['item_name']; ?></td>
+                                            <td><?php echo $row['company_name']; ?></td>
                                             <td><?php echo $row['Admin_Qty']; ?></td>
                                             <td><?php echo $row['Admin_price']; ?> ฿</td>
                                         </tr>
                                     </tbody>
                                     <?php
-                                        $status = $row['admin_status'];                                    
                                         }
                                     ?>
                                 </table>
@@ -123,7 +131,7 @@ body  {
                                                     <form action="admincomerorder_Acept.php" method="post">
                                                         <div class="modal-body">
                                                             <input type="hidden" class="form-control" value="<?php echo $adminorders_id ?>" name="adminorders_id">
-                                                            <p>เมื่อตรวจเช็คสินค้าแล้วให้กดปุ่มยืนยันสินค้าจะถูกเพิ่มเข้าไปในระบบ</p>
+                                                            <p>เช็คสินค้าเรียบร้อยแล้ว</p>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">กลับไป</button>

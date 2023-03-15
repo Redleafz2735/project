@@ -50,6 +50,9 @@
                     <a class="nav-link" href="admincompany.php">การสั่งสินค้า</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="adminblueprint.php">แปลนสินค้า</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="admincatagory.php">ประเภทสินค้า</a>
                 </li>
                 <li class="nav-item">
@@ -75,7 +78,6 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="adminlogout.php">Logout</a>
-                        <a class="dropdown-item" href="admincompanyIN.php">รายการสังสินค้าเข้า</a>
                     </div>
                 </div>
                 &nbsp;

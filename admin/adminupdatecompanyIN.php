@@ -51,10 +51,13 @@ body  {
                                 $A_id = $_GET['id'];
                                 $sql = $adminOrder->Editqty($A_id);
                                 while($row = mysqli_fetch_array($sql)) {
+                                $company_id = $row['company_id'];
+                                
                                 
                             ?>
                             <form action="admincartcheckupdate.php" method="post">
                                 <div class="mb-3">
+                                    <input type="hidden" name="company_id" value="<?php echo $row['company_id']; ?>">
                                     <input type="hidden" id="A_id" name="A_id" value="<?php echo $row['A_id']; ?>">
                                     <input type="hidden" name="A_price" value="<?php echo $row['item_price']; ?>">
                                     <label for="itemqty" class="form-label">จำนวน</label>
@@ -63,7 +66,7 @@ body  {
                             <?php 
                                 }
                             ?>
-                            <a href="admincompanyIN.php" class="btn btn-secondary">Go Back</a>
+                            <a href="admincompanyIN.php?id=<?php echo $company_id; ?>" class="btn btn-secondary">Go Back</a>
                             <button type="submit" name="submit" class="btn btn-primary">Update</button>
                         </form>
                         </div>

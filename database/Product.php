@@ -55,4 +55,17 @@ class Product
         return $resultArray;
     }
 
+    public function getData2($table = 'company'){
+        $result = $this->db->con->query("SELECT * FROM {$table} ");
+
+        $resultArray = array();
+
+        // fetch product data one by one
+        while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+            $resultArray[] = $item;
+        }
+
+        return $resultArray;
+    }
+
 }

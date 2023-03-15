@@ -27,25 +27,26 @@ body  {
                 <div class="card shadow-lg p-30 card-responsive" style="width: 70rem;">
                     <div class="card-body">
                         <div class="font-rubik ">
-                            <div class="card-deck">
+                        <div class="card-deck">
                             <?php
                                 $sql = $adminOrder->company();
                                 while($row = mysqli_fetch_array($sql)) {
+                                    $company_id = $row['company_id'];
                             ?>
                                 <div class="card md-4">
                                     <img src="../<?php echo $row['company_image']; ?>" class="card-img-top" alt="...">
                                     <div class="card-body text-center">
-                                    <h5 class="card-title"><?php echo $row['company_name']; ?></h5>
-                                    <p class="card-text">ขายวัสดุอุปกรณ์อลูมิเนียมราคากันเอง</p>
+                                        <h5 class="card-title"><?php echo $row['company_name']; ?></h5>
+                                        <p class="card-text">ขายวัสดุอุปกรณ์อลูมิเนียมราคากันเอง</p>
                                     </div>
+                                    <a href="admincompanydetail.php?id=<?php echo $row['company_id']; ?>" class="btn btn-primary">สั่งซื้อ</a>
                                     <div class="card-footer">
-                                        <a href="admincompanydetail.php?id=<?php echo $row['company_id']; ?>" class="btn btn-primary">สั่งซื้อ</a>
-                                    </div>
+                                    </div>                          
                                 </div>
                             <?php
                                 }
                             ?>
-                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>

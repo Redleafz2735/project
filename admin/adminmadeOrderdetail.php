@@ -29,6 +29,8 @@ body  {
     $total=$total+$rowza['MD_price'];
     $status = $rowza['status'];
     }
+    $vat = $total*35/100;
+    $total = $vat+$total;
 ?>
 <div class="container">
         <div class="row">
@@ -81,12 +83,12 @@ body  {
                                             <td><?php echo $total ?></td>
                                         </tr>
                                         <tr>
-                                            <td><strong>ขนาด</strong></td>
-                                            <td><?php echo $row1['size']; ?></td>
+                                            <td><strong>ขนาดความกว้าง</strong></td>
+                                            <td><?php echo $row1['width']; ?></td>
                                         </tr>
                                         <tr>
-                                            <td><strong>ขนาดความกว้างยาว</strong></td>
-                                            <td><?php echo $row1['details']; ?></td>
+                                            <td><strong>ขนาดความยาว</strong></td>
+                                            <td><?php echo $row1['height']; ?></td>
                                         </tr>
                                     </tbody>
                                     <?php 
@@ -110,7 +112,6 @@ body  {
                                     ?>
                                 </table>
                                 <h5><strong>วัสดุที่ใช้</strong></h5>
-                                <hr>
                                 <table class="table table-striped">
                                     <thead>
                                         <th>รูป</th>
@@ -159,7 +160,15 @@ body  {
                                         <?php
                                             }
                                         ?>
-                                        <hr>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>ค่าอุปกรณ์เพิ่มเติม+ค่าแรง</strong></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><?php echo $vat; ?></td>
+                                                <hr>
+                                            </tr>
+                                        </tbody>
                                         <?php if($status=='in process'){ ?>
                                             <form method="post" action="adminupdatemadeOrdersdetail.php">
                                                 <input type="hidden" value="<?php echo $made_id ?>" required class="form-control" name="made_id">
@@ -193,8 +202,9 @@ body  {
                                         <?php }else if($status=='Acept'){ ?>
 
                                         <?php }else{ ?>
-                                            <form method="post" action="adminupdatemadeOrdersdetail.php">
+                                            <form method="post" action="adminupdatemadeOrdersdetail1.php">
                                                 <input type="hidden" value="<?php echo $made_id ?>" required class="form-control" name="made_id">
+                                                <input type="hidden" value="<?php echo $total ?>" required class="form-control" name="made_price">
                                                 <tr>
                                                     <td><strong>อัพเดทสถานะ</strong></td>
                                                     <td>
@@ -210,6 +220,9 @@ body  {
                                 </table>
                                 <a href="adminmadeOrder.php" class="btn btn-secondary">Go Back</a>
                                 <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+                                <?php if($status=='success'){ ?>
+                                <a href="adminPDF.php?id=<?php echo $made_id; ?>" class="btn btn-secondary">Download PDF</a>
+                                <?php }?>
                                 </form> 
                             </div>
                         </div>

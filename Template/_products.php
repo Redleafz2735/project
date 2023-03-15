@@ -46,11 +46,7 @@
                 <h5 class="font-baloo font-size-20"><?php echo $item['item_name'] ?? "Unknown"; ?></h5>
                 <div class="d-flex">
                     <div class="rating text-warning font-size-12">
-                        <span><i class="fas fa-star"></i></span>
-                        <span><i class="fas fa-star"></i></span>
-                        <span><i class="fas fa-star"></i></span>
-                        <span><i class="fas fa-star"></i></span>
-                        <span><i class="far fa-star"></i></span>
+
                     </div>
                 </div>
                 <hr class="m-0">
@@ -71,16 +67,10 @@
                 <div id="policy">
                     <div class="d-flex">
                         <div class="return text-center mr-5">
-                            <div class="font-size-20 my-2 color-second">
-                                <span class="fas fa-retweet border p-3 rounded-pill"></span>
-                            </div>
-                            <a href="#" class="font-rale font-size-12">10 วัน <br> เปลี่ยนสินค้า</a>
+
                         </div>
                         <div class="return text-center mr-5">
-                            <div class="font-size-20 my-2 color-second">
-                                <span class="fas fa-check-double border p-3 rounded-pill"></span>
-                            </div>
-                            <a href="#" class="font-rale font-size-12">1 เดือน <br>ประกัน</a>
+
                         </div>
                     </div>
                 </div>
@@ -110,12 +100,7 @@
 
                 <!-- size -->
                 <div class="size my-3">
-                    <h6 class="font-baloo">ขนาด :</h6>
-                    <div class="d-flex justify-content-between w-75">
-                        <div class="font-rubik border p-2">
-                            <button class="btn p-0 font-size-14">มาตรฐาน</button>
-                        </div>
-                    </div>
+
                 </div>
                 <!-- !size -->
 
