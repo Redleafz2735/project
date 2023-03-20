@@ -26,11 +26,12 @@ body  {
     $made_id = $_GET['id'];
     $sql = $userorder->madeOrderUserdetails($made_id);
     while($rowza = mysqli_fetch_array($sql)) {
-    $total=$total+$rowza['MD_price'];
     $status = $rowza['status'];
+    $price =  $rowza['MD_price'];
+    $total = $total+$price;
+
     }
-    $vat = $total*35/100;
-    $total = $vat+$total;
+
 ?>
 <div class="container">
         <div class="row">
@@ -64,6 +65,9 @@ body  {
                                     <?php
                                         $sql = $userorder->madeOrderUserhaed($made_id);
                                         while($row1 = mysqli_fetch_array($sql)) {
+                                        $blue_id = $row1['blue_id'];
+                                        $itotal = $row1['made_price'];
+                                        $made_qty = $row1['made_qty'];
                                     ?>
                                     <tbody>
                                         <tr>
@@ -80,7 +84,7 @@ body  {
                                         </tr>
                                         <tr>
                                             <td><strong>ราคา</strong></td>
-                                            <td><?php echo $total ?></td>
+                                            <td><?php echo  $itotal; ?></td>
                                         </tr>
                                         <tr>
                                             <td><strong>ขนาดความกว้าง</strong></td>
@@ -116,7 +120,7 @@ body  {
                                     <thead>
                                         <th>รูป</th>
                                         <th>ชื่อวัสดุ</th>
-                                        <th>จำนวน</th>
+                                        <th>เมตร</th>
                                         <th>ราคา</th>
                                         <?php if($status=='in process'){ ?>
                                         
@@ -127,7 +131,7 @@ body  {
                                         <?php }else if($status=='finish'){ ?>
         
                                         <?php }else if($status=='Acept'){ ?>
-                                        <th>แก้ไข</th>
+
                                         <?php }else{ ?>
                                         <th>แก้ไข</th>
                                         <?php } ?>
@@ -141,7 +145,7 @@ body  {
                                         <tr>
                                             <td><img src="../<?php echo $row['item_image']; ?>" width="50px" height="50px" alt=" "></td>
                                             <td><?php echo $row['item_name']; ?></td>
-                                            <td><?php echo $row['MD_Qty']; ?></td>
+                                            <td><?php echo $row['MD_Qty']; ?> เมตร</td>
                                             <td><?php echo $row['MD_price']; ?></td>
                                             <?php if($status=='in process'){ ?>
                                         
@@ -152,12 +156,16 @@ body  {
                                             <?php }else if($status=='finish'){ ?>
             
                                             <?php }else if($status=='Acept'){ ?>
-                                            <td><a href="adminmadeOrderdetail1.php?id=<?php echo $row['id']; ?>" class="fas fa-edit btn btn-primary" style="font-size: 16px;">&nbsp;แก้ไข</a></td>
+
                                             <?php }else{ ?>
                                             <td><a href="adminmadeOrderdetail1.php?id=<?php echo $row['id']; ?>" class="fas fa-edit btn btn-primary" style="font-size: 16px;">&nbsp;แก้ไข</a></td>
                                             <?php } ?>
                                         </tr>
                                         <?php
+                                            }
+                                            if($blue_id == 1){
+                                                $vat = 1700*$made_qty;
+                                                $total = $total+$vat;
                                             }
                                         ?>
                                         <tbody>

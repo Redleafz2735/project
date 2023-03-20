@@ -14,8 +14,11 @@ if (isset($_POST['submit'])) {
     $M_Qty = $_POST['M_Qty'];
     print_r($M_Qty);
     echo '</br>';
+    $type_id = $_POST['type_id'];
+    print_r($type_id);
+    echo '</br>';
 
-        $sql = $admincatagory->Insertblueprintdetails($blue_id, $item_id, $M_Qty);
+        $sql = $admincatagory->Insertblueprintdetails($blue_id, $item_id, $M_Qty, $type_id);
         if ($sql) {
             $_SESSION['success'] = "เพิ่มบลูปลิ้นสำเร็จ";
             header("location: adminblueprint_matrial.php?id=$blue_id");

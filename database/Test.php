@@ -64,13 +64,47 @@ class Testproduct
         }
     }
 
+    public function updateblueprint($b_status, $name, $picture, $blue_id) {
+        if ($picture == 1){
+            $result = mysqli_query($this->db->con, "UPDATE blueprint SET 
+            b_status = '$b_stastus',
+            name = '$name'
+            WHERE blue_id = '$blue_id'
+        ");
+        return $result;
+        } else {
+            $result = mysqli_query($this->db->con, "UPDATE blueprint SET 
+            b_status = '$b_status',
+            name = '$name',
+            picture = '$picture'
+            WHERE blue_id = '$blue_id'
+        ");
+        return $result;
+        }
+    }
+
     public function deleteproduct($item_id) {
         $deleterecord = mysqli_query($this->db->con, "DELETE FROM product WHERE item_id = '$item_id'");
         return $deleterecord;
     }
 
+    public function material_caculate_type($id) {
+        $deleterecord = mysqli_query($this->db->con, "DELETE FROM material_caculate_type WHERE id = '$id'");
+        return $deleterecord;
+    }
+
     public function deleteadmincart($A_id) {
         $deleterecord = mysqli_query($this->db->con, "DELETE FROM admincart WHERE A_id = '$A_id'");
+        return $deleterecord;
+    }
+
+    public function deleteadminblueprint($blue_id) {
+        $deleterecord = mysqli_query($this->db->con, "DELETE FROM blueprint WHERE blue_id = '$blue_id'");
+        return $deleterecord;
+    }
+
+    public function deleteadminblueprint_material($id) {
+        $deleterecord = mysqli_query($this->db->con, "DELETE FROM blueprint_material WHERE id = '$id'");
         return $deleterecord;
     }
 

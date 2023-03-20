@@ -33,11 +33,11 @@
         $color = $_POST['color'];
         print_r($color);
         echo '</br>';
-        $width = $_POST['width'];
-        print_r($width);
+        $width_cm = $_POST['width'];
+        print_r($width_cm);
         echo '</br>';
-        $height = $_POST['height'];
-        print_r( $height);
+        $height_cm = $_POST['height'];
+        print_r( $height_cm);
         echo '</br>';
         $made_price = $_POST['made_price'];
         print_r($made_price);
@@ -46,52 +46,43 @@
         print_r($status);
         echo '</br>';
 
-        $width_cm = $width / 100;
-        $height_cm = $height / 100;
-        $area = $width_cm * $height_cm;
+        $width = $width_cm / 100;
+        $height = $height_cm / 100;
+        $area = $width * $height;
         print_r($area);
         echo '</br>';  
 
-        $sql = $Insertorders->insertmadeOrder($made_id, $blue_id, $user_id, $color, $made_price, $width, $height, $status, $made_qty);
+        $sql = $Insertorders->insertmadeOrder($made_id, $blue_id, $user_id, $color, $made_price, $width_cm, $height_cm, $status, $made_qty);
         
         $total = 0;
         $sql1 = $user->fetblueprintmaterailsend($blue_id);
             while($row1 = mysqli_fetch_array($sql1)) {
-            $MQTY = $row1['M_Qty']*$made_qty;
+                $MQTY = $row1['M_Qty'];
+                $type_id = $row1['type_id'];
+                $price = $row1['item_price'];
 
-            if($area <= '1'){
-                $price = $row1['item_price']-$row1['item_price']*70/100;
-                $total = $total+$price*$MQTY;             
-            } else if($area <= '5'){
-                $price = $row1['item_price']-$row1['item_price']*65/100;
-                $total = $total+$price*$MQTY;  
-            }else if($area <= '10'){
-                $price = $row1['item_price']-$row1['item_price']*60/100;
-                $total = $total+$price*$MQTY;  
-            }else if($area <= '15'){
-                $price = $row1['item_price']-$row1['item_price']*55/100;
-                $total = $total+$price*$MQTY;  
-            }else if($area <= '20'){
-                $price = $row1['item_price']-$row1['item_price']*50/100;
-                $total = $total+$price*$MQTY;  
-            }else if($area <= '25'){
-                $price = $row1['item_price']-$row1['item_price']*45/100;
-                $total = $total+$price*$MQTY;  
-            }else if($area <= '30'){
-                $price = $row1['item_price']-$row1['item_price']*40/100;
-                $total = $total+$price*$MQTY;  
-            }else if($area <= '36'){
-                $price = $row1['item_price']-$row1['item_price']*35/100;
-                $total = $total+$price*$MQTY;  
-            }else if ($area > '36'){
-                $price = $row1['item_price']-$row1['item_price']*20/100;
-                $total = $total+$price*$MQTY;  
-            }
-
-            print_r($price);
+                if($type_id == 1){
+                    $calculated_price = $price /6 * $height*2*$made_qty;
+                    $calculated_mqty = $MQTY*$height*2*$made_qty;
+                } elseif ($type_id == 2) {
+                    $calculated_price = $price /6 * $area*$made_qty;
+                    $calculated_mqty = $MQTY*$height*$made_qty;
+                } elseif ($type_id == 3) {
+                    $calculated_price = $price /6 * $width*$made_qty;
+                    $calculated_mqty = $MQTY*$width*$made_qty;
+                } elseif ($type_id == 5) {
+                    $calculated_price = $price /6 * ($width*2+$height*2)*2*$made_qty;
+                    $calculated_mqty = $MQTY*($width*2+$height*2)*$made_qty;
+                }
+                $rounded_price = round($calculated_price, 2);
+                $total = $total+$rounded_price;     
+            
+            print_r($rounded_price);
+            echo '</br>';
+            print_r($calculated_mqty);
             echo '</br>';  
-
-            $sql2 = $Insertorders->insertmadeOrderdetails($made_id, $blue_id, $row1['item_id'], $price, $MQTY);
+        
+            $sql2 = $Insertorders->insertmadeOrderdetails($made_id, $blue_id, $row1['item_id'], $rounded_price, $calculated_mqty);
         }
         if ($sql) {
             echo "<script>alert('สั่งทำเรียบร้อย');</script>";

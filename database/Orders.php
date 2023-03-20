@@ -28,9 +28,9 @@ class Testorders
         return $result;
     }
 
-    public function updateProductqty($item_id, $new_qty) {
+    public function updateProductqty($item_id, $rounded_QTY) {
         $result = mysqli_query($this->db->con, "UPDATE product SET 
-            item_qty = '$new_qty'
+            item_qty = '$rounded_QTY'
             WHERE item_id = '$item_id'
         ");
     }

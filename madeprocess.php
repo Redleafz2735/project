@@ -20,7 +20,6 @@
         $width = $width_cm / 100;
         $height = $height_cm / 100;
         $area = $width * $height;
-        print_r($area);
 
     }
 ?>
@@ -30,41 +29,7 @@
 include ('header.php');
 ?>
 <?php
-
     $total = 0;
-    $sql1 = $user->fetblueprintmaterail($blue_id);
-    while($row1 = mysqli_fetch_array($sql1)) {
-
-    if($area <= '1'){
-        $MQTY = $row1['M_Qty']*$made_qty;
-        $price = $row1['item_price']-$row1['item_price']*70/100;
-    }else if($area <= '5'){
-        $MQTY = $row1['M_Qty']*$made_qty;
-        $price = $row1['item_price']-$row1['item_price']*65/100;
-    }else if($area <= '10'){
-        $MQTY = $row1['M_Qty']*$made_qty;
-        $price = $row1['item_price']-$row1['item_price']*60/100;
-    }else if($area <= '15'){
-        $MQTY = $row1['M_Qty']*$made_qty;
-        $price = $row1['item_price']-$row1['item_price']*55/100;
-    }else if($area <= '20'){
-        $MQTY = $row1['M_Qty']*$made_qty;
-        $price = $row1['item_price']-$row1['item_price']*50/100;
-    }else if($area <= '25'){
-        $MQTY = $row1['M_Qty']*$made_qty;
-        $price = $row1['item_price']-$row1['item_price']*45/100;
-    }else if($area <= '30'){
-        $MQTY = $row1['M_Qty']*$made_qty;
-        $price = $row1['item_price']-$row1['item_price']*40/100;
-    }else if($area <= '36'){
-        $MQTY = $row1['M_Qty']*$made_qty;
-        $price = $row1['item_price']-$row1['item_price']*35/100;
-    }else if ($area >= '37'){
-        $MQTY = $row1['M_Qty']*$made_qty;
-        $price = $row1['item_price']-$row1['item_price']*20/100;
-    }
-
-    }
 ?>
     <div class="container" style="margin-top: 50px;">
         <div class="row">
@@ -96,8 +61,13 @@ include ('header.php');
                                 $sql = $user->fetblueprint1($blue_id);
                                 while($row = mysqli_fetch_array($sql)) {
                                     $name = $row['name'];
+                                    $picture = $row['picture'];
                                 }
                             ?>
+                            <img src="<?php echo $picture ?>" class="rounded mx-auto d-block" style="width:250px; height:250px;" alt="...">
+                            <div class="text-center">
+                                <h6>ตัวอย่างภาพ</h6>
+                            </div>
                             <div class="mb-3">
                                 <label for="item_brand" class="col-form-label">รายละเอียดของสินค้าที่สั่งทำ</label>
                                 <input type="hidden" value="<?php echo $blue_id; ?>" required class="form-control" name="blue_id">
@@ -125,56 +95,48 @@ include ('header.php');
                                     <thead>
                                         <th>รูป</th>
                                         <th>ชื่อวัสดุ</th>
-                                        <th>จำนวน</th>
-                                        <th>ราคา(ต่อชิ้น)</th>
+                                        <th>เมตร</th>
+                                        <th>ราคา</th>
                                     </thead>
                                     <?php
                                         $sql1 = $user->fetblueprintmaterail($blue_id);
                                         while($row1 = mysqli_fetch_array($sql1)) {
-                                        $MQTY = $row1['M_Qty']*$made_qty;
-                                        
-                                        if($area <= '1'){
-                                            $price = $row1['item_price']-$row1['item_price']*70/100;
-                                            $total = $total+$price*$MQTY;                                
-                                        } else if($area <= '5'){
-                                            $price = $row1['item_price']-$row1['item_price']*65/100;
-                                            $total = $total+$price*$MQTY;  
-                                        }else if($area <= '10'){
-                                            $price = $row1['item_price']-$row1['item_price']*60/100;
-                                            $total = $total+$price*$MQTY;  
-                                        }else if($area <= '15'){
-                                            $price = $row1['item_price']-$row1['item_price']*55/100;
-                                            $total = $total+$price*$MQTY;  
-                                        }else if($area <= '20'){
-                                            $price = $row1['item_price']-$row1['item_price']*50/100;
-                                            $total = $total+$price*$MQTY;  
-                                        }else if($area <= '25'){
-                                            $price = $row1['item_price']-$row1['item_price']*45/100;
-                                            $total = $total+$price*$MQTY;  
-                                        }else if($area <= '30'){
-                                            $price = $row1['item_price']-$row1['item_price']*40/100;
-                                            $total = $total+$price*$MQTY;  
-                                        }else if($area <= '36'){
-                                            $price = $row1['item_price']-$row1['item_price']*35/100;
-                                            $total = $total+$price*$MQTY;  
-                                        }else if ($area > '36'){
-                                            $price = $row1['item_price']-$row1['item_price']*20/100;
-                                            $total = $total+$price*$MQTY;  
+                                        $MQTY = $row1['M_Qty'];
+                                        $type_id = $row1['type_id'];
+                                        $price = $row1['item_price'];
+
+                                        if($type_id == 1){
+                                            $calculated_price = $price /6 * $height*2*$made_qty;
+                                            $calculated_mqty = $MQTY*$height*2*$made_qty;
+                                        } elseif ($type_id == 2) {
+                                            $calculated_price = $price /6 * $area*$made_qty;
+                                            $calculated_mqty = $MQTY*$height*$made_qty;
+                                        } elseif ($type_id == 3) {
+                                            $calculated_price = $price /6 * $width*$made_qty;
+                                            $calculated_mqty = $MQTY*$width*$made_qty;
+                                        } elseif ($type_id == 5) {
+                                            $calculated_price = $price /6 * ($width*2+$height*2)*2*$made_qty;
+                                            $calculated_mqty = $MQTY*($width*2+$height*2)*$made_qty;
                                         }
-                                
+                                        $rounded_price = round($calculated_price, 2);
+                                        $total = $total+$rounded_price;                                
                                     ?>
                                     <tbody>
                                         <tr>
                                             <td><img src="<?php echo $row1['item_image']; ?>" width="50px" height="50px" alt=" "></td>
                                             <td><?php echo $row1['item_name']; ?></td>
-                                            <td><?php echo $MQTY; ?></td>
-                                            <td><?php echo $price; ?></td>
+                                            <td><?php echo $calculated_mqty; ?> เมตร</td>
+                                            <td><?php echo  $rounded_price; ?></td>
                                         </tr>
                                     </tbody>
                                     <?php 
                                         }
-                                    $vat = $total*35/100;
-                                    $trueprice = $vat+$total;
+                                    ?>
+                                    <?php
+                                        if($blue_id == 1){
+                                            $vat = 1700*$made_qty;
+                                            $total = $total+$vat;
+                                        }
                                     ?>
                                     <tbody>
                                         <tr>
@@ -192,7 +154,7 @@ include ('header.php');
                             </div>
                             <div class="mb-3">
                                 <label for="size" class = "text-danger">*ราคาจะมีการปรับเปลี่ยนตามรายละเอียดที่ลูกค้าสั่ง โดนตอนนี้เป็นการประเมินข้างต้นเท่านั้น</label>
-                                <input type="text" readonly value="<?php echo $trueprice; ?>" required class="form-control" name="made_price">
+                                <input type="text" readonly value="<?php echo $total; ?>" required class="form-control" name="made_price">
                             </div>
                             <a href="made.php" class="btn btn-secondary">ย้อนกลับ</a>
                             <input type="submit" name="submit" id="submit" value="ดำเนินการสั่งทำ" class="btn btn-primary">

@@ -25,15 +25,36 @@ if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     print_r($name);
     echo '</br>';
+    $picture = $_FILES['picture'];
+    print_r($picture);
+    echo '</br>';
+    $b_status = $_POST['b_status'];
+    print_r($b_status);
+    echo '</br>';
 
-        $sql = $admincatagory->Insertblueprint($blue_id, $name);
-        if ($sql) {
-            $_SESSION['success'] = "เพิ่มบลูปลิ้นสำเร็จ";
-            header("location: adminblueprint.php");
-        } else {
-            $_SESSION['error'] = "มีบางอย่างผิดพลาด";
-            header("location: adminblueprint.php");
+        $allow = array('jpg', 'jpeg', 'png');
+        $extension = explode('.', $picture['name']);
+        $fileActExt = strtolower(end($extension));
+        $fileNew = rand() . "." . $fileActExt;  // rand function create the rand number 
+        $filePath = '../assets/'.$fileNew;
+        $truePath = './assets/'.$fileNew;
+    
+        if (in_array($fileActExt, $allow)) {
+            if ($picture['size'] > 0 && $picture['error'] == 0) {
+                if (move_uploaded_file($picture['tmp_name'], $filePath)){
+                    $picture = $truePath;
+                    $sql = $productinsert->Insertblueprint($blue_id, $name, $picture, $b_status);
+                if ($sql) {
+                    $_SESSION['success'] = "เพิ่มบลูปลิ้นสำเร็จ";
+                    header("location: adminblueprint.php");
+                } else {
+                    $_SESSION['error'] = "มีบางอย่างผิดพลาด";
+                    header("location: adminblueprint.php");
+                }
+                } 
+            }
         }
+        
     }
 
 ?>

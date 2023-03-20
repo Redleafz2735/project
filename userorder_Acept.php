@@ -13,10 +13,12 @@
             $QTY = $Order->fetchdataproduct($row['item_id']);
             while($rowbad = mysqli_fetch_array($QTY)){
 
-                $oldqty = $rowbad['item_qty'];
+                $oldqty = $rowbad['item_qty']*6;
                 $cartqty = $row['MD_Qty'];
-                $new_qty = $oldqty - $cartqty;
-                $sql2 = $Order->updateProductqty($row['item_id'], $new_qty);
+                $new_qty1 = $oldqty - $cartqty;
+                $new_qty = $new_qty1/6;
+                $rounded_QTY = round($new_qty, 2);
+                $sql2 = $Order->updateProductqty($row['item_id'], $rounded_QTY);
             }
 
         }

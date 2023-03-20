@@ -30,11 +30,11 @@ body  {
                             <div class="float-right">
                                 <span><i class="fa fa-th-large" style="color:#505050; font-size: 4rem;"></i></span>
                                 </div>
-                                <h1><strong>Blueprint</strong></h1>
+                                <h1><strong>สูตรคำนวน</strong></h1>
                                 <br>
                                 <!-- Button trigger modal -->
                                 <button type="button" class="fa fa-plus btn btn-success" style="font-size: 17.5px;" data-toggle="modal" data-target="#exampleModal">
-                                &nbsp;เพิ่มBlueprint
+                                &nbsp;เพิ่มสูตร
                                 </button>
                                 <!-- Modal -->
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -47,24 +47,10 @@ body  {
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                            <form action="admininsertblueprint.php" method="post" enctype="multipart/form-data">
+                                            <form action="adminCalculationCheck.php" method="post" enctype="multipart/form-data">
                                                 <div class="mb-3">
-                                                    <label for="name" class="col-form-label">ชื่อบลูปลิ้น:</label>
-                                                    <input type="text" required class="form-control" name="name">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="b_status" class="col-form-label">สถานะ</label>
-                                                        <select required class="form-control" name="b_status">
-                                                        <option value="" disabled selected>เลือกสถานะ    </option>
-                                                        <option type="text" value="ready">พร้อมใช้งาน</option>
-                                                        <option type="text" value="NOT">ไม่พร้อมใช้งาน</option>                 
-                                                    </select>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="picture" class="col-form-label">รูปภาพสินค้า</label>
-                                                    <input type="file" class="form-control" id="imgInput" name="picture">
-                                                    <img loading="lazy" width="100%" id="previewImg" alt="">
-                                                    <br>
+                                                    <label for="Value" class="col-form-label">สูตร</label>
+                                                    <input type="text" required class="form-control" name="Value">
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -95,35 +81,27 @@ body  {
                                 <table id="myTable" class="table table-bordered table-striped"> 
                                     <thead>
                                         <th>รหัส</th>
-                                        <th>รูป</th>
-                                        <th>ชื่อ</th>
-                                        <th>สถานะ</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
+                                        <th>สูตร</th>
+                                        <th>แก้ไข</th>
+                                        <th>ลบ</th>
                                     </thead>
 
                                     <tbody>
                                         <?php 
 
-                                            $sql = $adminuser->fetchdatablueprint();
+                                            $sql = $adminuser->fetchdatamaterial_caculate_type();
                                             while($row = mysqli_fetch_array($sql)) {
-                                            $status = $row['b_status'];
 
                                         ?>
                                             <tr>
                                                 <td><?php echo $row['id']; ?></td>
-                                                <td><img src="../<?php echo $row['picture']; ?>" width="50px" height="50px" alt=" "></td>
-                                                <td><?php echo $row['name']; ?></td>
-                                                <?php if($status=="ready") { ?>
-                                                <td> <button type="button" class="btn btn-success"><span class="fa fa-check-circle"aria-hidden="true"></span> พร้อมใช้งาน</button>
-                                                </td> <?php } ?> <?php if($status=="NOT") { ?>
-                                                <td> <button type="button" class="btn btn-danger"><i class="far fa-times-circle"></i> ไม่พร้อมใช้งาน</button></td>
-                                                <?php } ?>
-                                                <td><a href="adminblueprint_matrial.php?id=<?php echo $row['blue_id']; ?>" class="fas fa-edit btn btn-primary" style="font-size: 16px;">&nbsp;แก้ไข</a></td>
-                                                <td><a href="adminblueprintdelete.php?del=<?php echo $row['blue_id']; ?>" class="fas fa-trash-alt btn btn-danger" style="font-size: 16px;">&nbsp;ลบข้อมูล</a></td>
+                                                <td><?php echo $row['Value']; ?></td>
+                                                <td><a href="adminCalculationupdate.php?id=<?php echo $row['id']; ?>" class="fas fa-edit btn btn-primary" style="font-size: 16px;">&nbsp;แก้ไข</a></td>
+                                                <td><a href="adminCalculationDelete.php?del=<?php echo $row['id']; ?>" class="fas fa-trash-alt btn btn-danger" style="font-size: 16px;">&nbsp;ลบข้อมูล</a></td>
                                             </tr>
 
                                         <?php 
+
                                             }
                                         ?>
                                     </tbody>

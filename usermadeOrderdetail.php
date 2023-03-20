@@ -33,6 +33,7 @@ include ('header.php');
                                         $made_id = $_GET['id'];
                                         $sql = $userorder->madeOrderUserhaed($made_id);
                                         while($row1 = mysqli_fetch_array($sql)) {
+                                        $made_price = $row1['made_price'];
                                     ?>
                                     <tbody>
                                         <tr>
@@ -49,7 +50,7 @@ include ('header.php');
                                         </tr>
                                         <tr>
                                             <td><strong>ราคา</strong></td>
-                                            <td><?php echo $row1['made_price']; ?></td>
+                                            <td><?php echo $row1['made_price']; ?> ฿</td>
                                         </tr>
                                         <tr>
                                             <td><strong>ขนาดความกว้าง</strong></td>
@@ -81,7 +82,6 @@ include ('header.php');
                                     ?>
                                 </table>
                                 <h5><strong>วัสดุที่ใช้</strong></h5>
-                                <hr>
                                 <table class="table table-striped">
                                     <thead>
                                         <th>รูป</th>
@@ -93,21 +93,21 @@ include ('header.php');
                                         $total = 0;
                                         $sql = $userorder->madeOrderUserdetails($made_id);
                                         while($row = mysqli_fetch_array($sql)) {
-                                        $total = $total+$row['MD_price']*$row['MD_Qty'];                                
+                                        $total = $total+$row['MD_price'];                                
 
                                     ?>
                                     <tbody>
                                         <tr>
                                             <td><img src="<?php echo $row['item_image']; ?>" width="50px" height="50px" alt=" "></td>
                                             <td><?php echo $row['item_name']; ?></td>
-                                            <td><?php echo $row['MD_Qty']; ?></td>
+                                            <td><?php echo $row['MD_Qty']; ?> เมตร</td>
                                             <td><?php echo $row['MD_price']; ?></td>
                                         </tr>
                                     </tbody>
                                     <?php
                                         $status = $row['status'];
                                         }
-                                        $vat = $total*35/100;
+                                        $vat = $made_price-$total;
                                     ?>
                                     <tbody>
                                         <tr>

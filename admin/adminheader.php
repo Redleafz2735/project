@@ -53,6 +53,9 @@
                     <a class="nav-link" href="adminblueprint.php">แปลนสินค้า</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="adminCalculation.php">สูตร</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="admincatagory.php">ประเภทสินค้า</a>
                 </li>
                 <li class="nav-item">

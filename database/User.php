@@ -214,7 +214,7 @@ class User
 
     public function madeOrderUserhaed($made_id) {
         $result = mysqli_query($this->db->con,
-        "SELECT made_orders.made_id, blueprint.name, made_orders.color, made_orders.made_qty,
+        "SELECT made_orders.made_id, made_orders.blue_id, blueprint.name, made_orders.color, made_orders.made_qty,
         made_orders.made_price, made_orders.width, made_orders.height
         FROM made_orders
         INNER JOIN blueprint ON made_orders.blue_id = blueprint.blue_id
@@ -243,12 +243,13 @@ class User
 
     public function fetblueprint() {
         $result = mysqli_query($this->db->con, "SELECT * FROM blueprint
+        WHERE blueprint.b_status = 'ready'
         ORDER BY blueprint.id asc");
         return $result;
     }
 
     public function fetblueprint1($blue_id) {
-        $result = mysqli_query($this->db->con, "SELECT blueprint.blue_id, blueprint.name, blueprint_material.M_Qty FROM blueprint
+        $result = mysqli_query($this->db->con, "SELECT blueprint.blue_id, blueprint.name, blueprint_material.M_Qty, blueprint.picture FROM blueprint
 		INNER JOIN blueprint_material ON blueprint.blue_id = blueprint_material.blue_id
         WHERE blueprint.blue_id = '$blue_id'
         ORDER BY blueprint.id asc");
@@ -256,8 +257,10 @@ class User
     }
 
     public function fetblueprintmaterail($blue_id) {
-        $result = mysqli_query($this->db->con, "SELECT blueprint.blue_id,product.item_name,product.item_price,product.item_image,blueprint_material.M_Qty
+        $result = mysqli_query($this->db->con, "SELECT blueprint.blue_id,product.item_name,product.item_price,product.item_image,
+        blueprint_material.M_Qty, blueprint_material.type_id
         FROM blueprint_material
+        INNER JOIN material_caculate_type ON blueprint_material.type_id = material_caculate_type.id
         INNER JOIN blueprint ON blueprint_material.blue_id = blueprint.blue_id
         INNER JOIN product ON blueprint_material.item_id = product.item_id
         WHERE blueprint.blue_id = '$blue_id'");
@@ -266,8 +269,9 @@ class User
 
     public function fetblueprintmaterailsend($blue_id) {
         $result = mysqli_query($this->db->con, "SELECT blueprint.blue_id,product.item_id,product.item_name,product.item_image,blueprint_material.M_Qty,
-        product.item_price
+        product.item_price, blueprint_material.type_id
         FROM blueprint_material
+        INNER JOIN material_caculate_type ON blueprint_material.type_id = material_caculate_type.id
         INNER JOIN blueprint ON blueprint_material.blue_id = blueprint.blue_id
         INNER JOIN product ON blueprint_material.item_id = product.item_id
         WHERE blueprint.blue_id = '$blue_id'");
@@ -279,8 +283,8 @@ class User
         return $reg;
     }
 
-    public function insertmadeOrderdetails($made_id, $blue_id, $item_id, $price, $MD_Qty) {
-        $reg = mysqli_query($this->db->con, "INSERT INTO made_order_details(made_id, blue_id, item_id, MD_price, MD_Qty) VALUES('$made_id', '$blue_id', '$item_id', '$price', '$MD_Qty')");
+    public function insertmadeOrderdetails($made_id, $blue_id, $item_id, $rounded_price, $calculated_mqty) {
+        $reg = mysqli_query($this->db->con, "INSERT INTO made_order_details(made_id, blue_id, item_id, MD_price, MD_Qty) VALUES('$made_id', '$blue_id', '$item_id', '$rounded_price', '$calculated_mqty')");
         
     }
 }

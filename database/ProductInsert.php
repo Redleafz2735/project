@@ -16,5 +16,11 @@ class ProductInsert
         VALUES('$item_brand', '$item_name', '$item_price', '$item_image', '$item_register', '$item_qty')");
         return $reg;
     }
+
+    public function Insertblueprint($blue_id, $name, $picture, $b_status) {
+        $reg = mysqli_query($this->db->con, "INSERT INTO blueprint(blue_id, name, picture, b_status) 
+        VALUES('$blue_id', '$name', '$picture', '$b_status')");
+        return $reg;
+    }
 }
 ?>

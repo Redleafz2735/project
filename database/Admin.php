@@ -21,6 +21,11 @@ class Admin
         return $result;
     }
 
+    public function fetchdatamaterial_caculate_type() {
+        $result = mysqli_query($this->db->con, "SELECT * FROM material_caculate_type");
+        return $result;
+    }
+
     public function fetchonerecord($user_id) {
         $result = mysqli_query($this->db->con, "SELECT * FROM users WHERE user_id = '$user_id'");
         return $result;
@@ -31,8 +36,26 @@ class Admin
         return $result;
     }
 
+    public function fetchonerecordmaterial_caculate_type($id) {
+        $result = mysqli_query($this->db->con, "SELECT * FROM material_caculate_type WHERE id = '$id'");
+        return $result;
+    }
+
+    public function updatematerial_caculate_type($id, $Value) {
+        $result = mysqli_query($this->db->con, "UPDATE material_caculate_type SET 
+            Value = '$Value'
+            WHERE id = '$id'
+        ");
+        return $result;
+    }
+
     public function Insertproducttype($productbrand) {
         $reg = mysqli_query($this->db->con, "INSERT INTO producttype(productbrand) VALUES('$productbrand')");
+        return $reg;
+    }
+
+    public function Insertmaterial_caculate_type($Value) {
+        $reg = mysqli_query($this->db->con, "INSERT INTO material_caculate_type(Value) VALUES('$Value')");
         return $reg;
     }
 
@@ -41,8 +64,8 @@ class Admin
         return $reg;
     }
 
-    public function Insertblueprintdetails($blue_id, $item_id, $M_Qty) {
-        $reg = mysqli_query($this->db->con, "INSERT INTO blueprint_material(blue_id,item_id,M_Qty) VALUES('$blue_id','$item_id','$M_Qty')");
+    public function Insertblueprintdetails($blue_id, $item_id, $M_Qty, $type_id) {
+        $reg = mysqli_query($this->db->con, "INSERT INTO blueprint_material(blue_id,item_id,M_Qty,type_id) VALUES('$blue_id','$item_id','$M_Qty','$type_id')");
         return $reg;
     }
 
@@ -479,11 +502,26 @@ class Admin
         return $result;
     }
 
+    public function fetchdatablueprint1($blue_id) {
+        $result = mysqli_query($this->db->con, "SELECT * FROM blueprint
+        WHERE blueprint.blue_id = '$blue_id'");
+        return $result;
+    }
+
     public function fetchdataadminblueprint_matrial($blue_id) {
         $result = mysqli_query($this->db->con, "SELECT blueprint_material.id, blueprint_material.blue_id, blueprint_material.item_id, 
-        product.item_name, product.item_image, blueprint_material.M_Qty FROM blueprint_material
+        product.item_name, product.item_image, blueprint_material.M_Qty, material_caculate_type.Value FROM blueprint_material
+        INNER JOIN material_caculate_type ON blueprint_material.type_id = material_caculate_type.id
         INNER JOIN product ON blueprint_material.item_id = product.item_id
-        WHERE blueprint_material.blue_id  = '$blue_id'");
+        WHERE blueprint_material.blue_id   = '$blue_id'");
+        return $result;
+    }
+
+    public function fetchdataadminblueprint_matrial1($id) {
+        $result = mysqli_query($this->db->con, "SELECT blueprint_material.id, blueprint_material.blue_id, blueprint_material.item_id, 
+        product.item_name, product.item_image, blueprint_material.M_Qty, blueprint_material.type_id FROM blueprint_material
+        INNER JOIN product ON blueprint_material.item_id = product.item_id
+        WHERE blueprint_material.id  = '$id'");
         return $result;
     }
 
@@ -492,4 +530,20 @@ class Admin
         WHERE product.item_brand = '5'");
         return $result;
     }
-}
+
+    public function fetmaterial_caculate_type() {
+        $result = mysqli_query($this->db->con, "SELECT * FROM material_caculate_type
+        ORDER BY material_caculate_type.id asc");
+        return $result;
+    }
+
+    public function updateadminblueprint_matrial($id, $MD_Qty, $type_id) {
+        $result = mysqli_query($this->db->con, "UPDATE blueprint_material SET 
+            M_Qty = '$MD_Qty',
+            type_id = '$type_id'
+            WHERE id = '$id'
+        ");
+        return $result;
+    }
+}   
+
