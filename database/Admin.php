@@ -545,5 +545,29 @@ class Admin
         ");
         return $result;
     }
+
+    public function watchOrdersreport($form_date, $to_date) {
+        $result = mysqli_query($this->db->con, "SELECT product.item_name, order_details.item_price, order_details.quantity, orders.datetime,
+        SUM(order_details.quantity) AS quantity
+            FROM order_details
+                INNER JOIN product ON order_details.item_id = product.item_id
+                INNER JOIN orders ON order_details.order_id = orders.order_id
+                WHERE orders.datetime BETWEEN '$form_date' AND '$to_date'
+                GROUP BY product.item_name
+        ");
+        return $result;
+    }
+
+    public function watchmadeOrdersreport($form_date, $to_date) {
+        $result = mysqli_query($this->db->con, "SELECT product.item_name, made_order_details.MD_price, made_order_details.MD_Qty, made_orders.datetime,
+        SUM(made_order_details.MD_Qty) AS quantity
+        FROM made_order_details
+        INNER JOIN product ON made_order_details.item_id = product.item_id
+        INNER JOIN made_orders ON made_order_details.made_id = made_orders.made_id
+        WHERE made_orders.datetime BETWEEN '$form_date' AND '$to_date'
+        GROUP BY product.item_name
+        ");
+        return $result;
+    }
 }   
 

@@ -118,6 +118,7 @@ include ('header.php');
                                             $calculated_price = $price /6 * ($width*2+$height*2)*2*$made_qty;
                                             $calculated_mqty = $MQTY*($width*2+$height*2)*$made_qty;
                                         }
+                                        
                                         $rounded_price = round($calculated_price, 2);
                                         $total = $total+$rounded_price;                                
                                     ?>

@@ -132,8 +132,7 @@ include ('adminheader.php');
                     </div>
                 </div>
             </div>
-        </div>
-
+        </div>    
         <div class="col-md-3 center">
             <div class="card shadow p-30" style="width: 15rem;">
                 <div class="card-body">
@@ -179,6 +178,27 @@ include ('adminheader.php');
                 </div>
             </div>
         </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-5 mt-5 ml-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">รายงานการขาย</h5>
+                        <p class="card-text">ดูสรุปการขายในแต่ละเดือน</p>
+                        <a href="adminreportsell.php" class="btn btn-primary">คลิ้กที่นี่</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5 mt-5 ml-5" style="width: 72.5rem;">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">รายงานการสั่งทำ</h5>
+                        <p class="card-text">ดูสรุปการขายในแต่ละเดือน</p>
+                        <a href="adminreportmadesell.php" class="btn btn-primary">คลิ้กที่นี่</a>
+                    </div>
+                </div>
+            </div>
+        </div>  
         <?php
             $sql8 = $adminuser->Countallorders();
             $sql9 = $adminuser->Countallorders();
@@ -290,6 +310,7 @@ include ('adminheader.php');
             </div>
         
     </div>
+</div>
     <br>
     <br>
     <br>
