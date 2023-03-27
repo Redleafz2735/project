@@ -19,38 +19,38 @@
 
     if (isset($_POST['submit'])) {
         $made_id = guidv4();
-        print_r($made_id);
-        echo '</br>';
+        // print_r($made_id);
+        // echo '</br>';
         $user_id = $_POST['user_id'];
-        print_r($user_id);
-        echo '</br>';
+        // print_r($user_id);
+        // echo '</br>';
         $blue_id = $_POST['blue_id'];
-        print_r($blue_id);
-        echo '</br>';
+        // print_r($blue_id);
+        // echo '</br>';
         $made_qty = $_POST['made_qty'];
-        print_r($made_qty);
-        echo '</br>';
+        // print_r($made_qty);
+        // echo '</br>';
         $color = $_POST['color'];
-        print_r($color);
-        echo '</br>';
+        // print_r($color);
+        // echo '</br>';
         $width_cm = $_POST['width'];
-        print_r($width_cm);
-        echo '</br>';
+        // print_r($width_cm);
+        // echo '</br>';
         $height_cm = $_POST['height'];
-        print_r( $height_cm);
-        echo '</br>';
+        // print_r( $height_cm);
+        // echo '</br>';
         $made_price = $_POST['made_price'];
-        print_r($made_price);
-        echo '</br>';
+        // print_r($made_price);
+        // echo '</br>';
         $status = "NULL";
-        print_r($status);
-        echo '</br>';
+        // print_r($status);
+        // echo '</br>';
 
         $width = $width_cm / 100;
         $height = $height_cm / 100;
         $area = $width * $height;
-        print_r($area);
-        echo '</br>';  
+        // print_r($area);
+        // echo '</br>';  
 
         $sql = $Insertorders->insertmadeOrder($made_id, $blue_id, $user_id, $color, $made_price, $width_cm, $height_cm, $status, $made_qty);
         
@@ -77,10 +77,10 @@
                 $rounded_price = round($calculated_price, 2);
                 $total = $total+$rounded_price;     
             
-            print_r($rounded_price);
-            echo '</br>';
-            print_r($calculated_mqty);
-            echo '</br>';  
+            // print_r($rounded_price);
+            // echo '</br>';
+            // print_r($calculated_mqty);
+            // echo '</br>';  
         
             $sql2 = $Insertorders->insertmadeOrderdetails($made_id, $blue_id, $row1['item_id'], $rounded_price, $calculated_mqty);
         }

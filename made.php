@@ -72,11 +72,11 @@ include ('header.php');
                             </div>
                             <div class="mb-3">
                                 <label class="form-lable">ความกว้าง</label>
-                                <input type="text" class="form-control" id="width" name="width" placeholder="กรอกความกว้าง เช่น 200 ไม่ต้องมี CM">
+                                <input type="number" class="form-control" id="width" name="width" placeholder="กรอกความกว้าง เช่น 200 ไม่ต้องมี CM">
                             </div>
                             <div class="mb-3">
                                 <label class="form-lable">ความยาว</label>
-                                <input type="text" class="form-control" id="height" name="height" placeholder="กรอกความยาว เช่น 200 ไม่ต้องมี CM">
+                                <input type="number" class="form-control" id="height" name="height" placeholder="กรอกความยาว เช่น 200 ไม่ต้องมี CM">
                             </div>
                             <input type="submit" name="submit" id="submit" value="ประเมินราคา" class="btn btn-primary">
                         </form>

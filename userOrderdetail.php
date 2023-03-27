@@ -96,7 +96,7 @@ include ('header.php');
                                     <?php if($status=='in process'){ ?>
                                         
                                     <?php }else if($status=='success'){ ?>
-                                    <a href="userPDF.php?id=<?php echo $order_id; ?>" class="btn btn-danger">Download PDF</a>
+                                    <a href="userPDF.php?id=<?php echo $order_id; ?>" class="btn btn-danger">ดูใบเสร็จ</a>
                                     <?php }else if($status=='rejected'){ ?>
 
                                     <?php }else if($status=='finish'){ ?>

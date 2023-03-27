@@ -35,7 +35,7 @@
         ?>
 
     </head>
-    <body>
+    <body onload="window.print();>
     <?php
         $made_id = $_GET['id'];
     ?>

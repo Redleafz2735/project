@@ -35,7 +35,7 @@
         ?>
 
     </head>
-    <body>
+    <body onload="window.print();">
 
     <div class="container mt-5">
     <h2 align="left"><strong>Aluminuim Shop</strong></h2>

@@ -135,7 +135,7 @@ include ('header.php');
                                     ?>
                                     <?php
                                         if($blue_id == 1){
-                                            $vat = 1700*$made_qty;
+                                            $vat = 1200*$made_qty;
                                             $total = $total+$vat;
                                         }
                                     ?>
