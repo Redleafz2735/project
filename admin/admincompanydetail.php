@@ -67,17 +67,42 @@ body  {
                                             <img src="../<?php echo $row['item_image']; ?>" class="card-img-top" style="width: 15rem;" alt="...">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['item_name']; ?></h5>
-                                                <p class="card-text"><input type="number" value="1" name="item_qty" min='1' max='500'></p>
-                                                <p class="card-text"><?php echo $row['item_price']; ?> ฿</p>
+                                                <p class="card-text "><input type="number" class="form-control" value="1" name="item_qty" min='1' max='500'></p>
+                                                <?php 
+                                                $sql1 = $user->fetcolors($row['item_id']);
+                                                while($row1 = mysqli_fetch_array($sql1)) {                                            
+                                                ?>
+                                                <p class="card-text">
+                                                <select class="form-control" name="colors">
+                                                    <option value="" disabled selected>เลือกสี</option>
+                                                    <?php foreach($sql1 as $row1) { ?>
+                                                        <option type="text" value="<?php echo $row1['colors_id']; ?>"><?php echo $row1['colors']; ?></option>                 
+                                                    <?php }?>
+                                                </select>
+                                                </p>
+                                                <?php } ?>
+                                                <?php 
+                                                $sql2 = $user->fetsize($row['item_id']);
+                                                while($row2 = mysqli_fetch_array($sql2)) {                                          
+                                                ?>
+                                                <p class="card-text">
+                                                <select class="form-control" name="size">
+                                                    <option value="" disabled selected>เลือกขนาด</option>
+                                                    <?php foreach($sql2 as $row2) { ?>
+                                                        <option type="text" value="<?php echo $row2['size_id']; ?>"><?php echo $row2['size']; ?></option>                 
+                                                    <?php }?>
+                                                </select>
+                                                </p>
+                                                <?php } ?>
                                                 <input type="hidden" name="admin_id" value="<?php echo $_SESSION['admin_id']; ?>">
                                                 <input type="hidden" name="company_id" value="<?php echo $company_id; ?>">
                                                 <input type="hidden" name="item_id" value="<?php echo $row['item_id']; ?>">
-                                                <input type="hidden" name="item_price" value="<?php echo $row['item_price']; ?>">
                                                 <button type="submit" name="submit" class="btn btn-warning font-size-18">สั่งซื้อ</button>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
+                                
                                 <?php
                                     }
                                 ?>

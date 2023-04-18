@@ -320,15 +320,16 @@ class Admin
         return $result;
     }
 
-    public function admincart($admin_id, $company_id, $item_id, $item_qty, $trueprice) {
-        $result = mysqli_query($this->db->con,"INSERT INTO admincart(admin_id, company_id, item_id, A_qty, A_price) 
-        VALUES('$admin_id', '$company_id', '$item_id', '$item_qty', '$trueprice')");
+    public function admincart($admin_id, $company_id, $item_id, $item_qty, $trueprice, $colors, $size) {
+        $result = mysqli_query($this->db->con,"INSERT INTO admincart(admin_id, company_id, item_id, A_qty, A_price, A_colors, A_size) 
+        VALUES('$admin_id', '$company_id', '$item_id', '$item_qty', '$trueprice', '$colors', '$size')");
         return $result;
     }
 
     public function admincartfetch($company_id) {
-        $result = mysqli_query($this->db->con,"SELECT admincart.A_id, admincart.admin_id, admincart.company_id, admincart.item_id, product.item_image, company.company_name, product.item_name,
-        admincart.A_qty, admincart.A_price FROM admincart
+        $result = mysqli_query($this->db->con,"SELECT admincart.A_id, admincart.admin_id, admincart.company_id, admincart.item_id, product.item_image, company.company_name, product.item_name, admincart.A_colors, product_colors.colors, admincart.A_size, product_size.size, admincart.A_qty, admincart.A_price FROM admincart
+        INNER JOIN product_size ON product_size.id = admincart.A_size
+        INNER JOIN product_colors ON product_colors.id = admincart.A_colors
         INNER JOIN company ON company.company_id = admincart.company_id
         INNER JOIN product ON product.item_id = admincart.item_id
         WHERE admincart.company_id = '$company_id'"
@@ -566,6 +567,13 @@ class Admin
         INNER JOIN made_orders ON made_order_details.made_id = made_orders.made_id
         WHERE made_orders.datetime BETWEEN '$form_date' AND '$to_date'
         GROUP BY product.item_name
+        ");
+        return $result;
+    }
+
+    public function fetpriceadmin($item_id, $colors, $size) {
+        $result = mysqli_query($this->db->con, "SELECT product_details.item_id, product_details.colors_id, product_details.size_id, product_details.price, product_details.item_qty FROM product_details 
+        WHERE item_id = '$item_id' AND product_details.colors_id = '$colors' AND product_details.size_id = '$size'
         ");
         return $result;
     }

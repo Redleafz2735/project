@@ -53,6 +53,8 @@ body  {
                                     <th>รูป</th>
                                     <th>บริษัท</th>
                                     <th>ชื่อวัสดุ</th>
+                                    <th>สี</th>
+                                    <th>ขนาด</th>
                                     <th>จำนวน</th>
                                     <th>ราคา</th>
                                     <th>แก้ไข</th>
@@ -70,6 +72,8 @@ body  {
                                         <td><img src="../<?php echo $row1['item_image']; ?>" width="50px" height="50px" alt=" "></td>
                                         <td><?php echo $row1['company_name']; ?></td>
                                         <td><?php echo $row1['item_name']; ?></td>
+                                        <td><?php echo $row1['colors']; ?></td>
+                                        <td><?php echo $row1['size']; ?></td>
                                         <td><?php echo $row1['A_qty']; ?></td>
                                         <td><?php echo $row1['A_price']; ?> ฿</td>
                                         <td><a href="adminupdatecompanyIN.php?id=<?php echo $row1['A_id']; ?>" class="fas fa-edit btn btn-primary" style="font-size: 15px;">&nbsp;แก้ไข</a></td>

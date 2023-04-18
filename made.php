@@ -21,7 +21,7 @@ include ('header.php');
                     <div class="font-rubik ">
                         <h2 class="text-center"><strong>สั่งทำสินค้า</strong></h2>
                         <hr>
-                        <form action="madeprocess.php" method="post">
+                        <form action="madeprocess.php" method="post" enctype="multipart/form-data">
                             <!--Text Field-->
                             <?php if(isset($_SESSION['error'])) { ?>
                                 <div class="alert alert-danger" role="alert">
@@ -41,7 +41,6 @@ include ('header.php');
                             <?php } ?>
                             <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
                             <?php 
-
                                 $sql = $user->fetblueprint();
                                 while($row = mysqli_fetch_array($sql)) {
 
@@ -77,6 +76,11 @@ include ('header.php');
                             <div class="mb-3">
                                 <label class="form-lable">ความยาว</label>
                                 <input type="number" class="form-control" id="height" name="height" placeholder="กรอกความยาว เช่น 200 ไม่ต้องมี CM">
+                            </div>
+                            <div class="mb-3">
+                                <label for="picture" class="col-form-label">Image:</label>
+                                <input type="file" class="form-control" id="imgInput" name="picture">
+                                <img loading="lazy" width="25%" id="previewImg" alt="">
                             </div>
                             <input type="submit" name="submit" id="submit" value="ประเมินราคา" class="btn btn-primary">
                         </form>

@@ -16,15 +16,25 @@
         $item_qty = $_POST['item_qty'];
         print_r($item_qty);
         echo "<br/>";
-        $item_price = $_POST['item_price'];
-        print_r($item_price);
+        $colors = $_POST['colors'];
+        print_r($colors);
         echo "<br/>";
+        $size = $_POST['size'];
+        print_r($size);
+        echo "<br/>";
+        
+        $sql3 = $adminuser->fetpriceadmin($item_id, $colors, $size);
+        while($row3 = mysqli_fetch_array($sql3)) {
+        $price = $row3['price'];
+        print_r($price);
+        echo "<br/>";
+        }
 
-        $trueprice = $item_qty*$item_price;
+        $trueprice = $item_qty*$price;
         print_r($trueprice);
         echo "<br/>";
 
-        $sql = $adminOrder->admincart($admin_id, $company_id, $item_id, $item_qty, $trueprice);
+        $sql = $adminOrder->admincart($admin_id, $company_id, $item_id, $item_qty, $trueprice, $colors, $size);
         if ($sql) {
             $_SESSION['success'] = "เพิ่มรายการเรียบร้อย";
             header("location: admincompanydetail.php?id=$company_id"); 

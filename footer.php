@@ -34,6 +34,18 @@
 
 <!-- !start #footer -->
 <script>
+        let imgInput = document.getElementById('imgInput');
+        let previewImg = document.getElementById('previewImg');
+
+        imgInput.onchange = evt => {
+            const [file] = imgInput.files;
+                if (file) {
+                    previewImg.src = URL.createObjectURL(file)
+            }
+        }
+
+    </script>
+<script>
     // Attach a click event to the anchor tag
     $(document).ready(function(){
         $('.edit-link').click(function(){

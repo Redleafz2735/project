@@ -33,19 +33,22 @@ class Cart
     }
 
     // to get user_id and item_id and insert into cart table
-    public  function addToCart($userid, $itemid, $itemqty){
-        if (isset($userid) && isset($itemid) && isset($itemqty)){
+    public  function addToCart($userid, $itemid, $itemqty, $size, $colors){
+        if (isset($userid) && isset($itemid) && isset($itemqty) && isset($size) && isset($colors)){
             $params = array(
                 "user_id" => $userid,
                 "item_id" => $itemid,
-                "itemqty" => $itemqty
+                "itemqty" => $itemqty,
+                "size" => $size,
+                "colors" => $colors
+
             );
 
             // insert data into cart
             $result = $this->insertIntoCart($params);
             if ($result){
                 // Reload Page
-                header("Location: " . $_SERVER['PHP_SELF']);
+                header("Location: product.php?item_id=$itemid");
             }
         }
     }

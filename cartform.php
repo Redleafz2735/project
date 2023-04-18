@@ -19,13 +19,21 @@
                     <div class="col-sm-8">
                         <h5 class="font-baloo font-size-20"><?php echo $row['item_name'] ?? "Unknown"; ?></h5>
                         <!-- product qty -->
-                        <div class="qty d-flex pt-2">
+                    <form method="post" action="cartcheck.php">
+                        <div class="d-flex font-rale w-25">
+                            <h6 class="font-baloo">ขนาด</h6> &nbsp;&nbsp;&nbsp;
+                            <h6 class="font-baloo"><?php echo $row['size'] ?? 0; ?></h6>
+                        </div>
+                        <div class="d-flex font-rale w-25">
+                            <h6 class="font-baloo"><?php echo $row['colors'] ?? 0; ?></h6>
+                        </div>
+                        <div class="qty d-flex pt-1">
                             <div class="d-flex font-rale w-25">
                                 <h6 class="font-baloo">จำนวน</h6>
                                 <div class="px-4 font-rale">
-                                <form method="post" action="cartcheck.php">
                                     <h6>
-                                        <input type='number' readonly class='text-center iqty' name="itemqty" onchange='subTotal()' value='<?php echo $row['itemqty']; ?>' min='1' max='10'>
+                                        <input type='number' 
+                                        class='text-center iqty' readonly name="itemqty" onchange='subTotal()' value='<?php echo $row['itemqty']; ?>' min='1' max='10'>
                                         <!-- ไอดีสินค้า -->
                                         <input type="hidden" value="<?php echo $row['item_id'] ?? 0; ?>" name="item_id">
                                         <!-- ราคา -->
@@ -35,13 +43,13 @@
                                         <!-- ไอดีสินค้า-->
                                         <input type="hidden" name="cart_id" value="<?php echo $row['cart_id']; ?>">
                                     </h6>
+
                                 </div>
                                 <a href="update_cart.php?id=<?php echo $row['cart_id']; ?>" class="btn font-baloo px-3 border-right">Edit</a>
                                 <a href="cartdeleteza.php?del=<?php echo $row['cart_id']; ?>" class="btn font-baloo text-danger px-3 border-right" style="font-size: 15px;">&nbsp;ลบ</a>
                             </div>
                         </div>
                         <!-- !product qty -->
-
                     </div>
 
                     <div class="col-sm-2 text-right">

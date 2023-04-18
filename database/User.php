@@ -32,9 +32,10 @@ class User
 
     public function cartjoin($user_id) {
         $result = mysqli_query($this->db->con,
-        "SELECT cart_id,cart.user_id,cart.item_id,item_name,item_price,item_image,cart.itemqty FROM cart
-        INNER JOIN product
-        ON cart.item_id = product.item_id
+        "SELECT cart_id,cart.user_id,cart.item_id,item_name,product_size.id, product_size.size, product_colors.id, product_colors.colors, item_price,item_image,cart.itemqty FROM cart
+        INNER JOIN product_size ON cart.size = product_size.id
+        INNER JOIN product_colors ON cart.colors = product_colors.id
+        INNER JOIN product ON cart.item_id = product.item_id
         WHERE cart.user_id = '$user_id'");
         return $result;
     }
@@ -286,5 +287,43 @@ class User
     public function insertmadeOrderdetails($made_id, $blue_id, $item_id, $rounded_price, $calculated_mqty) {
         $reg = mysqli_query($this->db->con, "INSERT INTO made_order_details(made_id, blue_id, item_id, MD_price, MD_Qty) VALUES('$made_id', '$blue_id', '$item_id', '$rounded_price', '$calculated_mqty')");
         
+    }
+
+    public function fetproduct($item_id) {
+        $result = mysqli_query($this->db->con, "SELECT product_details.item_id, product_details.colors_id, product_colors.colors, product_details.size_id, product_size.size, product_details.price, product_details.item_qty FROM product_details 
+        INNER JOIN product_colors ON product_colors.id = product_details.colors_id 
+        INNER JOIN product_size ON product_size.id = product_details.size_id
+        WHERE product_details.item_id = '$item_id'");
+        return $result;
+    }
+
+    public function fetcolors($item_id) {
+        $result = mysqli_query($this->db->con, "SELECT product_details.colors_id, product_colors.colors FROM `product_details`
+        INNER JOIN product_colors ON product_colors.id = product_details.colors_id
+        WHERE item_id = '$item_id'
+        GROUP BY product_details.colors_id
+        ");
+        return $result;
+    }
+
+    public function fetsize($item_id) {
+        $result = mysqli_query($this->db->con, "SELECT product_details.size_id, product_size.size FROM `product_details`
+        INNER JOIN product_size ON product_size.id = product_details.size_id
+        WHERE item_id = '$item_id'
+        GROUP BY product_details.size_id
+        ");
+        return $result;
+    }
+
+    public function Product() {
+        $result = mysqli_query($this->db->con, "SELECT * FROM `product` WHERE product.item_id ='14' ");
+        return $result;
+    }
+
+    public function fetprice($item_id) {
+        $result = mysqli_query($this->db->con, "SELECT product_details.item_id, product_details.colors_id, product_details.size_id, product_details.price, product_details.item_qty FROM product_details 
+        WHERE item_id = '$item_id'
+        ");
+        return $result;
     }
 }

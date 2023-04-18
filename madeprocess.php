@@ -16,7 +16,23 @@
         $color = $_POST['color'];
         $width_cm = $_POST['width'];
         $height_cm = $_POST['height'];
+        $picture = $_FILES['picture'];
 
+        $allow = array('jpg', 'jpeg', 'png');
+        $extension = explode('.', $picture['name']);
+        $fileActExt = strtolower(end($extension));
+        $fileNew = rand() . "." . $fileActExt;  // rand function create the rand number 
+        $filePath = './assets/'.$fileNew;
+        $truePath = './assets/'.$fileNew;
+
+        if (in_array($fileActExt, $allow)) {
+            if ($picture['size'] > 0 && $picture['error'] == 0) {
+                if (move_uploaded_file($picture['tmp_name'], $filePath)){
+                    $picture = $truePath;
+                }
+            }
+        }
+        print_r($picture);
         $width = $width_cm / 100;
         $height = $height_cm / 100;
         $area = $width * $height;
