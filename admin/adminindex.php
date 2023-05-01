@@ -198,6 +198,15 @@ include ('adminheader.php');
                     </div>
                 </div>
             </div>
+            <div class="col-sm-5 mt-5 ml-5" style="width: 72.5rem;">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">รายงานสินค้าคงเหลือ</h5>
+                        <p class="card-text">ดูสรุปสินค้าคงเหลือ</p>
+                        <a href="adminreportqty.php" class="btn btn-primary">คลิ้กที่นี่</a>
+                    </div>
+                </div>
+            </div>
         </div>  
         <?php
             $sql8 = $adminuser->Countallorders();

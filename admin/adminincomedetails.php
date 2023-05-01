@@ -43,9 +43,13 @@ body  {
                                 <table class="table table-striped">                                   
                                     <thead>
                                         <th>ชื่อวัสดุ</th>
+                                        <th>สี</th>
+                                        <th>ขนาด</th>
                                         <th>บริษัท</th>
-                                        <th>จำนวนที่สั่ง</th>
-                                        <th>ราคา</th>
+                                        <th class="text-right">จำนวนที่สั่ง</th>
+                                        <th class="text-right">จำนวนที่รับ</th>
+                                        <th>ลงจำนวน</th>
+                                        <th class="text-right">ราคา</th>
                                     </thead>
                                     <?php
                                         $adminorders_id = $_GET['id'];
@@ -55,9 +59,13 @@ body  {
                                     <tbody>
                                         <tr>
                                             <td><?php echo $row['item_name']; ?></td>
+                                            <td><?php echo $row['D_colors']; ?></td>
+                                            <td><?php echo $row['D_size']; ?></td>
                                             <td><?php echo $row['company_name']; ?></td>
-                                            <td><?php echo $row['Admin_Qty']; ?></td>
-                                            <td><?php echo $row['Admin_price']; ?> ฿</td>
+                                            <td class="text-right"><?php echo $row['Admin_Qty']; ?></td>
+                                            <td class="text-right"><?php echo $row['D_qty']; ?></td>
+                                            <td><a href="adminincomedetailsfix.php?id=<?php echo $row['id']; ?>" class="fas fa-edit btn btn-secondary" style="font-size: 16px;">&nbsp;ลงจำนวน</a></td>
+                                            <td class="text-right"><?php echo $row['Admin_price']; ?> ฿</td>
                                         </tr>
                                     </tbody>
                                     <?php

@@ -307,6 +307,14 @@ class Admin
         return $result;
     }
 
+    public function updateadminOrdersdetail($id, $D_qty) {
+        $result = mysqli_query($this->db->con, "UPDATE adminorders_details SET 
+            D_qty = '$D_qty'
+            WHERE id = '$id'
+        ");
+        return $result;
+    }
+
     public function company() {
         $result = mysqli_query($this->db->con,"SELECT company.company_id, company.company_name, company.company_image FROM company");
         return $result;
@@ -343,9 +351,9 @@ class Admin
         return $result;
     }
 
-    public function adminInsertOrdersdetails($uuid, $item_id, $Admin_price, $Admin_Qty, $company_id) {
-        $result = mysqli_query($this->db->con,"INSERT INTO adminorders_details(adminorders_id, item_id, Admin_price, Admin_Qty, company_id) 
-        VALUES('$uuid', '$item_id', '$Admin_price', '$Admin_Qty', '$company_id')");
+    public function adminInsertOrdersdetails($uuid, $item_id, $Admin_price, $Admin_Qty, $company_id, $colors, $size) {
+        $result = mysqli_query($this->db->con,"INSERT INTO adminorders_details(adminorders_id, item_id, Admin_price, Admin_Qty, company_id, D_colors, D_size) 
+        VALUES('$uuid', '$item_id', '$Admin_price', '$Admin_Qty', '$company_id', '$colors', '$size')");
     }
 
     public function deletealladmincart() {
@@ -567,6 +575,17 @@ class Admin
         INNER JOIN made_orders ON made_order_details.made_id = made_orders.made_id
         WHERE made_orders.datetime BETWEEN '$form_date' AND '$to_date'
         GROUP BY product.item_name
+        ");
+        return $result;
+    }
+
+    public function watchmadeOrdersqty($item_id) {
+        $result = mysqli_query($this->db->con, "SELECT product.item_id, product.item_name, product_details.item_qty, product_details.limit_qty, product_colors.colors, product_size.size
+        FROM product_details
+        INNER join product_colors on product_details.colors_id=product_colors.id
+        inner JOIN product_size on product_details.size_id=product_size.id
+        INNER JOIN product on product_details.item_id=product.item_id
+        WHERE product.item_id = '$item_id'
         ");
         return $result;
     }

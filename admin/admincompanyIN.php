@@ -48,10 +48,15 @@ body  {
                                     </div>
                                 <?php } ?>
                             <hr>
+                            <?php
+                                $sql2 = $adminuser->admincartfetch($company_id);
+                                while($row2 = mysqli_fetch_array($sql2)) {
+                            ?>
+                            <h5><strong><?php echo $row2['company_name']; ?></strong></h5>
+                            <?php }?>
                             <table class="table table-striped">
                                 <thead>
                                     <th>รูป</th>
-                                    <th>บริษัท</th>
                                     <th>ชื่อวัสดุ</th>
                                     <th>สี</th>
                                     <th>ขนาด</th>
@@ -70,7 +75,6 @@ body  {
                                 <tbody>
                                     <tr>
                                         <td><img src="../<?php echo $row1['item_image']; ?>" width="50px" height="50px" alt=" "></td>
-                                        <td><?php echo $row1['company_name']; ?></td>
                                         <td><?php echo $row1['item_name']; ?></td>
                                         <td><?php echo $row1['colors']; ?></td>
                                         <td><?php echo $row1['size']; ?></td>

@@ -18,22 +18,18 @@ include ('adminheader.php');
             <div class="col-md-12">
                 <div class="card mt-5">
                     <div class="card-header">
-                        <h4>สรุปการสั่งทำทั้งหมด</h4>
+                    <h4>สรุปสินค้าคงเหลือ</h4>
                     </div>
                     <div class="card-body">
                         <form action="" method="GET">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>จากวันที่</label>
-                                        <input type="date" name="from_date" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>ถึงวันที่</label>
-                                        <input type="date" name="to_date" class="form-control">
-                                    </div>
+                                <div class="form-group col-md-4">
+                                <label>Product:  </label>
+                                <select class="custom-select" name="item_id" id="item_id" required>
+                                    <option value="">--Select Product--</option>
+                                    <option value="14">กล่องเรียบ</option>
+                                    <option value="Egg">Egg</option>
+                                </select>
                                 </div>
                                 <div class="col-md-4">                                
                                     <div class="form-group">
@@ -50,30 +46,38 @@ include ('adminheader.php');
                         <table class="table table=borderd">
                             <thead>
                                 <tr>
-                                    <th>ชื่อ</th>
-                                    <th class="text-right">ราคา</th>
-                                    <th class="text-right">เมตร</th>
+                                    <th>สินค้า</th>
+                                    <th>สี</th>
+                                    <th>ขนาด</th>
+                                    <th class="text-right">จำนวนคงเหลือ</th>
                                 </tr>
                             </thead>
                             <tbody>
                             <?php
-                                if(isset($_GET['from_date']) && isset($_GET['to_date'])){
-                                    $from_date = $_GET['from_date'];
-                                    $to_date = $_GET['to_date'];
+                                if(isset($_GET['item_id'])){
+                                    $item_id = $_GET['item_id'];
 
-                                    $sql = $adminuser->watchmadeOrdersreport($from_date, $to_date);
+                                    $sql = $adminuser->watchmadeOrdersqty($item_id);
 
                                     if(mysqli_num_rows($sql) > 0)
                                     {
                                         foreach($sql as $row)
                                         {
-                                            $QTY = $row['quantity'];
                                             //echo $row['fullname'];
                                             ?>
                                             <tr>
                                                 <td><?php echo $row['item_name']; ?></td>
-                                                <td class="text-right"><?php echo $row['MD_price']; ?></td>
-                                                <td class="text-right"><?php echo $QTY; ?></td>
+                                                <td><?php echo $row['colors']; ?></td>
+                                                <td><?php echo $row['size']; ?></td>
+                                                <?php 
+                                                    if($row['item_qty'] >= $row['limit_qty']){
+                                                ?>
+                                                <td class="text-right"><?php echo $row['item_qty']; ?></td>
+                                                <?php 
+                                                    }else if($row['item_qty'] <= $row['limit_qty']){
+                                                ?>
+                                                <td class="text-right text-danger"><?php echo $row['item_qty']; ?> (สินค้าใกล้จะหมด)</td>
+                                                <?php } ?>        
                                             </tr>
                                             <?php
                                         }
@@ -81,6 +85,8 @@ include ('adminheader.php');
                                     else
                                     {
                                         echo "ไม่มีข้อมูลในระบบ";
+                                        echo "</br>";
+                                        echo "</br>";
                                     }
                                 }
                                 

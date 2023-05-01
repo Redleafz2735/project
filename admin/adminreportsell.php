@@ -51,9 +51,8 @@ include ('adminheader.php');
                             <thead>
                                 <tr>
                                     <th>ชื่อ</th>
-                                    <th>ราคา</th>
-                                    <th>จำนวน</th>
-                                    <th>เวลา</th>
+                                    <th class="text-right">ราคา</th>
+                                    <th class="text-right">จำนวน</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -72,9 +71,8 @@ include ('adminheader.php');
                                             ?>
                                             <tr>
                                                 <td><?php echo $row['item_name']; ?></td>
-                                                <td><?php echo $row['item_price']; ?></td>
-                                                <td><?php echo $row['quantity']; ?></td>
-                                                <td><?php echo $row['datetime']; ?></td>
+                                                <td class="text-right"><?php echo $row['item_price']; ?></td>
+                                                <td class="text-right"><?php echo $row['quantity']; ?></td>
                                             </tr>
                                             <?php
                                         }

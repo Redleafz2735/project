@@ -39,7 +39,7 @@
         $sql1 = $adminuser->admincartfetch($company_id);
         while($row = mysqli_fetch_array($sql1)) {
 
-            $sql2 = $adminOrder->adminInsertOrdersdetails($uuid, $row['item_id'], $row['A_price'], $row['A_qty'], $row['company_id']);
+            $sql2 = $adminOrder->adminInsertOrdersdetails($uuid, $row['item_id'], $row['A_price'], $row['A_qty'], $row['company_id'], $row['colors'], $row['size']);
         }
         $sql3 = $adminOrder->deletealladmincart();                         
         if ($sql) {
