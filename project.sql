@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2023 at 07:57 PM
+-- Generation Time: Sep 06, 2023 at 09:39 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -18,8 +18,461 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
+-- Database: `phpmyadmin`
+--
+CREATE DATABASE IF NOT EXISTS `phpmyadmin` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `phpmyadmin`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__bookmark`
+--
+
+CREATE TABLE `pma__bookmark` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `dbase` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `user` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `label` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `query` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Bookmarks';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__central_columns`
+--
+
+CREATE TABLE `pma__central_columns` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_type` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_length` text COLLATE utf8_bin DEFAULT NULL,
+  `col_collation` varchar(64) COLLATE utf8_bin NOT NULL,
+  `col_isNull` tinyint(1) NOT NULL,
+  `col_extra` varchar(255) COLLATE utf8_bin DEFAULT '',
+  `col_default` text COLLATE utf8_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Central list of columns';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__column_info`
+--
+
+CREATE TABLE `pma__column_info` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `column_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `comment` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `mimetype` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `transformation` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `transformation_options` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `input_transformation` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `input_transformation_options` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Column information for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__designer_settings`
+--
+
+CREATE TABLE `pma__designer_settings` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `settings_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Settings related to Designer';
+
+--
+-- Dumping data for table `pma__designer_settings`
+--
+
+INSERT INTO `pma__designer_settings` (`username`, `settings_data`) VALUES
+('root', '{\"angular_direct\":\"direct\",\"snap_to_grid\":\"off\",\"relation_lines\":\"true\"}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__export_templates`
+--
+
+CREATE TABLE `pma__export_templates` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `export_type` varchar(10) COLLATE utf8_bin NOT NULL,
+  `template_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `template_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved export templates';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__favorite`
+--
+
+CREATE TABLE `pma__favorite` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `tables` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Favorite tables';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__history`
+--
+
+CREATE TABLE `pma__history` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `username` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `db` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `timevalue` timestamp NOT NULL DEFAULT current_timestamp(),
+  `sqlquery` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='SQL history for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__navigationhiding`
+--
+
+CREATE TABLE `pma__navigationhiding` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `item_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `item_type` varchar(64) COLLATE utf8_bin NOT NULL,
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Hidden items of navigation tree';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__pdf_pages`
+--
+
+CREATE TABLE `pma__pdf_pages` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `page_nr` int(10) UNSIGNED NOT NULL,
+  `page_descr` varchar(50) CHARACTER SET utf8 NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='PDF relation pages for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__recent`
+--
+
+CREATE TABLE `pma__recent` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `tables` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Recently accessed tables';
+
+--
+-- Dumping data for table `pma__recent`
+--
+
+INSERT INTO `pma__recent` (`username`, `tables`) VALUES
+('root', '[{\"db\":\"project\",\"table\":\"product_details\"},{\"db\":\"project\",\"table\":\"cart\"},{\"db\":\"project\",\"table\":\"product\"},{\"db\":\"project\",\"table\":\"product_colors\"},{\"db\":\"project\",\"table\":\"product_size\"},{\"db\":\"project\",\"table\":\"product_image\"},{\"db\":\"project\",\"table\":\"blueprint\"},{\"db\":\"project\",\"table\":\"material_caculate_type\"},{\"db\":\"project\",\"table\":\"blueprint_material\"},{\"db\":\"project\",\"table\":\"made_orders\"}]');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__relation`
+--
+
+CREATE TABLE `pma__relation` (
+  `master_db` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `master_table` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `master_field` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `foreign_db` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `foreign_table` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `foreign_field` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Relation table';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__savedsearches`
+--
+
+CREATE TABLE `pma__savedsearches` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `search_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `search_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved searches';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__table_coords`
+--
+
+CREATE TABLE `pma__table_coords` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `pdf_page_number` int(11) NOT NULL DEFAULT 0,
+  `x` float UNSIGNED NOT NULL DEFAULT 0,
+  `y` float UNSIGNED NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table coordinates for phpMyAdmin PDF output';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__table_info`
+--
+
+CREATE TABLE `pma__table_info` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `display_field` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table information for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__table_uiprefs`
+--
+
+CREATE TABLE `pma__table_uiprefs` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `prefs` text COLLATE utf8_bin NOT NULL,
+  `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tables'' UI preferences';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__tracking`
+--
+
+CREATE TABLE `pma__tracking` (
+  `db_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `table_name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `version` int(10) UNSIGNED NOT NULL,
+  `date_created` datetime NOT NULL,
+  `date_updated` datetime NOT NULL,
+  `schema_snapshot` text COLLATE utf8_bin NOT NULL,
+  `schema_sql` text COLLATE utf8_bin DEFAULT NULL,
+  `data_sql` longtext COLLATE utf8_bin DEFAULT NULL,
+  `tracking` set('UPDATE','REPLACE','INSERT','DELETE','TRUNCATE','CREATE DATABASE','ALTER DATABASE','DROP DATABASE','CREATE TABLE','ALTER TABLE','RENAME TABLE','DROP TABLE','CREATE INDEX','DROP INDEX','CREATE VIEW','ALTER VIEW','DROP VIEW') COLLATE utf8_bin DEFAULT NULL,
+  `tracking_active` int(1) UNSIGNED NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Database changes tracking for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__userconfig`
+--
+
+CREATE TABLE `pma__userconfig` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `timevalue` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `config_data` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User preferences storage for phpMyAdmin';
+
+--
+-- Dumping data for table `pma__userconfig`
+--
+
+INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
+('root', '2023-04-07 03:33:02', '{\"Console\\/Mode\":\"collapse\"}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__usergroups`
+--
+
+CREATE TABLE `pma__usergroups` (
+  `usergroup` varchar(64) COLLATE utf8_bin NOT NULL,
+  `tab` varchar(64) COLLATE utf8_bin NOT NULL,
+  `allowed` enum('Y','N') COLLATE utf8_bin NOT NULL DEFAULT 'N'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User groups with configured menu items';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pma__users`
+--
+
+CREATE TABLE `pma__users` (
+  `username` varchar(64) COLLATE utf8_bin NOT NULL,
+  `usergroup` varchar(64) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Users and their assignments to user groups';
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pma__central_columns`
+--
+ALTER TABLE `pma__central_columns`
+  ADD PRIMARY KEY (`db_name`,`col_name`);
+
+--
+-- Indexes for table `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `db_name` (`db_name`,`table_name`,`column_name`);
+
+--
+-- Indexes for table `pma__designer_settings`
+--
+ALTER TABLE `pma__designer_settings`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_user_type_template` (`username`,`export_type`,`template_name`);
+
+--
+-- Indexes for table `pma__favorite`
+--
+ALTER TABLE `pma__favorite`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `pma__history`
+--
+ALTER TABLE `pma__history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `username` (`username`,`db`,`table`,`timevalue`);
+
+--
+-- Indexes for table `pma__navigationhiding`
+--
+ALTER TABLE `pma__navigationhiding`
+  ADD PRIMARY KEY (`username`,`item_name`,`item_type`,`db_name`,`table_name`);
+
+--
+-- Indexes for table `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  ADD PRIMARY KEY (`page_nr`),
+  ADD KEY `db_name` (`db_name`);
+
+--
+-- Indexes for table `pma__recent`
+--
+ALTER TABLE `pma__recent`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `pma__relation`
+--
+ALTER TABLE `pma__relation`
+  ADD PRIMARY KEY (`master_db`,`master_table`,`master_field`),
+  ADD KEY `foreign_field` (`foreign_db`,`foreign_table`);
+
+--
+-- Indexes for table `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_savedsearches_username_dbname` (`username`,`db_name`,`search_name`);
+
+--
+-- Indexes for table `pma__table_coords`
+--
+ALTER TABLE `pma__table_coords`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`pdf_page_number`);
+
+--
+-- Indexes for table `pma__table_info`
+--
+ALTER TABLE `pma__table_info`
+  ADD PRIMARY KEY (`db_name`,`table_name`);
+
+--
+-- Indexes for table `pma__table_uiprefs`
+--
+ALTER TABLE `pma__table_uiprefs`
+  ADD PRIMARY KEY (`username`,`db_name`,`table_name`);
+
+--
+-- Indexes for table `pma__tracking`
+--
+ALTER TABLE `pma__tracking`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`version`);
+
+--
+-- Indexes for table `pma__userconfig`
+--
+ALTER TABLE `pma__userconfig`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `pma__usergroups`
+--
+ALTER TABLE `pma__usergroups`
+  ADD PRIMARY KEY (`usergroup`,`tab`,`allowed`);
+
+--
+-- Indexes for table `pma__users`
+--
+ALTER TABLE `pma__users`
+  ADD PRIMARY KEY (`username`,`usergroup`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pma__history`
+--
+ALTER TABLE `pma__history`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  MODIFY `page_nr` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- Database: `project`
 --
+CREATE DATABASE IF NOT EXISTS `project` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `project`;
 
 -- --------------------------------------------------------
 
@@ -33,8 +486,18 @@ CREATE TABLE `admincart` (
   `company_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `A_qty` int(11) NOT NULL,
-  `A_price` double(10,2) NOT NULL
+  `A_price` double(10,2) NOT NULL,
+  `A_colors` int(11) NOT NULL,
+  `A_size` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admincart`
+--
+
+INSERT INTO `admincart` (`A_id`, `admin_id`, `company_id`, `item_id`, `A_qty`, `A_price`, `A_colors`, `A_size`) VALUES
+(1, 1, 1, 14, 1, 980.00, 1, 1),
+(2, 1, 2, 15, 1, 1200.00, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -63,7 +526,10 @@ INSERT INTO `adminorders` (`id`, `adminorders_id`, `admintotal`, `admin_id`, `ad
 (5, 'c366fed2-8165-4f22-b0cd-9619f72546be', 6250.00, 1, '2023-03-21 22:04:11', 'success'),
 (6, '86f151e1-3e99-4682-b9be-32227e16fa61', 5500.00, 1, '2023-03-21 22:08:43', 'success'),
 (7, '77b81f36-bfc3-41a7-9bff-8d3dac778857', 3920.00, 1, '2023-03-21 22:11:20', 'success'),
-(8, '2b66070b-e604-4220-ae5f-9c6b390ff597', 2480.00, 1, '2023-03-21 22:13:01', 'NULL');
+(8, '2b66070b-e604-4220-ae5f-9c6b390ff597', 2480.00, 1, '2023-03-21 22:13:01', 'NULL'),
+(9, '5f896bb8-7b0e-4eb7-9b44-e70b72747db5', 338060.00, 1, '2023-04-12 09:14:11', 'NULL'),
+(10, '7810a67b-7210-49ed-9c91-7337d0418c53', 3920.00, 1, '2023-04-19 11:17:37', 'NULL'),
+(11, 'f2612979-3f28-4608-bedd-3ad570f072e7', 195000.00, 1, '2023-04-19 11:50:29', 'NULL');
 
 -- --------------------------------------------------------
 
@@ -77,26 +543,34 @@ CREATE TABLE `adminorders_details` (
   `item_id` int(11) NOT NULL,
   `Admin_price` double(10,2) NOT NULL,
   `Admin_Qty` int(11) NOT NULL,
-  `company_id` int(11) NOT NULL
+  `company_id` int(11) NOT NULL,
+  `D_colors` varchar(255) NOT NULL,
+  `D_size` varchar(255) NOT NULL,
+  `D_qty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `adminorders_details`
 --
 
-INSERT INTO `adminorders_details` (`id`, `adminorders_id`, `item_id`, `Admin_price`, `Admin_Qty`, `company_id`) VALUES
-(1, 'f9a508b5-d548-48d6-9791-c3e992adac68', 14, 5880.00, 6, 1),
-(2, 'f9a508b5-d548-48d6-9791-c3e992adac68', 18, 6250.00, 5, 1),
-(3, 'f9a508b5-d548-48d6-9791-c3e992adac68', 20, 2520.00, 4, 1),
-(4, 'e6663220-4eb2-4599-9fdf-5908bdf9b0b1', 14, 4900.00, 5, 1),
-(5, 'e6663220-4eb2-4599-9fdf-5908bdf9b0b1', 14, 2940.00, 3, 1),
-(6, '883f1d6d-fab9-46bc-87f6-d3f254ec8975', 14, 4900.00, 5, 2),
-(7, '24bc080b-8613-48f6-9d00-7f85cc1d0031', 14, 4900.00, 5, 1),
-(8, '24bc080b-8613-48f6-9d00-7f85cc1d0031', 15, 4800.00, 4, 1),
-(9, 'c366fed2-8165-4f22-b0cd-9619f72546be', 18, 6250.00, 5, 1),
-(10, '86f151e1-3e99-4682-b9be-32227e16fa61', 17, 5500.00, 5, 1),
-(11, '77b81f36-bfc3-41a7-9bff-8d3dac778857', 14, 3920.00, 4, 1),
-(12, '2b66070b-e604-4220-ae5f-9c6b390ff597', 21, 2480.00, 4, 2);
+INSERT INTO `adminorders_details` (`id`, `adminorders_id`, `item_id`, `Admin_price`, `Admin_Qty`, `company_id`, `D_colors`, `D_size`, `D_qty`) VALUES
+(1, 'f9a508b5-d548-48d6-9791-c3e992adac68', 14, 5880.00, 6, 1, 'สีดำ', 'TEST', 0),
+(2, 'f9a508b5-d548-48d6-9791-c3e992adac68', 18, 6250.00, 5, 1, 'สีดำ', 'TEST', 0),
+(3, 'f9a508b5-d548-48d6-9791-c3e992adac68', 20, 2520.00, 4, 1, 'สีดำ', 'TEST', 0),
+(4, 'e6663220-4eb2-4599-9fdf-5908bdf9b0b1', 14, 4900.00, 5, 1, 'สีดำ', 'TEST', 0),
+(5, 'e6663220-4eb2-4599-9fdf-5908bdf9b0b1', 14, 2940.00, 3, 1, 'สีดำ', 'TEST', 0),
+(6, '883f1d6d-fab9-46bc-87f6-d3f254ec8975', 14, 4900.00, 5, 2, 'สีดำ', 'TEST', 0),
+(7, '24bc080b-8613-48f6-9d00-7f85cc1d0031', 14, 4900.00, 5, 1, 'สีดำ', 'TEST', 0),
+(8, '24bc080b-8613-48f6-9d00-7f85cc1d0031', 15, 4800.00, 4, 1, 'สีดำ', 'TEST', 0),
+(9, 'c366fed2-8165-4f22-b0cd-9619f72546be', 18, 6250.00, 5, 1, 'สีดำ', 'TEST', 0),
+(10, '86f151e1-3e99-4682-b9be-32227e16fa61', 17, 5500.00, 5, 1, 'สีดำ', 'TEST', 0),
+(11, '77b81f36-bfc3-41a7-9bff-8d3dac778857', 14, 3920.00, 4, 1, 'สีดำ', 'TEST', 0),
+(12, '2b66070b-e604-4220-ae5f-9c6b390ff597', 21, 2480.00, 4, 2, 'สีดำ', 'TEST', 0),
+(13, '5f896bb8-7b0e-4eb7-9b44-e70b72747db5', 14, 6860.00, 7, 1, 'สีดำ', 'TEST', 0),
+(14, '5f896bb8-7b0e-4eb7-9b44-e70b72747db5', 15, 1200.00, 1, 1, 'สีดำ', 'TEST', 0),
+(15, '5f896bb8-7b0e-4eb7-9b44-e70b72747db5', 14, 330000.00, 300, 1, 'สีดำ', 'TEST', 0),
+(16, '7810a67b-7210-49ed-9c91-7337d0418c53', 14, 3920.00, 4, 1, 'สีดำ', '1.0 มิล', 0),
+(17, 'f2612979-3f28-4608-bedd-3ad570f072e7', 14, 195000.00, 150, 1, 'สีขาว', '1.5 มิล', 99);
 
 -- --------------------------------------------------------
 
@@ -206,8 +680,17 @@ CREATE TABLE `cart` (
   `cart_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
-  `itemqty` int(11) NOT NULL
+  `itemqty` int(11) NOT NULL,
+  `size` int(11) NOT NULL,
+  `colors` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cart_id`, `user_id`, `item_id`, `itemqty`, `size`, `colors`) VALUES
+(1, 1, 25, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -475,6 +958,7 @@ INSERT INTO `orders` (`order_id`, `subtotal`, `user_id`, `datetime`, `status`) V
 ('630361e1-6d73-49cf-8cef-372a5539dead', 5400.00, 5, '2023-01-22 16:12:53', 'in process'),
 ('7431cf0d-9441-42e9-8aec-fbec7b1e5ab0', 13000.00, 1, '2023-01-22 19:52:52', 'in process'),
 ('9b99b6d3-ec25-4000-b4c6-ab779258aa1d', 45500.00, 1, '2023-01-22 14:10:33', 'finish'),
+('9f39dc1a-5328-4f61-8f0d-38a407a4ae5c', 2940.00, 1, '2023-04-12 09:17:18', 'NULL'),
 ('a2edd3be-bc91-484d-8768-fe3cca825d5b', 7000.00, 1, '2023-01-15 18:42:28', 'NULL'),
 ('ba1585b3-2191-4109-8b35-46eca1f061e1', 3500.00, 6, '2023-02-05 16:58:58', 'NULL'),
 ('babcce12-a7aa-4426-91bb-a665e0e2d6bc', 11000.00, 2, '2023-01-15 13:22:44', 'success'),
@@ -549,7 +1033,8 @@ INSERT INTO `order_details` (`id`, `order_id`, `item_id`, `item_price`, `quantit
 (37, '052599ee-03ea-47f0-847d-1271cea1e879', 9, 4000.00, 10),
 (38, 'c2a0099e-6e60-4c8d-b156-d527939b3dff', 17, 1100.00, 500),
 (39, '13d7c51b-f8ad-4377-ae0a-2652a739d5ab', 17, 1100.00, 500),
-(40, 'e2c59ae5-0da8-4c87-a59c-c20fda6c54ac', 17, 1100.00, 4);
+(40, 'e2c59ae5-0da8-4c87-a59c-c20fda6c54ac', 17, 1100.00, 4),
+(41, '9f39dc1a-5328-4f61-8f0d-38a407a4ae5c', 14, 980.00, 3);
 
 -- --------------------------------------------------------
 
@@ -605,10 +1090,10 @@ INSERT INTO `product` (`item_id`, `item_brand`, `item_name`, `item_price`, `item
 (9, 2, 'หน้าต่างบานเปิด', 4000.00, './assets/products/271663216.png', '2022-10-06 07:58:41', 988.00),
 (10, 1, 'ประตูบานเปิดมือเดียว', 3500.00, './assets/products/404478385.png', '2022-10-07 11:38:10', 998.00),
 (11, 3, 'โต๊ะปิกนิก', 2500.00, './assets/products/1832267164.png', '2022-10-07 11:57:01', 995.00),
-(14, 5, 'กล่องเรียบ', 980.00, './assets/products/660721803.png', '2023-03-19 05:29:13', 1019.66),
+(14, 5, 'กล่องเรียบ', 980.00, './assets/products/660721803.png', '2023-03-19 05:29:13', 1016.66),
 (15, 5, 'เสาบนสวิง', 1200.00, './assets/products/758554432.png', '2023-02-05 06:07:24', 1002.66),
 (16, 5, 'เสาล่างสวิง', 1200.00, './assets/products/1310258870.png', '2023-02-05 06:08:17', 999.66),
-(17, 5, 'ธรณีสวิง', 1100.00, './assets/products/1173711610.png', '2023-02-06 09:33:31', -0.34),
+(17, 5, 'ธรณีสวิง', 1100.00, './assets/products/1173711610.png', '2023-02-06 09:33:31', 200.00),
 (18, 5, 'เสาข้างสวิง', 1250.00, './assets/products/2190999.png', '2023-02-06 09:41:22', 1007.66),
 (19, 6, 'รีเวท', 130.00, './assets/products/1367924176.png', '2023-03-10 06:22:54', 501.00),
 (20, 5, 'เฟรมบน', 630.00, './assets/products/505247154.png', '2023-02-11 05:51:50', 994.00),
@@ -662,6 +1147,87 @@ INSERT INTO `producttype` (`producttype_id`, `productbrand`, `producttype_sell`)
 (5, 'อลูมิเนียม', 'half'),
 (6, 'เบ็ดเตล็ด', 'all'),
 (7, 'มือจับ', 'all');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_colors`
+--
+
+CREATE TABLE `product_colors` (
+  `id` int(11) NOT NULL,
+  `colors` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product_colors`
+--
+
+INSERT INTO `product_colors` (`id`, `colors`) VALUES
+(1, 'สีดำ'),
+(2, 'สีขาว');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_details`
+--
+
+CREATE TABLE `product_details` (
+  `id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `colors_id` int(11) NOT NULL,
+  `size_id` int(11) NOT NULL,
+  `price` double(10,2) NOT NULL,
+  `details` text NOT NULL,
+  `item_qty` int(11) NOT NULL,
+  `limit_qty` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product_details`
+--
+
+INSERT INTO `product_details` (`id`, `item_id`, `colors_id`, `size_id`, `price`, `details`, `item_qty`, `limit_qty`) VALUES
+(1, 14, 1, 1, 980.00, 'กล่องเรียบ หนา 1.0 มิล', 200, 50),
+(2, 14, 1, 2, 1100.00, 'กล่องเรียบ หนา 1.5 มิล', 10, 20),
+(3, 14, 1, 3, 1400.00, 'กล่องเรียบ หนา 2.0 มิล', 200, 70),
+(4, 14, 2, 1, 1100.00, 'กล่องเรียบ', 197, 50),
+(5, 14, 2, 2, 1300.00, 'กล่องเรียบ', 195, 50),
+(6, 14, 2, 3, 1600.00, 'กล่องเรียบ', 200, 50),
+(7, 15, 1, 1, 1200.00, 'เสาบนสวิง', 200, 30);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_image`
+--
+
+CREATE TABLE `product_image` (
+  `id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `path` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_size`
+--
+
+CREATE TABLE `product_size` (
+  `id` int(11) NOT NULL,
+  `size` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product_size`
+--
+
+INSERT INTO `product_size` (`id`, `size`) VALUES
+(1, '1.0 มิล'),
+(2, '1.5 มิล'),
+(3, '2.0 มิล');
 
 -- --------------------------------------------------------
 
@@ -803,6 +1369,24 @@ ALTER TABLE `producttype`
   ADD PRIMARY KEY (`producttype_id`);
 
 --
+-- Indexes for table `product_colors`
+--
+ALTER TABLE `product_colors`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_details`
+--
+ALTER TABLE `product_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_size`
+--
+ALTER TABLE `product_size`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -816,19 +1400,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admincart`
 --
 ALTER TABLE `admincart`
-  MODIFY `A_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `A_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `adminorders`
 --
 ALTER TABLE `adminorders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `adminorders_details`
 --
 ALTER TABLE `adminorders_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `admins`
@@ -852,7 +1436,7 @@ ALTER TABLE `blueprint_material`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `company`
@@ -894,7 +1478,7 @@ ALTER TABLE `material_caculate_type`
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `order_request`
@@ -915,10 +1499,33 @@ ALTER TABLE `producttype`
   MODIFY `producttype_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีประเภทสินค้า', AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `product_colors`
+--
+ALTER TABLE `product_colors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `product_details`
+--
+ALTER TABLE `product_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `product_size`
+--
+ALTER TABLE `product_size`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสลูกค้า', AUTO_INCREMENT=16;
+--
+-- Database: `test`
+--
+CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `test`;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
